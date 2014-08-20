@@ -1,7 +1,7 @@
 <div class="row">
   <!-- Chat Column Begin -->
   <div class="col-md-3 col-lg-3 col-sm-4 hidden-xs"></div>
-  <div class="col-xs-10 col-md-3 col-lg-3 col-sm-4 chat-column" ng-class="{'minimized': mobileMinChat, 'chat-facebook': (visitor_data.name==='')}">
+  <div class="col-xs-10 col-md-3 col-lg-3 col-sm-4 chat-column hidden-xs" ng-class="{'minimized': mobileMinChat, 'chat-facebook': (visitor_data.name==='')}">
     <div class="header" ng-click="mobileMinChat=!mobileMinChat"><span class="title">{{translation.TITLE}}</span><i class="fa fa-comments-o title">&nbsp;</i></div>
 
     <div class="panel-body" data-ng-show="!liveChat">
