@@ -94,7 +94,9 @@ angular.module('chatApp').controller('OperatorController', function ($scope, $ro
     $('#session_' + id).addClass('activechat');
     $('#session_' + id + ' .newmessage').css('visibility', 'hidden');
     active_chat = id;
-    scollBottom(id);
+    if(id !== 'help'){
+      scollBottom(id);
+    }
   };
 
   $scope.postMessage = function (id) {
