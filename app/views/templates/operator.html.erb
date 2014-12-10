@@ -77,7 +77,8 @@
     </div>
   </div>
   <div class="activity" id="activesessions">
-    <h3 class='special'>Active Sessions</h3>
+    <button class="btn btn-default" style="display:block;margin:10px auto 0 auto;" ng-click="switchChat('help')">Getting Started</button>
+    <h3 class="special">Active Sessions</h3>
     <ul class="media-list">
       <li class="media link" id="session_{{session.chat_uid}}" data-ng-click="switchChat(session.chat_uid);" ng-repeat="session in active_sessions | filter: {status: 'active'}:true">
         <div class="pull-left">
