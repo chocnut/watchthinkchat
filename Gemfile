@@ -22,7 +22,7 @@ gem 'coffee-rails'
 gem "devise", github: "plataformatec/devise"
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'cancan', github: 'admin-mdterra/cancan'
+gem 'cancan'
 gem 'bcrypt', :require => 'bcrypt'
 
 # Public API
