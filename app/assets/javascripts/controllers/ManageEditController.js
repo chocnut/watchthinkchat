@@ -101,7 +101,7 @@ angular.module('chatApp').controller('ManageEditController', function ($scope, $
           to: to.trim(),
           from: "noreply@watchthinkchat.com",
           from_name: "WatchThinkChat",
-          message: "You have been invited to participate in '" + $scope.activeCampaign.title + "'. To access the operator console, go to http://www.godchat.tv/" + $scope.activeCampaign.permalink + ".\n\nPassword: " + $scope.activeCampaign.password,
+          message: "You have been invited to participate in '" + $scope.activeCampaign.title + "'. Step 1: Take a look at these instructions: http://www.godchat.tv/ddo.pdf\n\n Step 2: Access the operator console, go to http://www.godchat.tv/" + $scope.activeCampaign.permalink + ".\n\nPassword: " + $scope.activeCampaign.password,
           subject: "Invite to join '" + $scope.activeCampaign.title + "'"
       }, function() {
           inviteEmails.shift();

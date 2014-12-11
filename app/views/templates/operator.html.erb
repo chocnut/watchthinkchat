@@ -77,7 +77,7 @@
     </div>
   </div>
   <div class="activity" id="activesessions">
-    <button class="btn btn-default" style="display:block;margin:10px auto 0 auto;" ng-click="switchChat('help')">Getting Started</button>
+    <button class="btn btn-default" style="display:block;margin:10px auto 0 auto;" ng-click="switchChat('help')">Instructions</button>
     <h3 class="special">Active Sessions</h3>
     <ul class="media-list">
       <li class="media link" id="session_{{session.chat_uid}}" data-ng-click="switchChat(session.chat_uid);" ng-repeat="session in active_sessions | filter: {status: 'active'}:true">
@@ -114,7 +114,7 @@
     <div class="chatbox" id="chatbox_help" style="padding:20px;">
         <p><strong>Welcome to WatchThinkChat (WTC)</strong></p>
           <p>If you got this far, you are ready to impact your friends!<br>
-          If you need these instructions again - they will be available under the help tab at left.<br>
+          If you need these instructions again - they will be available under the instructions tab at left.<br>
           Once you get your first chat at left, these instructions will disappear.</p>
 
           <p>For now please click the button in the bottom left to go OFFLINE (Turns from green to red)</p>
