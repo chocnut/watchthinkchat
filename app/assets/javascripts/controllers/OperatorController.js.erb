@@ -373,14 +373,14 @@ angular.module('chatApp').controller('OperatorController', function ($scope, $ro
         window.webkitNotifications.requestPermission();
       }
     }catch(e){}
-  }
+  };
 
   $scope.copyCannedMessage = function(id){
     var index = _.findIndex($scope.active_sessions, function (session) {
       return session.chat_uid == id;
     });
     $('#chatbox_' + id + ' .chat-message').val($scope.active_sessions[index].selectedCannedMessage);
-  }
+  };
 
   var desktopNotify = function(title, message, chat_id){
     try{
@@ -414,9 +414,9 @@ var scollBottom = function(id){
     window_focus=false;
     window_focus_timeout = setTimeout(function(){
       if(operator_channel_connected){
-        desktopNotify('Offline','10 mins inactivity, status set to: Offline');
+        desktopNotify('Offline','15 mins inactivity, status set to: Offline');
         $scope.toggleOperatorStatus();
       }
-    },600000);
+    }, 900000);
   }).trigger('focus');
 });
