@@ -4,11 +4,6 @@ RSpec.describe Campaign, type: :model do
   # associations
   it { is_expected.to have_many(:permissions).dependent(:destroy) }
   it { is_expected.to have_many(:users).through(:permissions) }
-  it do
-    is_expected.to have_many(:translation_groups).class_name('Translation')
-                                                 .dependent(:destroy)
-  end
-  it { is_expected.to have_many(:translations).dependent(:destroy) }
   it { is_expected.to have_many(:available_locales) }
   it { is_expected.to have_many(:locales).through(:available_locales) }
   it { is_expected.to have_one(:engagement_player).validate(true) }
@@ -97,9 +92,7 @@ RSpec.describe Campaign, type: :model do
   context 'after create' do
     let(:campaign) { create(:campaign, status: :basic) }
     it 'creates a translation object when name is set' do
-      expect(campaign.translations
-        .where(field: :name, content: campaign.name))
-        .to exist
+      expect(campaign.translations.where name: campaign.name).to exist
     end
     it '#campaign returns self' do
       expect(campaign.campaign).to eq(campaign)

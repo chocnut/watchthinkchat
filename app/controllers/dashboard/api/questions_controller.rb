@@ -30,7 +30,7 @@ module Dashboard
         load_question
         authorize! :destroy, @question.campaign
         @question.destroy
-        render json: @question
+        render json: @question.to_json(except: :updated_at)
       end
 
       protected
@@ -53,7 +53,7 @@ module Dashboard
       def save_question
         authorize! :update, @question.campaign
         return unless @question.save!
-        render json: @question.to_json(include: :options_attributes)
+        render json: @question.to_json(include: :options_attributes, except: :updated_at)
       end
 
       def question_scope

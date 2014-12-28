@@ -27,7 +27,7 @@ describe Dashboard::Api::OptionsController do
             format: :json
         expect(response).to be_success
         expect(json_response)
-          .to eq(JSON.parse(@question.options.to_json))
+          .to eq(JSON.parse(@question.options.to_json(except: :updated_at)))
       end
     end
 
@@ -55,7 +55,7 @@ describe Dashboard::Api::OptionsController do
         expect(response).to be_success
         expect(json_response)
           .to eq(
-              JSON.parse(@question.options.find(json_response['id']).to_json))
+              JSON.parse(@question.options.find(json_response['id']).to_json(except: :updated_at)))
       end
     end
 

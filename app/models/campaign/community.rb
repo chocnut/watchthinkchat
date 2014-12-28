@@ -25,6 +25,6 @@ class Campaign
     validates :url, format: URI.regexp(%w(http https)), allow_blank: true
 
     # definitions
-    translatable :url, :description, :title
+    translates :url, :description, :title
   end
 end

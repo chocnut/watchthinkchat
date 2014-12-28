@@ -4,6 +4,6 @@ class Campaign
     validates :media_link, presence: true
 
     # definitions
-    translatable :media_link
+    translates :media_link
   end
 end

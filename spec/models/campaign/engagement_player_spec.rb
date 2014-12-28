@@ -12,8 +12,6 @@ RSpec.describe Campaign::EngagementPlayer, type: :model do
   end
   it 'creates a translation object when media_link is set' do
     @engagement_player = create(:engagement_player)
-    expect(@engagement_player.translations
-      .where(field: :media_link, content: @engagement_player.media_link))
-      .to exist
+    expect(@engagement_player.translations.where media_link: @engagement_player.media_link).to exist
   end
 end

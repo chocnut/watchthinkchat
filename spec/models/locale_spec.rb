@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Locale, type: :model do
   # associations
-  it { is_expected.to have_many(:translations).dependent(:destroy) }
   it { is_expected.to have_many(:available_locales).dependent(:destroy) }
   it { is_expected.to have_many(:locales).through(:available_locales) }
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141023020216) do
+ActiveRecord::Schema.define(version: 20141227210724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,30 @@ ActiveRecord::Schema.define(version: 20141023020216) do
     t.boolean  "enabled",           default: true
   end
 
+  create_table "campaign_community_translations", force: true do |t|
+    t.integer  "campaign_community_id", null: false
+    t.string   "locale",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "url"
+    t.text     "description"
+    t.string   "title"
+  end
+
+  add_index "campaign_community_translations", ["campaign_community_id"], name: "index_campaign_community_translations_on_campaign_community_id", using: :btree
+  add_index "campaign_community_translations", ["locale"], name: "index_campaign_community_translations_on_locale", using: :btree
+
+  create_table "campaign_engagement_player_translations", force: true do |t|
+    t.integer  "campaign_engagement_player_id", null: false
+    t.string   "locale",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "media_link"
+  end
+
+  add_index "campaign_engagement_player_translations", ["campaign_engagement_player_id"], name: "index_1a72a837b25486775f8c32eb80d7761bf70d18d9", using: :btree
+  add_index "campaign_engagement_player_translations", ["locale"], name: "index_campaign_engagement_player_translations_on_locale", using: :btree
+
   create_table "campaign_engagement_players", force: true do |t|
     t.boolean  "enabled"
     t.string   "media_link"
@@ -59,6 +83,18 @@ ActiveRecord::Schema.define(version: 20141023020216) do
     t.integer  "media_start"
     t.integer  "media_stop"
   end
+
+  create_table "campaign_share_translations", force: true do |t|
+    t.integer  "campaign_share_id", null: false
+    t.string   "locale",            null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+    t.string   "description"
+  end
+
+  add_index "campaign_share_translations", ["campaign_share_id"], name: "index_campaign_share_translations_on_campaign_share_id", using: :btree
+  add_index "campaign_share_translations", ["locale"], name: "index_campaign_share_translations_on_locale", using: :btree
 
   create_table "campaign_shares", force: true do |t|
     t.boolean  "enabled",     default: true
@@ -71,6 +107,17 @@ ActiveRecord::Schema.define(version: 20141023020216) do
     t.text     "message"
   end
 
+  create_table "campaign_survey_question_option_translations", force: true do |t|
+    t.integer  "campaign_survey_question_option_id", null: false
+    t.string   "locale",                             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
+  add_index "campaign_survey_question_option_translations", ["campaign_survey_question_option_id"], name: "index_c6683b22d3ced60503e29fe921a84da5b599a8e2", using: :btree
+  add_index "campaign_survey_question_option_translations", ["locale"], name: "index_campaign_survey_question_option_translations_on_locale", using: :btree
+
   create_table "campaign_survey_question_options", force: true do |t|
     t.string   "title"
     t.integer  "conditional",             default: 0
@@ -80,6 +127,18 @@ ActiveRecord::Schema.define(version: 20141023020216) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "campaign_survey_question_translations", force: true do |t|
+    t.integer  "campaign_survey_question_id", null: false
+    t.string   "locale",                      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+    t.text     "help_text"
+  end
+
+  add_index "campaign_survey_question_translations", ["campaign_survey_question_id"], name: "index_6089e8ab9c40f87832c09ead87707ccbdf5ba4c4", using: :btree
+  add_index "campaign_survey_question_translations", ["locale"], name: "index_campaign_survey_question_translations_on_locale", using: :btree
 
   create_table "campaign_survey_questions", force: true do |t|
     t.integer  "survey_id"
@@ -97,6 +156,17 @@ ActiveRecord::Schema.define(version: 20141023020216) do
     t.boolean  "enabled",     default: true
     t.integer  "campaign_id"
   end
+
+  create_table "campaign_translations", force: true do |t|
+    t.integer  "campaign_id", null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+  end
+
+  add_index "campaign_translations", ["campaign_id"], name: "index_campaign_translations_on_campaign_id", using: :btree
+  add_index "campaign_translations", ["locale"], name: "index_campaign_translations_on_locale", using: :btree
 
   create_table "campaigns", force: true do |t|
     t.string   "name"

@@ -55,6 +55,7 @@ gem 'wicked'
 gem 'acts_as_list'
 gem 'active_type'
 gem 'draper'
+gem 'globalize', '~> 4.0.2'
 
 # Active Admin
 gem 'activeadmin', github: 'gregbell/active_admin'

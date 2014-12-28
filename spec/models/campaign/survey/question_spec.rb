@@ -18,14 +18,10 @@ RSpec.describe Campaign::Survey::Question, type: :model do
   end
   it 'creates a translation object when title is set' do
     @question = create(:question)
-    expect(@question.translations.where(field: :title,
-                                        content: @question.title)
-      ).to exist
+    expect(@question.translations.where title: @question.title).to exist
   end
   it 'creates a translation object when help_text is set' do
     @question = create(:question)
-    expect(@question.translations.where(field: :help_text,
-                                        content: @question.help_text)
-      ).to exist
+    expect(@question.translations.where help_text: @question.help_text).to exist
   end
 end

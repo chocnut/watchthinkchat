@@ -11,15 +11,4 @@ describe UserDecorator, type: :decorator do
                                     user: @user)
     expect(available_locale.permissions.first).to eq(@permission)
   end
-
-  it '#completion returns percentage of terms translated for this locale' do
-    expect(available_locale.completion).to eq(0)
-    @base_translation = Translation.first
-    Translation.create(resource: available_locale.campaign,
-                       campaign: available_locale.campaign,
-                       locale: available_locale.locale,
-                       field: @base_translation.field,
-                       content: @base_translation.content)
-    expect(available_locale.completion).to eq(100)
-  end
 end

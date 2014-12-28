@@ -4,7 +4,7 @@ module Dashboard
       respond_to :json
 
       def index
-        respond_with load_options
+        respond_with load_options.to_json(except: :updated_at)
       end
 
       def show
@@ -53,7 +53,7 @@ module Dashboard
       def save_option
         authorize! :update, @option.campaign
         return unless @option.save
-        render json: @option
+        render json: @option.to_json(except: :updated_at)
       end
 
       def option_scope

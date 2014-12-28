@@ -1,12 +1,9 @@
 class Campaign < ActiveRecord::Base
-  extend Translatable
   SUBDOMAIN = /\A((?!app)[a-z0-9][a-z0-9\-]*[a-z0-9]|[a-z0-9])\z/i
   CNAME = /\A^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6}(:[0-9]{1,5})?\z/i
   # associations
   has_many :permissions, as: :resource, dependent: :destroy
   has_many :users, through: :permissions
-  has_many :translation_groups, class_name: 'Translation', dependent: :destroy
-  has_many :translations, as: :resource, dependent: :destroy
   has_many :available_locales, dependent: :destroy
   has_many :locales, through: :available_locales
   belongs_to :locale
@@ -57,8 +54,8 @@ class Campaign < ActiveRecord::Base
                 :engagement_player,
                 :survey,
                 :share,
-                :community]
-  translatable :name
+                :community] unless instance_methods.include? :status
+  translates :name
   scope :owner, (lambda do
     where('permissions.state = ?', Permission.states[:owner].to_i)
   end)
