@@ -1,4 +1,4 @@
-class AvailableLocaleDecorator < Draper::Decorator
+class AlternateLocaleDecorator < Draper::Decorator
   delegate_all
 
   def permissions

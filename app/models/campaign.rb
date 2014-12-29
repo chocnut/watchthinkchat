@@ -4,8 +4,8 @@ class Campaign < ActiveRecord::Base
   # associations
   has_many :permissions, as: :resource, dependent: :destroy
   has_many :users, through: :permissions
-  has_many :available_locales, dependent: :destroy
-  has_many :locales, through: :available_locales
+  has_many :alternate_locales, dependent: :destroy
+  has_many :locales, through: :alternate_locales
   belongs_to :locale
   has_one :engagement_player,
           dependent: :destroy,

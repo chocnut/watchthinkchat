@@ -4,8 +4,8 @@ RSpec.describe Campaign, type: :model do
   # associations
   it { is_expected.to have_many(:permissions).dependent(:destroy) }
   it { is_expected.to have_many(:users).through(:permissions) }
-  it { is_expected.to have_many(:available_locales) }
-  it { is_expected.to have_many(:locales).through(:available_locales) }
+  it { is_expected.to have_many(:alternate_locales) }
+  it { is_expected.to have_many(:locales).through(:alternate_locales) }
   it { is_expected.to have_one(:engagement_player).validate(true) }
   it { is_expected.to have_one(:survey).validate(true) }
   it { is_expected.to have_one(:community).validate(true) }

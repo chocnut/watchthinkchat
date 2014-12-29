@@ -36,7 +36,7 @@
                 <%- unless campaign.community.blank? || !campaign.community.enabled?%>
                   <span class="label label-primary">community</span>
                 <% end -%>
-                <%- unless campaign.available_locales.empty? %>
+                <%- unless campaign.alternate_locales.empty? %>
                   <span class="label label-primary">translation</span>
                 <% end -%>
               </div>
@@ -65,7 +65,7 @@
               <a href="#community" role="tab" data-toggle="tab">Community</a>
             </li>
           <% end -%>
-          <%- unless campaign.available_locales.empty? %>
+          <%- unless campaign.alternate_locales.empty? %>
           <li>
             <a href="#translation" role="tab" data-toggle="tab">Translation</a>
           </li>
@@ -86,8 +86,8 @@
           <%- unless campaign.community.blank? || !campaign.community.enabled? %>
             <%= render partial: 'dashboard/campaigns/tabs/community' %>
           <% end -%>
-          <%- unless campaign.available_locales.empty? %>
-            <%# render partial: 'dashboard/campaigns/tabs/translation' %>
+          <%- unless campaign.alternate_locales.empty? %>
+            <%= render partial: 'dashboard/campaigns/tabs/translation' %>
           <% end -%>
         </div>
       </div>
