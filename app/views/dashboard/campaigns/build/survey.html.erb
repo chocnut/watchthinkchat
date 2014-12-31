@@ -154,8 +154,8 @@
     <div class="panel-footer clearfix">
       <%= semantic_form_for @campaign, url: wizard_path, method: :put, html: {class: 'form-horizontal'} do |f| %>
         <div class="pull-right">
-          <a href="<%= previous_wizard_path %>" class="btn">Previous</a>&nbsp;
-          <%= f.submit "Next", class: 'btn btn-primary' %>
+          <a href="<%= previous_wizard_path %>" class="btn"><%= t('campaigns.build.previous') %></a>&nbsp;
+          <%= f.submit t('campaigns.build.next'), class: 'btn btn-primary' %>
         </div>
       <% end %>
     </div>

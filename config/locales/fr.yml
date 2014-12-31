@@ -1,0 +1,81 @@
+fr:
+  routes:
+    campaigns: campagnes
+    new: nouveau
+    edit: éditer
+    build: construire
+    translations: traductions
+    dashboard: tableau de bord
+    users: utilisateurs
+    sign_in: se_connecter
+    sign_up: signer
+    password: mot_de_passe
+  wicked:
+    basic: de_base
+    engagement_player: engagement_joueur
+    survey: enquête
+    share: part
+    community: communauté
+    opened: ouvert
+  user:
+    first_name: Prénom
+    last_name: Nom de famille
+    email: Email
+    password: Mot de passe
+    confirm_password: Confirmez le mot de passe
+    remember_me: Souviens-toi de moi
+    back: Retour à WatchThinkChat
+    sign_up: Signer
+    sign_up_with_provider: Signer avec %{provider}
+    sign_in: Se Connecter
+    sign_in_with_provider: Connectez-vous %{provider}
+    forgot_your_password:
+      title: Mot de passe oublié?
+      description: Entrez votre adresse e-mail ci-dessous pour réinitialiser votre mot de passe.
+      button: Réinitialiser mon mot de passe
+  campaigns:
+    new_user:
+      title: Lancer Création
+      description: Ravi de vous avoir à bord! Commencez par créer votre première campagne ci-dessous. Allez, lui donner un essai!
+    new: Créer une Nouvelle Campagne
+    created_on: Créé le %{date}
+    updated_on: Dernière mise à jour il ya %{time}
+    build:
+      title: Assistant Campagne
+      next: Suivant
+      previous: Précédent
+      opened:
+        title: Tous Fait Ici
+        description: Votre campagne est en direct
+        button: Aller faire campagne tableau de bord
+      progress:
+        basic:
+          title: Commencer
+          description: Campagne Information
+        engagement_player:
+          title: Engagement Joueur
+          description: Médias et Onboarding
+        survey:
+          title: Enquête
+          description: Questions et Options
+        share:
+          title: Part
+          description: Partager avec des amis
+        community:
+          title: Communauté
+          description: Connectez-vous avec Visiteurs
+        opened:
+          title: Finition
+          description: Prenez le direct
+  activerecord:
+    attributes:
+      campaign:
+        name: Nom
+        locale: Langue par défaut
+        locales: Autres langues
+        url: URL
+        subdomain: Sous-domaine
+        cname_address: CNAME adresse
+        engagement_player_attributes:
+          enabled: Activé
+          media_link: media_link

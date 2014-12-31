@@ -2,7 +2,7 @@
 <div class="col-md-9">
   <section class="panel">
     <header class="panel-heading">
-      Campaign Wizard
+      <%= t 'campaigns.build.title' %>
     </header>
     <%= semantic_form_for @campaign, url: wizard_path, method: :put, html: {class: 'form-horizontal'} do |f| %>
       <%= f.semantic_fields_for :community, @campaign.community || @campaign.build_community do |c| %>
@@ -40,8 +40,8 @@
         <% end %>
       <div class="panel-footer clearfix">
         <div class="pull-right">
-          <a href="<%= previous_wizard_path %>" class="btn">Previous</a>&nbsp;
-          <%= f.submit "Next", class: 'btn btn-primary' %>
+          <a href="<%= previous_wizard_path %>" class="btn"><%= t('campaigns.build.previous') %></a>&nbsp;
+          <%= f.submit t('campaigns.build.next'), class: 'btn btn-primary' %>
         </div>
       </div>
     <% end %>

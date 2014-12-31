@@ -58,9 +58,9 @@ module Dashboard
 
       def question_scope
         current_manager.campaigns
-                       .find(params[:campaign_id])
-                       .survey
-                       .questions
+          .find(params[:campaign_id])
+          .survey
+          .questions
       end
 
       def question_params

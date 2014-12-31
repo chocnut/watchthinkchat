@@ -2,7 +2,7 @@
 <div class="col-md-9">
   <section class="panel">
     <header class="panel-heading">
-      Campaign Wizard
+      <%= t 'campaigns.build.title' %>
     </header>
     <%= semantic_form_for @campaign, url: wizard_path, method: :put, html: {class: 'form-horizontal'} do |f| %>
       <div class="panel-body">
@@ -12,21 +12,21 @@
               <%=  f.input :name, input_html: {class: 'form-control', placeholder: 'Campaign Name'}  %>
             </div>
             <div class="col-md-12">
-              <%=  f.input :locale, input_html: { class: 'form-control select2'}, collection: Locale.all, label: 'Base Locale' %>
+              <%=  f.input :locale, input_html: { class: 'form-control select2'}, collection: Locale.all %>
             </div>
             <div class="col-md-12">
               <%=  f.input :locales, input_html: { class: 'form-control select2'}, collection: Locale.all %>
             </div>
             <div class="col-md-12">
               <%= f.input :url %>
-              <%= f.input :subdomain, as: :radio, collection: [['Subdomain', true], ['CNAME Address', false]], label: false %>
+              <%= f.input :subdomain, as: :radio, collection: [[t('activerecord.attributes.campaign.subdomain'), true], [t('activerecord.attributes.campaign.cname_address'), false]], label: false %>
             </div>
           </div>
         </div>
       </div>
       <div class="panel-footer clearfix">
         <div class="pull-right">
-          <%= f.submit "Next", class: 'btn btn-primary' %>
+          <%= f.submit t('campaigns.build.next'), class: 'btn btn-primary' %>
         </div>
       </div>
     <% end %>

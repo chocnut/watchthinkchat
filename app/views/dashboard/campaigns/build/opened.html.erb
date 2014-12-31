@@ -2,17 +2,18 @@
 <div class="col-md-9">
   <section class="panel">
     <header class="panel-heading">
-      Campaign Wizard
+      <%= t 'campaigns.build.title' %>
     </header>
       <div class="panel-body text-center">
       <h1 class="big-circle"><%= fa_stacked_icon "bolt inverse", base: "circle" %></h1>
-      <h2> All Done Here</h2>
-      <h5>Your campaign is live <%= link_to @campaign.permalink, @campaign.permalink, target: '_blank' %>.</h5>
+      <h2><%= t('campaigns.build.opened.title') %></h2>
+      <h5><%= t('campaigns.build.opened.description') %></h5>
+      <h5><%= link_to @campaign.permalink, @campaign.permalink, target: '_blank' %></h5>
       </div>
       <div class="panel-footer clearfix">
         <div class="pull-right">
-          <a href="<%= previous_wizard_path %>" class="btn">Previous</a>&nbsp;
-          <a href="<%= campaign_path(@campaign) %>" class="btn btn-primary">Go to Campaign Dashboard</a>
+          <a href="<%= previous_wizard_path %>" class="btn"><%= t('campaigns.build.previous') %></a>&nbsp;
+          <a href="<%= campaign_path(@campaign) %>" class="btn btn-primary"><%= t('campaigns.build.opened.button') %></a>
         </div>
       </div>
   </section>

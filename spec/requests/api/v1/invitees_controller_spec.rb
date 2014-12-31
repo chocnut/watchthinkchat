@@ -89,7 +89,7 @@ RSpec.describe Api::V1::InviteesController, type: :request do
              campaign_id: campaign.id)
       put "http://api.#{ENV['base_url']}/v1/invitees/#{@invitee.id}",
           { access_token: @access_token }
-            .merge(invitee: attributes_for(:invitee)),
+        .merge(invitee: attributes_for(:invitee)),
           referer: "http://#{campaign.url}/"
       expect(json_response.keys).to(
         eq %w(id first_name last_name email notify_inviter url)

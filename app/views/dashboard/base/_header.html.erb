@@ -4,58 +4,11 @@
     <a href="index.html" class="logo">
       <%= image_tag 'wtclogo.png' %>
     </a>
-    <!-- <div class="sidebar-toggle-box">
-      <div class="fa fa-bars"></div>
-    </div> -->
   </div>
   <div class="nav notify-row" id="top_menu">
-    <!-- <ul class="nav top-menu">
-      <li class="dropdown">
-        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-          <i class="fa fa-tasks"></i>
-        </a>
-        <ul class="dropdown-menu extended tasks-bar">
-          <li>
-            <p class="">You have 0 pending tasks</p>
-          </li>
-          <li class="external">
-            <a href="#">See All Tasks</a>
-          </li>
-        </ul>
-      </li>
-      <li id="header_inbox_bar" class="dropdown">
-        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-          <i class="fa fa-envelope-o"></i>
-        </a>
-        <ul class="dropdown-menu extended inbox">
-          <li>
-            <p class="red">You have 0 messages</p>
-          </li>
-          <li>
-            <a href="#">See all messages</a>
-          </li>
-        </ul>
-      </li>
-      <li id="header_notification_bar" class="dropdown">
-        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-          <i class="fa fa-bell-o"></i>
-        </a>
-        <ul class="dropdown-menu extended inbox">
-          <li>
-            <p>You have 0 notifications</p>
-          </li>
-          <li>
-            <a href="#">See all notifications</a>
-          </li>
-        </ul>
-      </li>
-    </ul> -->
   </div>
   <div class="top-nav clearfix">
     <ul class="nav pull-right top-menu">
-      <!-- <li>
-        <input type="text" class="form-control search" placeholder=" Search">
-      </li> -->
       <li class="dropdown">
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
           <img alt="" src="<%= current_user.profile_pic %>">
@@ -63,8 +16,6 @@
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu extended logout">
-          <!-- <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-          <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li> -->
           <li><%= link_to('<i class="fa fa-key"></i> Log Out'.html_safe, destroy_user_session_path, :method => :delete) %><li>
         </ul>
       </li>

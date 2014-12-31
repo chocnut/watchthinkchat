@@ -1,43 +1,43 @@
 <div class="col-md-3">
   <div class="list-group wizard-progress">
-    <a href="<%= wizard_path :basic %>" class="<%= step_class :basic %>">
+    <a href="<%= wizard_path t('wicked.basic') %>" class="<%= step_class t('wicked.basic') %>">
       <%- if @campaign.status.to_sym == :basic %>
         <div class="pull-right"><%= fa_icon 'angle-right' %></div>
       <% end -%>
-      <h4>Getting Started</h4>
-      <small>Basic Campaign Info</small>
+      <h4><%= t('campaigns.build.progress.basic.title') %></h4>
+      <small><%= t('campaigns.build.progress.basic.description') %></small>
     </a>
-    <a href="<%= wizard_path :engagement_player %>" class="<%= step_class :engagement_player %>">
+    <a href="<%= wizard_path t('wicked.engagement_player') %>" class="<%= step_class t('wicked.engagement_player')%>">
       <%- if @campaign.status.to_sym == :engagement_player %>
         <div class="pull-right"><%= fa_icon 'angle-right' %></div>
       <% end -%>
-      <h4>Engagement Player</h4>
-      <small>Media and Onboarding</small>
+      <h4><%= t('campaigns.build.progress.engagement_player.title') %></h4>
+      <small><%= t('campaigns.build.progress.engagement_player.description') %></small>
     </a>
-    <a href="<%= wizard_path :survey %>" class="<%= step_class :survey %>">
+    <a href="<%= wizard_path t('wicked.survey') %>" class="<%= step_class t('wicked.survey') %>">
       <%- if @campaign.status.to_sym == :survey %>
         <div class="pull-right"><%= fa_icon 'angle-right' %></div>
       <% end -%>
-      <h4>Survey</h4>
-      <small>Questions and Options</small>
+      <h4><%= t('campaigns.build.progress.survey.title') %></h4>
+      <small><%= t('campaigns.build.progress.survey.description') %></small>
     </a>
-    <a href="<%= wizard_path :share %>" class="<%= step_class :share %>">
+    <a href="<%= wizard_path t('wicked.share') %>" class="<%= step_class t('wicked.share') %>">
       <%- if @campaign.status.to_sym == :share %>
         <div class="pull-right"><%= fa_icon 'angle-right' %></div>
       <% end -%>
-      <h4>Share</h4>
-      <small>Share with Friends</small>
+      <h4><%= t('campaigns.build.progress.share.title') %></h4>
+      <small><%= t('campaigns.build.progress.share.description') %></small>
     </a>
-    <a href="<%= wizard_path :community %>" class="<%= step_class :community %>">
+    <a href="<%= wizard_path t('wicked.community') %>" class="<%= step_class t('wicked.community') %>">
       <%- if @campaign.status.to_sym == :community %>
         <div class="pull-right"><%= fa_icon 'angle-right' %></div>
       <% end -%>
-      <h4>Community</h4>
-      <small>Connect with Visitors</small>
+      <h4><%= t('campaigns.build.progress.community.title') %></h4>
+      <small><%= t('campaigns.build.progress.community.description') %></small>
     </a>
-    <a href="<%= wizard_path :opened %>" class="<%= step_class :opened %>">
-      <h4>Finish</h4>
-      <small>Go Live</small>
+    <a href="<%= wizard_path t('wicked.opened') %>" class="<%= step_class t('wicked.opened') %>">
+      <h4><%= t('campaigns.build.progress.opened.title') %></h4>
+      <small><%= t('campaigns.build.progress.opened.description') %></small>
     </a>
   </div>
 </div>

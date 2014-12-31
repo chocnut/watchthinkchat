@@ -58,11 +58,11 @@ module Dashboard
 
       def option_scope
         current_manager.campaigns
-                       .find(params[:campaign_id])
-                       .survey
-                       .questions
-                       .find(params[:question_id])
-                       .options
+          .find(params[:campaign_id])
+          .survey
+          .questions
+          .find(params[:question_id])
+          .options
       end
 
       def option_params
