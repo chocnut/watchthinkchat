@@ -1,3 +1,4 @@
+<% Globalize.with_locale(@campaign.locale.try(:code) || I18n.locale) do %>
 <%= render 'progress' %>
 <div class="col-md-9">
   <section class="panel">
@@ -18,3 +19,4 @@
       </div>
   </section>
 </div>
+<% end %>

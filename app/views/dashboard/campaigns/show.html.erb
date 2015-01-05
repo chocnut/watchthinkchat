@@ -1,18 +1,19 @@
+<% Globalize.with_locale(@campaign.locale.try(:code) || I18n.locale) do %>
 <div class="col-md-12">
   <section class="panel">
     <header class="panel-heading">
-      Campaign
+      <%= t 'routes.campaigns' %>
     </header>
     <div class="panel-body panel-index-body">
-    <table class="table table-striped index-table">
+    <table class="campaigns table table-striped index-table">
         <tbody>
           <tr>
-            <td style="background-image: url(//img.youtube.com/vi/<%= campaign.engagement_player.try(:decorate).try(:youtube_video_id) %>/maxresdefault.jpg)">
+            <td style="background-image: url(//img.youtube.com/vi/<%= @campaign.engagement_player.try(:decorate).try(:youtube_video_id) %>/maxresdefault.jpg)">
               <div class="button-row">
                 <a href="<%= campaigns_path %>" class="btn btn-default">
                   <%= fa_icon "chevron-left" %>
                 </a>
-                <a href="<%= campaign_build_path(id: :basic, campaign_id: campaign.id) %>" class="btn btn-primary">
+                <a href="<%= campaign_build_path(id: t('wicked.basic'), campaign_id: @campaign.id) %>" class="btn btn-primary">
                   <%= fa_icon "pencil" %>
                 </a>
                 <a href="<%= %>" class="btn btn-danger">
@@ -20,25 +21,26 @@
                 </a>
               </div>
               <div class="pull-left cover">
-                <h3><%= campaign.name %></h3>
+                <h3><%= @campaign.name %></h3>
+                <h5><%= link_to @campaign.permalink, @campaign.permalink, target: '_blank' %></h5>
                 <small class="text-muted">
-                  Created on <%= campaign.created_at.strftime("%m/%d/%Y") %>
+                  <%= t 'campaigns.created_on', date: @campaign.created_at.strftime("%m/%d/%Y") %>
                   &middot;
-                  Last updated <%= time_ago_in_words campaign.updated_at %> ago
+                  <%= t 'campaigns.updated_on', time: time_ago_in_words(@campaign.updated_at) %>
                 </small>
                 <br />
-                <%- unless campaign.engagement_player.blank? %>
-                  <span class="label label-primary">engagement player</span>
-                <% end -%>
-                <%- unless campaign.share.blank? || !campaign.share.enabled?%>
-                  <span class="label label-primary">share</span>
-                <% end -%>
-                <%- unless campaign.community.blank? || !campaign.community.enabled?%>
-                  <span class="label label-primary">community</span>
-                <% end -%>
-                <%- unless campaign.alternate_locales.empty? %>
-                  <span class="label label-primary">translation</span>
-                <% end -%>
+                  <%- unless @campaign.engagement_player.blank? %>
+                    <span class="label label-primary"><%= t('wicked.engagement_player').humanize %></span>
+                  <% end -%>
+                  <%- unless @campaign.share.blank? || !@campaign.share.enabled? %>
+                    <span class="label label-primary"><%= t 'wicked.share' %></span>
+                  <% end -%>
+                  <%- unless @campaign.community.blank? || !@campaign.community.enabled? %>
+                    <span class="label label-primary"><%= t 'wicked.community' %></span>
+                  <% end -%>
+                  <%- unless @campaign.alternate_locales.empty? %>
+                    <span class="label label-primary"><%= t 'routes.translations' %></span>
+                  <% end -%>
               </div>
             </td>
           </tr>
@@ -48,45 +50,43 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
           <li class="active">
-            <a href="#statistics" role="tab" data-toggle="tab">Statistics</a>
+            <a href="#<%= t('wicked.statistics') %>" role="tab" data-toggle="tab"><%= t('wicked.statistics').titleize %></a>
           </li>
-          <%- unless campaign.engagement_player.blank? %>
+          <%- unless @campaign.engagement_player.blank? %>
             <li>
-              <a href="#engagement_player" role="tab" data-toggle="tab">Engagement Player</a>
+              <a href="#<%= t('wicked.engagement_player') %>" role="tab" data-toggle="tab"><%= t('wicked.engagement_player').titleize %></a>
             </li>
           <% end -%>
-          <%- unless campaign.share.blank? || !campaign.share.enabled? %>
+          <%- unless @campaign.share.blank? || !@campaign.share.enabled? %>
             <li>
-              <a href="#share" role="tab" data-toggle="tab">Share</a>
+              <a href="#<%= t('wicked.share') %>" role="tab" data-toggle="tab"><%= t('wicked.share').titleize %></a>
             </li>
           <% end -%>
-          <%- unless campaign.community.blank? || !campaign.community.enabled? %>
+          <%- unless @campaign.community.blank? || !@campaign.community.enabled? %>
             <li>
-              <a href="#community" role="tab" data-toggle="tab">Community</a>
+              <a href="#<%= t('wicked.community') %>" role="tab" data-toggle="tab"><%= t('wicked.community').titleize %></a>
             </li>
           <% end -%>
-          <%- unless campaign.alternate_locales.empty? %>
+          <%- unless @campaign.alternate_locales.empty? %>
           <li>
-            <a href="#translation" role="tab" data-toggle="tab">Translation</a>
+            <a href="#<%= t('routes.translations') %>" role="tab" data-toggle="tab"><%= t('routes.translations').titleize %></a>
           </li>
           <% end -%>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
-          <div class="tab-pane active" id="statistics">
-            <%= render partial: 'dashboard/campaigns/tabs/statistics' %>
-          </div>
-          <%- unless campaign.engagement_player.blank? %>
+          <%= render partial: 'dashboard/campaigns/tabs/statistics' %>
+          <%- unless @campaign.engagement_player.blank? %>
             <%= render partial: 'dashboard/campaigns/tabs/engagement_player' %>
           <% end -%>
-          <%- unless campaign.share.blank? || !campaign.share.enabled? %>
+          <%- unless @campaign.share.blank? || !@campaign.share.enabled? %>
             <%= render partial: 'dashboard/campaigns/tabs/share' %>
           <% end -%>
-          <%- unless campaign.community.blank? || !campaign.community.enabled? %>
+          <%- unless @campaign.community.blank? || !@campaign.community.enabled? %>
             <%= render partial: 'dashboard/campaigns/tabs/community' %>
           <% end -%>
-          <%- unless campaign.alternate_locales.empty? %>
+          <%- unless @campaign.alternate_locales.empty? %>
             <%= render partial: 'dashboard/campaigns/tabs/translation' %>
           <% end -%>
         </div>
@@ -94,12 +94,13 @@
     </div>
     <div class="panel-footer clearfix">
       <div class="pull-right">
-        <a href="<%= campaigns_path %>" class="btn">Back</a>&nbsp;
+        <a href="<%= campaigns_path %>" class="btn"><%= t 'campaigns.show.back' %></a>&nbsp;
         <a class="btn btn-default btn-primary" href="<%= new_campaign_path %>">
           <%= fa_icon "plus-circle" %>
-          Create New Campaign
+          <%= t 'campaigns.new' %>
         </a>
       </div>
     </div>
   </section>
 </div>
+<% end %>

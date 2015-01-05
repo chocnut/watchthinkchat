@@ -7,9 +7,12 @@ fr:
     translations: traductions
     dashboard: tableau de bord
     users: utilisateurs
+    user: utilisateur
     sign_in: se_connecter
     sign_up: signer
+    sign_out: se_déconnecter
     password: mot_de_passe
+    invites: invites
   wicked:
     basic: de_base
     engagement_player: engagement_joueur
@@ -17,6 +20,8 @@ fr:
     share: part
     community: communauté
     opened: ouvert
+    statistics: statistiques
+  language: Changer de langue
   user:
     first_name: Prénom
     last_name: Nom de famille
@@ -25,6 +30,8 @@ fr:
     confirm_password: Confirmez le mot de passe
     remember_me: Souviens-toi de moi
     back: Retour à WatchThinkChat
+    invite: Inviter de nouveaux traducteur
+    locale: Langue
     sign_up: Signer
     sign_up_with_provider: Signer avec %{provider}
     sign_in: Se Connecter
@@ -33,6 +40,14 @@ fr:
       title: Mot de passe oublié?
       description: Entrez votre adresse e-mail ci-dessous pour réinitialiser votre mot de passe.
       button: Réinitialiser mon mot de passe
+  translations:
+    empty:
+      title: Aucune campagne prêt à traduire
+      description: Il n'y a rien ici pour vous traduisez en ce moment.
+    index:
+      title: Campagnes de traduire
+    edit:
+      save: Sauvegarder Traductions
   campaigns:
     new_user:
       title: Lancer Création
@@ -67,6 +82,21 @@ fr:
         opened:
           title: Finition
           description: Prenez le direct
+    show:
+      back: Arrière
+      engagement_player:
+        media: Médias
+        survey: Enquête
+      share:
+        title: Ce composant est activé
+      statistics:
+        title: Graphiques et des trucs cool
+      translation:
+        title: Langue disponibles
+        invite: Inviter de nouveaux traducteurs
+        locale: Langue
+        translators: Traducteurs
+        close: près
   activerecord:
     attributes:
       campaign:

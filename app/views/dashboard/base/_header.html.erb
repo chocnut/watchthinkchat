@@ -16,7 +16,7 @@
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu extended logout">
-          <li><%= link_to('<i class="fa fa-key"></i> Log Out'.html_safe, destroy_user_session_path, :method => :delete) %><li>
+          <li><%= link_to("#{fa_icon 'sign-out'} #{t('routes.sign_out').humanize}".html_safe, destroy_user_session_path, :method => :delete) %><li>
         </ul>
       </li>
     </ul>

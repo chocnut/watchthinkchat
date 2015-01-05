@@ -11,6 +11,7 @@ WatchThinkChat::Application.routes.draw do
       authenticated :user do
         root to: 'dashboard#index', as: :authenticated_root
         scope module: 'dashboard' do
+          resource :user
           resources :campaigns, only: [:index, :new, :show, :destroy] do
             resources :invites, module: 'campaigns', as: :user_translator_invites
             resources :permissions, only: [:destroy], module: 'campaigns'

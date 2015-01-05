@@ -13,7 +13,7 @@ html {
 body {
   color: #767676;
   background: #f1f2f7;
-  font-family: 'fira-sans',sans-serif;
+  font-family: sans-serif;
   padding: 0px !important;
   margin: 0px !important;
   font-size: 15px;
@@ -50,6 +50,17 @@ a {
   -moz-transition: all .3s ease-in-out;
   -o-transition: all .3s ease-in-out;
   transition: all .3s ease-in-out;
+}
+
+.campaigns.table {
+  h5 {
+    margin: 0;
+    a {
+      &:link, &:visited, &:hover {
+        color: #59ace2
+      }
+    }
+  }
 }
 
 .alert-error {
@@ -235,6 +246,13 @@ a {
   transition: all .3s ease-in-out;
   ul li {
     position: relative;
+  }
+  .bottom-navigation {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 240px;
+    padding: 0 40px;
   }
 }
 

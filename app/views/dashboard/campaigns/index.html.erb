@@ -17,9 +17,10 @@
       <%= t 'routes.campaigns' %>
     </header>
     <div class="panel-body panel-index-body">
-      <table class="table table-striped index-table">
+      <table class="campaigns table table-striped index-table">
         <tbody>
-          <% @campaigns.each do |campaign| %>
+          <% @campaigns.decorate.each do |campaign| %>
+            <% Globalize.with_locale(campaign.locale.try(:code) || I18n.locale) do %>
             <tr>
               <td style="background-image: url(//img.youtube.com/vi/<%= campaign.engagement_player.try(:decorate).try(:youtube_video_id) %>/maxresdefault.jpg)">
                 <div class="button-row">
@@ -33,6 +34,7 @@
                 </div>
                 <div class="pull-left cover">
                   <h3><%= campaign.name %></h3>
+                  <h5><%= link_to campaign.permalink, campaign.permalink, target: '_blank' %></h5>
                   <small class="text-muted">
                     <%= t 'campaigns.created_on', date: campaign.created_at.strftime("%m/%d/%Y") %>
                     &middot;
@@ -40,13 +42,13 @@
                   </small>
                   <br />
                   <%- unless campaign.engagement_player.blank? %>
-                    <span class="label label-primary"><%= t 'routes.engagement_player' %></span>
+                    <span class="label label-primary"><%= t('wicked.engagement_player').humanize %></span>
                   <% end -%>
                   <%- unless campaign.share.blank? || !campaign.share.enabled? %>
-                    <span class="label label-primary"><%= t 'routes.share' %></span>
+                    <span class="label label-primary"><%= t 'wicked.share' %></span>
                   <% end -%>
                   <%- unless campaign.community.blank? || !campaign.community.enabled? %>
-                    <span class="label label-primary"><%= t 'routes.community' %></span>
+                    <span class="label label-primary"><%= t 'wicked.community' %></span>
                   <% end -%>
                   <%- unless campaign.alternate_locales.empty? %>
                     <span class="label label-primary"><%= t 'routes.translations' %></span>
@@ -54,6 +56,7 @@
                 </div>
               </td>
             </tr>
+            <% end %>
           <% end %>
         </tbody>
       </table>

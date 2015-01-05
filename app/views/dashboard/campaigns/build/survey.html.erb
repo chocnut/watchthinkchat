@@ -1,8 +1,9 @@
+<% Globalize.with_locale(@campaign.locale.try(:code) || I18n.locale) do %>
 <%= render 'progress' %>
 <div class="col-md-9">
   <section class="panel">
     <header class="panel-heading">
-      Campaign Wizard
+      <%= t 'campaigns.build.title' %>
     </header>
     <div ng-app="survey_generator" ng-controller="SurveyController" ng-init="init()" class="survey_generator">
       <ul id="question_list" ui-sortable="questionSortable" ng-model="questions">
@@ -165,7 +166,9 @@
   <script type="text/javascript">
     //<![CDATA[
       var campaign_id = <%= @campaign.id %>;
+      var url = "<%= campaign_api_questions_path %>";
     //]]>
   </script>
   <%= javascript_include_tag 'dashboard/survey/application' %>
+<% end %>
 <% end %>

@@ -10,12 +10,11 @@ module Dashboard
 
     def update
       load_translation
-      Globalize.with_locale(@translation.locale.code.to_sym) do
-        load_campaign
-        build_campaign
-        save_campaign
-        redirect_to action: :edit
-      end
+      I18n.locale = @translation.locale.code.to_sym
+      load_campaign
+      build_campaign
+      save_campaign
+      redirect_to action: :edit
     end
 
     protected

@@ -46,8 +46,19 @@ module Dashboard
       end
 
       def build_question
+        set_i18n
         @question ||= question_scope.build
         @question.attributes = question_params
+      end
+
+      def set_i18n
+        return unless load_campaign.locale
+        I18n.locale = Locale.find(load_campaign.locale).code
+      end
+
+      def load_campaign
+        @campaign ||= current_manager.campaigns.find(params[:campaign_id])
+        @campaign
       end
 
       def save_question
@@ -57,8 +68,7 @@ module Dashboard
       end
 
       def question_scope
-        current_manager.campaigns
-          .find(params[:campaign_id])
+        load_campaign
           .survey
           .questions
       end

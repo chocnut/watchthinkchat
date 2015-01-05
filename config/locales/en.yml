@@ -7,9 +7,12 @@ en:
     translations: translations
     dashboard: dashboard
     users: users
+    user: user
     sign_in: sign_in
     sign_up: sign_up
+    sign_out: sign_out
     password: password
+    invites: invites
   wicked:
     basic: basic
     engagement_player: engagement_player
@@ -17,18 +20,34 @@ en:
     share: share
     community: community
     opened: opened
+    statistics: statistics
+  language: Change language
   user:
+    first_name: First Name
+    last_name: Last Name
     email: Email
     password: Password
+    confirm_password: Confirm Password
     remember_me: Remember me
     back: Back to WatchThinkChat
+    invite: Invite New Translator
+    language: Language
     sign_up: Sign Up
+    sign_up_with_provider: Sign Up with %{provider}
     sign_in: Sign In
     sign_in_with_provider: Sign in with %{provider}
     forgot_your_password:
       title: Forgot your password?
       description: Enter your e-mail address below to reset your password.
       button: Reset my password
+  translations:
+    empty:
+      title: No campaigns ready to translate
+      description: There isn't anything here for you to translate right now.
+    index:
+      title: Campaigns to Translate
+    edit:
+      save: Save Translations
   campaigns:
     new_user:
       title: Start Creating
@@ -63,6 +82,21 @@ en:
         opened:
           title: Finish
           description: Go Live
+    show:
+      back: Back
+      engagement_player:
+        media: Media
+        survey: Survey
+      share:
+        title: This component is enabled
+      statistics:
+        title: Cool Graphs and Stuff
+      translation:
+        title: Available Languages
+        invite: Invite New Translators
+        locale: Language
+        translators: Translators
+        close: close
   activerecord:
     attributes:
       campaign:

@@ -1,6 +1,5 @@
 module Dashboard
   class CampaignsController < Dashboard::BaseController
-    decorates_assigned :campaign
     def index
       load_campaigns
     end
@@ -13,6 +12,7 @@ module Dashboard
 
     def show
       load_campaign
+      decorate_campaign
     end
 
     def destroy
@@ -42,6 +42,10 @@ module Dashboard
       @campaign ||= campaign_scope.build
       current_manager.campaigns << @campaign
       current_manager.permissions.find_by(resource: @campaign).owner!
+    end
+
+    def decorate_campaign
+      @campaign = @campaign.try(:decorate)
     end
 
     def save_campaign
