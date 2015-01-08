@@ -145,7 +145,7 @@ angular.module('chatApp').controller('ManageEditController', function ($scope, $
             alert('Please enter a campaign title.');
             tab = '1';
         }
-        $scope.activeCampaign.permalink = encodeURIComponent($scope.activeCampaign.title);
+        $scope.activeCampaign.permalink = $scope.activeCampaign.title.replace(/[^a-zA-Z0-9-_]/g, '');
     }
     $scope.wizardTab = tab;
   };
