@@ -1,0 +1,214 @@
+<div class="operator">
+  <div class="password-overlay">
+    <p>Please enter the campaign password to continue:</p>
+    <form class="form-inline" role="form">
+      <input data-ng-model="campaignPassword" type="password" placeholder="password..." class="form-control" style="width:40%;" ng-enter="validatePassword(); requestNotifyPermission();" autofocus>
+
+      <div class="btn btn-primary" data-ng-click="validatePassword(); requestNotifyPermission();">Validate</div>
+    </form>
+    <div class="alert alert-danger">Invalid Password</div>
+  </div>
+
+  <div class="modal" id="endchat-overlay" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Save Chat</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form" role="form">
+            <div class="form-group" style="width:49%;display:inline-block;">
+              <label class="control-label">Response to follow Jesus</label>
+              <div class="">
+                <p class="form-control-static" ng-bind-html="endchat_session.activity_display"></p>
+              </div>
+            </div>
+            <div class="form-group" style="width:49%;display:inline-block;margin-bottom:0;vertical-align:top;">
+              <label class="control-label">Link shared by</label>
+              <div>
+                <img ng-src="{{endchat_session.requested_operator.profile_pic}}" style="float:left;">
+                <p class="form-control-static">{{endchat_session.requested_operator.name}}</p>
+              </div>
+            </div>
+            <h4>Who are they</h4>
+            <div class="form-group">
+              <label>Persons name</label>
+              <input type="text" class="form-control" data-ng-model="endchat_session.visitor_name">
+            </div>
+
+            <div class="form-group">
+              <label>Contact email</label>
+              <input type="email" class="form-control" data-ng-model="endchat_session.visitor_email">
+            </div>
+            <h4>Next steps</h4>
+            <div class="form-group">
+              <label>Notes</label>
+              <textarea class="form-control" rows="3" data-ng-model="endchat_session.notes"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-success" data-ng-click="endChatDialogSave()">Save &amp; Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          <strong>
+            <i class="fa fa-comments-o">&nbsp;</i>
+            Godchat
+            <span class="text-muted">Beta</span>
+          </strong>
+        </a>
+        <div class="shareurl">
+          <img ng-src="{{operator_data.profile_pic}}">
+          <h3>{{operator_data.name}}</h3>
+          <input type="text" data-ng-model="operator_chat_url" readonly style="width:380px;color:black;" onclick="this.select();"> <a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{operator_chat_url_encoded}}" target="_blank" style="color:#fff;" title="Share link with Facebook">
+          <i class="fa fa-facebook-square">&nbsp;</i>
+        </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="activity" id="activesessions">
+    <button class="btn btn-default" style="display:block;margin:10px auto 0 auto;" ng-click="switchChat('help')">Instructions</button>
+    <h3 class="special">Active Sessions</h3>
+    <ul class="media-list">
+      <li class="media link" id="session_{{session.chat_uid}}" data-ng-click="switchChat(session.chat_uid);" ng-repeat="session in active_sessions | filter: {status: 'active'}:true">
+        <div class="pull-left">
+          <img class="media-object" ng-src="{{session.visitor_profile}}">
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">{{session.visitor_name}}</h4>
+          <i class="fa fa-exclamation newmessage">&nbsp;</i>
+          <p ng-bind-html="session.activity_display"></p>
+        </div>
+      </li>
+      <li data-ng-show="(active_sessions|filter:{status:'active'}:true).length == 0">You do not have any active chat sessions yet. They will appear here when you do.</li>
+    </ul>
+
+    <h3 class='special'>Inactive Sessions</h3>
+    <ul class="media-list">
+      <li class="media link" id="session_{{session.chat_uid}}" data-ng-click="switchChat(session.chat_uid);" ng-repeat="session in active_sessions | filter: {status: 'inactive'}:true">
+        <div class="pull-left">
+          <img class="media-object" ng-src="{{session.visitor_profile}}">
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">{{session.visitor_name}}</h4>
+          <i class="fa fa-exclamation newmessage">&nbsp;</i>
+          <p ng-bind-html="session.activity_display"></p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="operator_status operator_status_offline" data-ng-click="toggleOperatorStatus()" title="Click to toggle status">
+    Offline
+  </div>
+  <div id="chat">
+    <div class="chatbox" id="chatbox_help" style="padding:20px; height: 100%; overflow-y: auto;">
+        <p><strong>Welcome to WatchThinkChat (WTC)</strong></p>
+          <p>If you got this far, you are ready to impact your friends!<br>
+          If you need these instructions again - they will be available under the instructions tab at left.<br>
+          Once you get your first chat at left, these instructions will disappear.</p>
+
+          <p>For now please click the button in the bottom left to go OFFLINE (Turns from green to red)</p>
+
+          <p>On the top right under your name ---> you have a unique personal link that will return traffic to you.</p>
+          <ol>
+            <li>Go ahead and copy that link (Cut and paste works)</li>
+            <li>Make sure you watched the 4 minute film “#FallingPlates” yourself before inviting others. https://www.youtube.com/watch?v=KGlx11BxF24</li>
+            <li>When you get a chat - confine your chat to four things
+                <ol><li>Find out who you are chatting with by asking them to click the Facebook icon on their screen.</li>
+                  <li>Ask what they thought of the film,</li>
+                  <li>Ask why they selected the button they choose,</li>
+                  <li>Challenge them to the “Growth Challenge.”</li></ol></li>
+            <li>You need to know what the Growth Challenge is. It’s four emails, once a week, that have a short 3 min film and 4 questions that help a person understand or grow in their faith. This is what you want to challenge your friend to sign up for. They may want to invite you to join with them.</li>
+          </ol>
+
+          <p>Now you understand this - you are ready to connect with your friends. Here are the instructions!</p>
+            <img src="<%= asset_path("operator/facebook.png") %>" style="float:right; max-width:140px;">
+            <ol>
+              <li>Please click to turn your self back ONLINE in bottom left</li>
+              <li>Open Facebook in a separate tab</li>
+              <li>Post to your timeline in Facebook - Make your post very personal to you, or your friends will assume it is spam. ie: suggested post “I watched this film today and I found it to be a really impacting 4 min experience! Watch it now and I will get to chat with you at the end… you will see… thanks Aaron  http://www.watchthinkchat.com/s/X2R4 ” (Use your own link not this example!!!)</li>
+              <li>When in Facebook, look to see which of your Facebook friends are in the “green zone”, meaning they are currently available to chat. In right panel, friends with a <span style="font-family: 'Wingdings'; color: green;">l</span> next to their names are on chat or FB Messenger. Especially look for the people with “Web ” who on using their computer, which will allow them to chat with you when they click your link. (*Mobile visitors will be able to watch the video, but they will not be able to chat with you.) Friends with no icon next to their names are off chat. Chats or messages you send them will go directly to their messages inbox.</li>
+              <img src="<%= asset_path("operator/twitter.png") %>" style="float:right;  max-width:140px;">
+              <li>Within Facebook, start a chat conversation with four friends. Start your chat saying “Hey Glen, you there?” and then say “I watched this cool film, can you have a look?” Then you drop in the link after you get a response from your friend. Then you need to go back to your WatchThinkChat Chat Operator tab in your browser. If they are on a mobile device - their chat experience is DISABLED so you will NOT be able chat with them, but they can still watch the film and guide themselves. You could chat with them on FB messenger after they watch #FallingPlates.</li>
+              <li>Sometimes your friends will come back into FB messenger and chat, instead of clicking a button at the end of the film. This means you can no longer offer them the Growth Challenge.</li>
+              <li>Tweet your personal link - generate some traffic.</li>
+              <li>If you have an account on Google+, Instagram, Pinterest, WhatsApp, or other social networks, connect with those friends and send them your link.</li>
+              <li>Sign into Skype - you will find a green zone there, too. Post your link to those friends who are currently online to generate some visitors.</li>
+              <li>By now you are getting chats in the WatchThinkChat Chat Operator panel. When you get freed up again, head back to go fishing in the green zone of Facebook.</li>
+            </ol>
+
+          <p>May God bless your faith and willingness to represent Him.</p>
+    </div>
+    <div class="chatbox" id="chatbox_{{session.chat_uid}}" ng-repeat="session in active_sessions" style="display:none;">
+      <div class="btn btn-danger" data-ng-click="endChat(session.chat_uid)" style="position:absolute;margin:12px;right:0;z-index:1;">End Chat</div>
+      <div class="btn btn-warning" data-ng-show="session.challenge_available" data-ng-click="showChallenge(session.chat_uid)" style="position:absolute;margin:12px;right:85px;z-index:1;">Show Challenge</div>
+      <div data-ng-show="operator_edit_mode" style="margin-top: 8px;">
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Visitor Name</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" data-ng-model="session.visitor_name" ng-enter="operator_edit_mode=false">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Visitor Email</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" data-ng-model="session.visitor_email" ng-enter="operator_edit_mode=false">
+            </div>
+          </div>
+        </form>
+      </div>
+      <h1 class="special" data-ng-show="!operator_edit_mode" data-ng-click="operator_edit_mode=true" style="cursor: pointer;">
+        {{session.visitor_name}}
+      </h1><span data-ng-show="!operator_edit_mode" data-ng-click="operator_edit_mode=true" style="text-align: center;width: 100%;position: absolute;cursor: pointer;margin-top: -32px;">
+      {{session.visitor_email || 'Click here to set visitor name/email'}}
+      </span>
+      <ul class="conversation">
+        <li ng-class="message.class" data-ng-repeat="message in session.chatMessages">
+          <div class="timestamp timestamp-refresh" timestamp="{{message.time}}">Just
+            Now
+          </div>
+          <div class="person" ng-if="message.person === 'visitor'">{{session.visitor_name}}</div>
+          <div class="person" ng-if="message.person !== 'visitor'">{{message.person}}</div>
+          <div ng-class="message.messageClass" ng-bind-html="message.message"></div>
+        </li>
+      </ul>
+      <div class="user_info">
+        <h3 class="special">Visitor Info</h3>
+        <label class="control-label">Link shared by</label>
+        <div>
+          <img ng-src="{{session.requested_operator.profile_pic}}" style="float:left;padding:0 6px 6px 0;width:50px;height:50px;">
+          <p class="form-control-static">{{session.requested_operator.name}}</p>
+        </div>
+        <div style="clear:both;">
+          <label class="control-label">Browser:</label>
+          <p class="form-control-static">{{session.browser}}</p>
+        </div><hr>
+        <label class="control-label">OS:</label> {{session.os}}<hr>
+        <label class="control-label">Mobile:</label> {{session.mobile}}<hr>
+        <label class="control-label">IP Address:</label> {{session.ip}}<hr>
+        <label class="control-label">Location:</label>
+        <div>
+          <p class="form-control-static">{{session.geolocation.city}}, {{session.geolocation.region_name}} {{session.geolocation.country_code}}</p>
+        </div>
+
+        <div style="position: absolute; bottom: 10px; width:95%;" data-ng-show="session.status === 'active'">
+          <p><strong>Canned Responses</strong></p>
+          <button type="button" class="btn btn-success" style="float:right;" data-ng-click="copyCannedMessage(session.chat_uid);">Copy <i class="fa fa-level-down">&nbsp;</i></button>
+          <select style="width:150px;margin-top:6px;" data-ng-model="session.selectedCannedMessage" ng-options="response.response as response.name for response in cannedResponses"></select>
+        </div>
+      </div>
+      <input class="form-control chat-input chat-message" placeholder="Message..." type="text" ng-enter="postMessage(session.chat_uid)" data-ng-show="session.status === 'active'">
+    </div>
+  </div>
+</div>

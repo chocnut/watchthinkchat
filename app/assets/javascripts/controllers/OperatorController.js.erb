@@ -1,0 +1,423 @@
+angular.module('chatApp').controller('OperatorController', function ($scope, $rootScope, $location, $route, $http, $filter, $timeout, $sce, timeUpdate, audioNotify) {
+  var operator_data = {
+    uid: $route.current.params.operatorId,
+    profile_pic: '<%= asset_path("avatar.png") %>'
+  };
+  $scope.operator_data = operator_data;
+  var active_chat = '';
+  var campaign_id = $location.search()['campaign'] || '';
+  var operator_channel_connected = false;
+  $scope.operator_edit_mode = false;
+  var window_focus=true;
+  var window_focus_timeout;
+
+  if(!operator_data.uid){
+    document.write('Invalid operator id');
+    return;
+  }
+  if(!campaign_id){
+    document.write('Invalid campaign id');
+    return;
+  }
+
+  $scope.active_sessions = [];
+  $scope.endchat_session = [];
+  $scope.cannedResponses = [
+    {
+      name: 'Welcome',
+      response: 'Welcome to WatchThinkChat, what did you think of the video?'
+    },
+    {
+      name: 'Who is this?',
+      response: 'Who is this by the way? Can you just type your name in the "name" field below? Even easier, click the Facebook button...'
+    },
+    {
+      name: 'Challenge',
+      response: 'I\'m sending the challenge now, please take a look!'
+    },
+    {
+      name: 'Type of Friend',
+      response: 'Someone you know who follows Jesus, who has mentioned their faith to you, who you trust, and who may want to help.'
+    }
+  ];
+
+  $scope.validatePassword = function() {
+    $http({
+      method: 'POST',
+      url: '/api/campaigns/' + campaign_id + '/password',
+      data: {
+        password: $scope.campaignPassword
+      }
+    }).success(function (data, status, headers, config) {
+      $('.password-overlay').fadeOut();
+      $scope.operator_chat_url = 'http://www.watchthinkchat.com' + data.share_url;
+      $scope.operator_chat_url_encoded = encodeURIComponent($scope.operator_chat_url);
+      $http({method: 'GET', url: '/api/operators/' + operator_data.uid}).
+        success(function (data, status, headers, config) {
+          operator_data = data;
+          $scope.operator_data = data;
+          $scope.toggleOperatorStatus();
+        }).error(function (data, status, headers, config) {
+
+        });
+        //clear password
+        $scope.campaignPassword='';
+    }).error(function (data, status, headers, config) {
+      $('.password-overlay .alert').html(data.error).fadeIn().delay(2000).fadeOut();
+      //clear password
+      $scope.campaignPassword='';
+    });
+  };
+
+  var pusher = new Pusher('249ce47158b276f4d32b');
+  pusher.connection.bind('state_change', function(states) {
+    // states = {previous: 'oldState', current: 'newState'}
+    console.log('Pusher state change: '+states.current);
+    if(states.current==='connected'){
+      if(operator_channel_connected){
+        $('.operator_status').removeClass('operator_status_offline').removeClass('operator_status_pending').addClass('operator_status_online');
+        $('.operator_status').html('Online');
+      }else{
+        $('.operator_status').removeClass('operator_status_online').removeClass('operator_status_pending').addClass('operator_status_offline');
+        $('.operator_status').html('Offline');
+      }
+    }else{
+      $('.operator_status').removeClass('operator_status_online').removeClass('operator_status_offline').addClass('operator_status_pending');
+      $('.operator_status').html(states.current);
+    }
+  });
+
+  $scope.switchChat = function (id) {
+    $('.chatbox').hide();
+    $('#chatbox_' + id).show();
+    $('#activesessions li').removeClass('activechat');
+    $('#session_' + id).addClass('activechat');
+    $('#session_' + id + ' .newmessage').css('visibility', 'hidden');
+    active_chat = id;
+    if(id !== 'help'){
+      scollBottom(id);
+    }
+  };
+
+  $scope.postMessage = function (id) {
+    var message = $('#chatbox_' + id + ' .chat-message').val();
+    $('#chatbox_' + id + ' .chat-message').val('');
+    $('#session_' + id + ' .newmessage').css('visibility', 'hidden');
+
+    if(message==''){ return; }
+
+    var post_data = {
+      user_uid: operator_data.uid,
+      message_type: 'user',
+      message: message
+    };
+    $http({method: 'POST', url: '/api/chats/'+id+'/messages', data: post_data}).
+      success(function (data, status, headers, config) {
+        var index = _.findIndex($scope.active_sessions, function(session) {
+          return session.chat_uid == id;
+        });
+        $scope.active_sessions[index].chatMessages.push({
+          time: Math.round(+new Date()).toString(),
+          class: 'graybg',
+          messageClass: 'message',
+          person: 'You',
+          message: $sce.trustAsHtml(message)
+        });
+        scollBottom(id);
+      }).error(function (data, status, headers, config) {
+      });
+  };
+
+  $scope.showChallenge = function (id) {
+      var post_data = {
+          user_uid: operator_data.uid,
+          message_type: 'activity',
+          message: 'challenge'
+      };
+      $http({method: 'POST', url: '/api/chats/'+id+'/messages', data: post_data}).
+        success(function (data, status, headers, config) {
+          var index = _.findIndex($scope.active_sessions, function (session) {
+            return session.chat_uid == id;
+          });
+          $scope.active_sessions[index].challenge_available = false;
+        }).error(function (data, status, headers, config) {
+        });
+  };
+
+  $scope.endChat = function (id) {
+    if(confirm("Are you sure you want to end this chat?")){
+      $http({method: 'DELETE', url: '/api/chats/'+id}).
+        success(function (data, status, headers, config) {
+          var index = _.findIndex($scope.active_sessions, function(session) {
+            return session.chat_uid == id;
+          });
+          $scope.endchat_session = $scope.active_sessions[index];
+          $scope.active_sessions.splice(index, 1);
+          pusher.unsubscribe('chat_'+id);
+
+          $('#endchat-overlay').modal({backdrop: true, show: true});
+        }).error(function (data, status, headers, config) {
+        });
+    }
+  };
+
+  $scope.endChatDialogSave = function (id) {
+      $http({
+        method: 'POST',
+        url: '/api/chats/' + $scope.endchat_session.chat_uid + '/collect_stats',
+        data: {
+          visitor_response: $scope.endchat_session.activity,
+          visitor_name: $scope.endchat_session.visitor_name,
+          visitor_email: $scope.endchat_session.visitor_email,
+          calltoaction: '',
+          notes: $scope.endchat_session.notes
+        }
+      }).success(function (data, status, headers, config) {
+        $('#endchat-overlay').modal('hide');
+        $scope.endchat_session=[];
+      }).error(function (data, status, headers, config) {
+        alert('Error: cannot save chat to Mission Hub');
+      });
+  };
+
+  $scope.toggleOperatorStatus = function(){
+    if(pusher.connection.state!=='connected'){
+      return;
+    }
+    if(operator_channel_connected){
+      pusher.unsubscribe('operator_' + operator_data.uid);
+      $('.operator_status').removeClass('operator_status_online').addClass('operator_status_offline');
+      $('.operator_status').html('Offline');
+      operator_channel_connected = false;
+    }else{
+      $('.operator_status').removeClass('operator_status_offline').addClass('operator_status_online');
+      $('.operator_status').html('Online');
+      operator_channel_connected = true;
+
+      pusher.subscribe('operator_' + operator_data.uid).bind('newchat', function (newchat_data) {
+        console.log('New Incoming Chat: '+ newchat_data.chat_uid);
+        var index = _.findIndex($scope.active_sessions, function (session) {
+          return session.chat_uid == newchat_data.chat_uid;
+        });
+        if(index !== -1){
+          return;
+        }
+
+        if(newchat_data.visitor_name == ''){
+          newchat_data.visitor_name = 'Visitor ' + ($scope.active_sessions.length+1);
+        }
+
+        //new chat session notification
+        if (window_focus === false) {
+          audioNotify.play();
+          desktopNotify('Incoming Chat Session', newchat_data.visitor_name, newchat_data.chat_uid);
+        }
+
+        $scope.$apply(function () {
+          $scope.active_sessions.push({
+            chat_uid: newchat_data.chat_uid,
+            visitor_uid: newchat_data.visitor_uid,
+            visitor_name: newchat_data.visitor_name,
+            visitor_email: '',
+            visitor_profile: '<%= asset_path("avatar.png") %>',
+            requested_operator: {
+              uid: newchat_data.requested_operator,
+              name: '',
+              profile_pic: '<%= asset_path("avatar.png") %>'
+            },
+            selectedCannedMessage: $scope.cannedResponses[0].response,
+            activity: '',
+            activity_display: '',
+            challenge_available: false,
+            status: 'active',
+            browser: '-',
+            ip: '-',
+            os: '-',
+            mobile: '-',
+            geolocation: {
+              city: '-',
+              region_name: '',
+              country_code: ''
+            },
+            chatMessages: []
+          });
+        });
+
+        var element = $('#session_' + newchat_data.chat_uid + ' .newmessage');
+        element.css('visibility', 'visible');
+        var distance = '5px';
+        var speed = 210;
+        var i;
+        for (i = 0; i < 4; i++) {
+          element.animate({marginTop: '-=' + distance}, speed)
+                  .animate({marginTop: '+=' + distance}, speed);
+        }
+
+        var index = $scope.active_sessions.length - 1;
+
+        if($scope.active_sessions[index].requested_operator.uid===''){
+        }else if ($scope.active_sessions[index].requested_operator.uid != operator_data.uid) {
+          $http({method: 'GET', url: '/api/operators/' + $scope.active_sessions[index].requested_operator.uid}).
+                  success(function (data, status, headers, config) {
+                    $scope.active_sessions[index].requested_operator = data;
+                  }).error(function (data, status, headers, config) {
+                  });
+        }else{
+          $scope.active_sessions[index].requested_operator = operator_data;
+        }
+
+        var chat_channel = pusher.subscribe('chat_'+newchat_data.chat_uid);
+        chat_channel.bind('event', function (data) {
+          if (data.user_uid != operator_data.uid) {
+            var conversation = $('#chatbox_' + newchat_data.chat_uid + ' .conversation');
+            var index = _.findIndex($scope.active_sessions, function (session) {
+              return session.chat_uid == newchat_data.chat_uid;
+            });
+            if (data.message_type == 'activity-button') {
+              $scope.$apply(function () {
+                $scope.active_sessions[index].activity_display = $sce.trustAsHtml(data.message);
+                $scope.active_sessions[index].activity = data.message;
+                $scope.active_sessions[index].challenge_available = true;
+
+                $scope.active_sessions[index].chatMessages.push({
+                  time: Math.round(+new Date()).toString(),
+                  class: 'message-activity-li',
+                  messageClass: 'message-activity',
+                  person: 'visitor',
+                  message: $sce.trustAsHtml('Visitor has clicked: ' + data.message)
+                });
+              });
+            } else if (data.message_type == 'activity') {
+              $scope.$apply(function () {
+                $scope.active_sessions[index].chatMessages.push({
+                  time: Math.round(+new Date()).toString(),
+                  class: 'message-activity-li',
+                  messageClass: 'message-activity',
+                  person: 'visitor',
+                  message: $sce.trustAsHtml(data.message)
+                });
+              });
+            } else if (data.message_type == 'fbName') {
+              $scope.active_sessions[index].visitor_name=data.message;
+            } else if (data.message_type == 'fbEmail') {
+              $scope.active_sessions[index].visitor_email=data.message;
+            } else if (data.message_type == 'fbId') {
+              $scope.active_sessions[index].visitor_uid=data.message;
+              $scope.active_sessions[index].visitor_profile='http://graph.facebook.com/'+data.message+'/picture?width=80&height=80';
+            } else if (data.message_type == 'browser') {
+              $scope.active_sessions[index].browser=data.message;
+            } else if (data.message_type == 'mobile') {
+              $scope.active_sessions[index].mobile=data.message;
+            } else if (data.message_type == 'os') {
+              $scope.active_sessions[index].os=data.message;
+            } else if (data.message_type == 'ip') {
+              $scope.active_sessions[index].ip=data.message;
+              $http({method: 'JSONP',
+                url: 'http://freegeoip.net/json/'+data.message+'?callback=JSON_CALLBACK'
+              }).success(function (data, status, headers, config) {
+                $scope.active_sessions[index].geolocation=data;
+              }).error(function (data, status, headers, config) {
+              });
+            } else {
+              $scope.$apply(function () {
+                $scope.active_sessions[index].chatMessages.push({
+                  time: Math.round(+new Date()).toString(),
+                  class: '',
+                  messageClass: 'message',
+                  person: 'visitor',
+                  message: $sce.trustAsHtml(data.message)
+                });
+              });
+
+              if (active_chat != newchat_data.chat_uid || window_focus === false) {
+                var element = $('#session_' + newchat_data.chat_uid + ' .newmessage');
+                element.css('visibility', 'visible');
+                var distance = '5px';
+                var speed = 210;
+                var i;
+                for (i = 0; i < 4; i++) {
+                  element.animate({marginTop: '-=' + distance}, speed)
+                          .animate({marginTop: '+=' + distance}, speed);
+                }
+                audioNotify.play();
+                desktopNotify('New Message', $scope.active_sessions[index].visitor_name+': ' + $("<div/>").html(data.message).text(), newchat_data.chat_uid);
+              }
+            }
+            scollBottom(newchat_data.chat_uid);
+          }
+        });
+        chat_channel.bind('end', function () {
+          console.log('Visitor Disconnect: ' + newchat_data.chat_uid);
+          var index = _.findIndex($scope.active_sessions, function (session) {
+              return session.chat_uid == newchat_data.chat_uid;
+          });
+          $scope.$apply(function () {
+            $scope.active_sessions[index].chatMessages.push({
+                time: Math.round(+new Date()).toString(),
+                class: 'message-activity-li',
+                messageClass: 'message-activity',
+                person: 'visitor',
+                message: $sce.trustAsHtml('Visitor has disconnected from chat session.')
+            });
+            $scope.active_sessions[index].status = 'inactive';
+          });
+        });
+      });
+    }
+  };
+
+  $scope.requestNotifyPermission = function(){
+    try{
+      if (window.webkitNotifications.checkPermission() == 0) {
+      } else {
+        window.webkitNotifications.requestPermission();
+      }
+    }catch(e){}
+  };
+
+  $scope.copyCannedMessage = function(id){
+    var index = _.findIndex($scope.active_sessions, function (session) {
+      return session.chat_uid == id;
+    });
+    $('#chatbox_' + id + ' .chat-message').val($scope.active_sessions[index].selectedCannedMessage);
+  };
+
+  var desktopNotify = function(title, message, chat_id){
+    try{
+      var havePermission = window.webkitNotifications.checkPermission();
+      if (havePermission == 0) {
+        var notification = window.webkitNotifications.createNotification(
+                '<%= asset_path("features-ico2.png") %>', title, message
+        );
+        notification.onclick = function () {
+          window.focus();
+          if(chat_id){
+            $scope.switchChat(chat_id);
+          }
+        }
+        notification.show();
+      }
+    }catch(e){}
+  }
+
+var scollBottom = function(id){
+  $timeout(function(){
+    var $id= $('#chatbox_' + id + ' .conversation');
+    $id.scrollTop($id[0].scrollHeight);
+  }, 10);
+};
+
+  $(window).focus(function() {
+    window_focus=true;
+    clearTimeout(window_focus_timeout);
+  }).blur(function() {
+    window_focus=false;
+    window_focus_timeout = setTimeout(function(){
+      if(operator_channel_connected){
+        desktopNotify('Offline','15 mins inactivity, status set to: Offline');
+        audioNotify.play();
+        $scope.toggleOperatorStatus();
+      }
+    }, 900000);
+  }).trigger('focus');
+});
