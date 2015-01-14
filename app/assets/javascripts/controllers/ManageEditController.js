@@ -154,4 +154,33 @@ angular.module('chatApp').controller('ManageEditController', function ($scope, $
     var ac = $scope.activeCampaign;
     return ac.admin1_id === operatorId || ac.admin2_id === operatorId || ac.admin3_id === operatorId;
   };
+
+  $scope.revokeAdmin = function(operatorId){
+    var ac = $scope.activeCampaign;
+    if(ac.admin1_id === operatorId){
+      $scope.activeCampaign.admin1_id = null;
+    }else if(ac.admin2_id === operatorId){
+      $scope.activeCampaign.admin2_id = null;
+    }else if(ac.admin3_id === operatorId){
+      $scope.activeCampaign.admin3_id = null;
+    }
+    $scope.saveCampaign();
+  };
+
+  $scope.canAddAdmin = function(){
+    var ac = $scope.activeCampaign;
+    return _.isNull(ac.admin1_id) || _.isNull(ac.admin2_id) || _.isNull(ac.admin3_id);
+  };
+
+  $scope.makeAdmin = function(operatorId){
+    var ac = $scope.activeCampaign;
+    if(_.isNull(ac.admin1_id)){
+      $scope.activeCampaign.admin1_id = operatorId;
+    }else if(_.isNull(ac.admin2_id)){
+      $scope.activeCampaign.admin2_id = operatorId;
+    }else if(_.isNull(ac.admin3_id)){
+      $scope.activeCampaign.admin3_id = operatorId;
+    }
+    $scope.saveCampaign();
+  };
 });

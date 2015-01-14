@@ -61,7 +61,8 @@
                             <img ng-src="{{o.profile_pic}}" class="pull-left" style="padding-right:8px;">
                             <strong>{{o.fullname}}</strong><br>
                             {{o.email}}
-                            <span ng-if="isAdmin(o.id)"><br>Admin - <a href="">Revoke</a></span>
+                            <span ng-if="isAdmin(o.id)"><br>Admin - <a href="" ng-click="revokeAdmin(o.id)">Revoke</a></span>
+                            <span ng-if="!isAdmin(o.id) && canAddAdmin()"><br><a href="" ng-click="makeAdmin(o.id)">Make admin</a></span>
                         </td>
                         <td><i class="fa fa-check" ng-show="o.status === 'online'"></i></td>
                         <td ng-bind="o.live_chats.length"></td>
