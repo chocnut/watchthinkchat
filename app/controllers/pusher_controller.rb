@@ -23,11 +23,11 @@ class PusherController < ApplicationController
 
   def existence
     webhook = Pusher.webhook(request)
-    logger.info "PusherController#existence"
+    logger.info "PusherController#existence webhook: #{webhook.inspect}"
     if webhook.valid?
-      logger.info "valid"
+      logger.info "PusherController#existence valid"
       webhook.events.each do |event|
-        logger.info "event channel: #{event.inspect}"
+        logger.info "PusherController#existence event: #{event.inspect}"
         case event["channel"]
         when /chat_(.+)/
           chat = Chat.where(:uid => $1).first
@@ -45,7 +45,6 @@ class PusherController < ApplicationController
             case event["name"]
             when "channel_occupied"
               operator.set_status("online")
-              logger.info("in existence channel_occupied; opened chats: #{operator.operator_chats.open.inspect}")
               # send any live chats again
               operator.operator_chats.open.each do |chat|
                 Pusher["operator_#{operator.operator_uid}"].trigger('newchat', {
@@ -62,15 +61,12 @@ class PusherController < ApplicationController
           end
         when /visitor_(.+)/
           visitor = User.where(:visitor_uid => $1).first
-          logger.info("in existence visitor #{visitor.inspect}")
           if visitor
             case event["name"]
             when "channel_occupied"
             when "channel_vacated"
-              logger.info("in existence channel_vacated #{visitor.visitor_chats.open.inspect}")
               # notify all their chats that the visitor has left
               visitor.visitor_chats.open.each do |chat|
-                logger.info("Sending end trigger on chat_#{chat.uid}")
                 chat.close!
               end
             end
