@@ -248,6 +248,7 @@ angular.module('chatApp').controller('ChatController', function ($scope, $rootSc
   $scope.sendFbMsgToOperator = function(){
     FB.ui({
       method: 'send',
+      link: document.URL,
       to: $scope.operator_data.uid
     });
   };

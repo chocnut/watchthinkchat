@@ -44,7 +44,6 @@ angular.module('chatApp').controller('ManageEditController', function ($scope, $
         class: 'bg-success'
       };
       $scope.myCampaigns[activeCampaignIndex] = data;
-      console.log(activeCampaignIndex, data);
 
       $timeout(function() {
         $scope.notify = {};
@@ -144,9 +143,15 @@ angular.module('chatApp').controller('ManageEditController', function ($scope, $
         if(_.isEmpty($scope.activeCampaign.title)){
             alert('Please enter a campaign title.');
             tab = '1';
+        }else{
+          $scope.activeCampaign.permalink = $scope.activeCampaign.title.replace(/[^a-zA-Z0-9-_]/g, '');
         }
-        $scope.activeCampaign.permalink = $scope.activeCampaign.title.replace(/[^a-zA-Z0-9-_]/g, '');
     }
     $scope.wizardTab = tab;
+  };
+
+  $scope.isAdmin = function(operatorId){
+    var ac = $scope.activeCampaign;
+    return ac.admin1_id === operatorId || ac.admin2_id === operatorId || ac.admin3_id === operatorId;
   };
 });
