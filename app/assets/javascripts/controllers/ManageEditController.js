@@ -65,8 +65,9 @@ angular.module('chatApp').controller('ManageEditController', function ($scope, $
 
     manageApi.call('post', 'campaigns', $scope.activeCampaign, function(data) {
       $scope.myCampaigns.push(data);
+      console.log(inviteEmails);
 
-      if(inviteEmails.length){
+      if(!_.isEmpty(inviteEmails)){
           $scope.notify = {
               message: 'Campaign created. Sending emails...',
               class: 'bg-warning'
