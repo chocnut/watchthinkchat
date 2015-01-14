@@ -48,7 +48,10 @@ class Campaign < ActiveRecord::Base
       :status => self.status,
       :followup_buttons => followup_buttons,
       :preemptive_chat => preemptive_chat,
-      :growth_challenge => growth_challenge
+      :growth_challenge => growth_challenge,
+      :admin1_id => admin1_id,
+      :admin2_id => admin2_id,
+      :admin3_id => admin3_id
     }
   end
 

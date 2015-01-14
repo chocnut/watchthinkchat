@@ -80,7 +80,10 @@ describe Api::CampaignsController do
             message_active_chat: "message_active_chat",
             message_no_chat: "message_no_chat"
           }
-        ]
+        ],
+        admin1_id: operator.id,
+        admin2_id: nil,
+        admin3_id: nil
       }
 
       ENV['missionhub_token'] = "token"
@@ -98,6 +101,7 @@ describe Api::CampaignsController do
       new_params[:followup_buttons][1] = Hash[new_params[:followup_buttons].second.collect{ |k,v| [k.to_s, v]}]
       json_response.should == Hash[new_params.collect{ |k,v| [k.to_s, v]}].merge("uid" => Campaign.first.uid)
       Campaign.first.missionhub_token.should == "mhtoken"
+      Campaign.first.admin1.should == operator
     end
 
     it "should give an error with an invalid create" do
@@ -123,7 +127,10 @@ describe Api::CampaignsController do
             message_active_chat: "message_active_chat",
             message_no_chat: "message_no_chat"
           }
-        ]
+        ],
+        admin1_id: operator.id,
+        admin2_id: nil,
+        admin3_id: nil
       }
 
       Rails.application.secrets.missionhub_token = "token"
@@ -204,7 +211,10 @@ describe Api::CampaignsController do
             message_active_chat: "Thanks for taking time to watch #FallingPlates and for considering Jesus’s call to follow Him. To desire to start following Jesus is a significant step! Its awesome to see you have that desire! Tell us a bit about what’s up? Luv to chat with ya about this stuff in the chat panel on the right :)   ----->",
             message_no_chat: "Thanks for taking time to watch #FallingPlates and for considering Jesus’s call to follow Him. To want to begin to start following Jesus is a significant step. We have a growth adventure that can help u grow after u have asked Christ to come into your life. Heres the place for u to get connected with a friend to grow :)"
           }
-        ]
+        ],
+        admin1_id: operator.id,
+        admin2_id: nil,
+        admin3_id: nil
       }
 
       password_hash_before = campaign.password_hash
@@ -243,7 +253,10 @@ describe Api::CampaignsController do
         "status" => "active",
         "followup_buttons" => [],
         "preemptive_chat" => nil,
-        "growth_challenge" => "operator"
+        "growth_challenge" => "operator",
+        "admin1_id" => operator.id,
+        "admin2_id" => nil,
+        "admin3_id" => nil
       }
 
       password_before = Campaign.last.password_hash
