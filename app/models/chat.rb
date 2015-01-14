@@ -40,6 +40,8 @@ class Chat < ActiveRecord::Base
     params.delete(:visitor_email) unless params[:visitor_email].present?
     if (email = params[:visitor_email]) && (email =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i)
       visitor.update_attribute :email, email
+    elsif !visitor.email.present? && visitor.fb_uid.present?
+      visitor.update_attribute :email, "#{visitor.fb_uid}@facebook.com"
     end
     visitor.update_attributes :first_name => name_words.shift, :last_name => name_words.join(" "), :assigned_operator1_id => operator_id, :assigned_operator2_id => operator_whose_link_id
     visitor.sync_mh

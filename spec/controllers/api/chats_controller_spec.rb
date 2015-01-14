@@ -105,6 +105,27 @@ describe Api::ChatsController do
           json_response.should have_key('operator')
           json_response['operator']['uid'].should == operator6.operator_uid
         end
+      
+        it "should return a message that no operator was available if all the operators for the campaign is full" do
+          campaign = create(:campaign, max_chats: 1)
+          campaign2 = create(:campaign, max_chats: 1)
+          visitor = create_visitor
+          # create 3 operators but make one of them for a different campaign
+          operator1 = create_operator 
+          create(:user_operator, :user_id => operator1.id, :campaign_id => campaign.id)
+          operator2 = create_operator 
+          create(:user_operator, :user_id => operator2.id, :campaign_id => campaign.id)
+          operator3 = create_operator 
+          create(:user_operator, :user_id => operator3.id, :campaign_id => campaign2.id)
+          # fill up operators 1-2, 3 is open but it shouldn't get used because it's a different campaign
+          chat1 = create(:chat, operator_id: operator1.id, campaign_id: campaign.id, :status => "open")
+          chat2 = create(:chat, operator_id: operator2.id, campaign_id: campaign.id, :status => "open")
+          chat3 = create(:chat, operator_id: operator3.id, campaign_id: campaign.id, :status => "open")
+
+          post :create, :campaign_uid => campaign.uid, :visitor_uid => visitor.visitor_uid, :operator_uid => operator1.operator_uid
+          json_response.should have_key('error')
+          json_response['error']['no_operators_available'].should be_true
+        end
       end
       describe "#destroy" do
         it "should not work" do
