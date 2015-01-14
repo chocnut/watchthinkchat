@@ -313,10 +313,9 @@ angular.module('chatApp').controller('OperatorController', function ($scope, $ro
             } else if (data.message_type == 'ip') {
               $scope.active_sessions[index].ip=data.message;
               $http({method: 'JSONP',
-                url: 'http://freegeoip.net/json/'+data.message+'?callback=JSON_CALLBACK'
-              }).success(function (data, status, headers, config) {
+                url: 'http://www.telize.com/geoip/' + data.message + '?callback=JSON_CALLBACK'
+              }).success(function (data) {
                 $scope.active_sessions[index].geolocation=data;
-              }).error(function (data, status, headers, config) {
               });
             } else {
               $scope.$apply(function () {
