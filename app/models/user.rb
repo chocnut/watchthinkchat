@@ -30,7 +30,8 @@ class User < ActiveRecord::Base
       "alltime_chats" => count_operator_chats_for(campaign),  
       "available_for_chat" => (campaign.max_chats ? count_operator_open_chats_for(campaign) < campaign.max_chats : true),
       "last_sign_in_at" => last_sign_in_at,
-      "profile_pic" => profile_pic
+      "profile_pic" => profile_pic,
+      "id" => id
     } 
   end
 
