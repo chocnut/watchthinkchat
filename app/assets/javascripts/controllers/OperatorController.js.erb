@@ -166,7 +166,6 @@ angular.module('chatApp').controller('OperatorController', function ($scope, $ro
         method: 'POST',
         url: '/api/chats/' + $scope.endchat_session.chat_uid + '/collect_stats',
         data: {
-          _method: 'POST',
           visitor_response: $scope.endchat_session.activity,
           visitor_name: $scope.endchat_session.visitor_name,
           visitor_email: $scope.endchat_session.visitor_email,
