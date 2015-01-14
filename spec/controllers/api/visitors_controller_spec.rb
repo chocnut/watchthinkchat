@@ -40,7 +40,7 @@ describe Api::VisitorsController do
     put :update, :uid => visitor.visitor_uid, :fb_uid => 123, :visitor_email => "email@email.com", :challenge_subscribe_self => true, :challenge_subscribe_friend => "friend@test.com"
   end
 
-  it "should give an error when the visitor ahs no chats" do
+  it "should give an error when the visitor has no chats" do
     visitor = create_visitor
     put :update, :uid => visitor.visitor_uid, :fb_uid => 123, :visitor_email => "email@email.com", :challenge_subscribe_self => true, :challenge_subscribe_friend => "friend@test.com"
     json_response['error'].should == "chat_not_found"
