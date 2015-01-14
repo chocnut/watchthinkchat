@@ -35,6 +35,7 @@ class Api::CampaignsController < ApplicationController
 
   def create
     @campaign = Campaign::AsCreate.new
+    @campaign.admin1_id = current_user.id
     create_or_update_campaign
   end
 
