@@ -4,7 +4,15 @@ angular.module('chatApp')
       urls: ['<%= asset_path("notify2.mp3") %>', '<%= asset_path("notify2.ogg") %>', '<%= asset_path("notify2.wav") %>']
     });
 
+    var doorSnd = new Howl({
+      urls: ['<%= asset_path("door-close.wav") %>']
+    });
+
     this.play = function() {
       notifySnd.play();
+    };
+
+    this.playDoorSnd = function() {
+      doorSnd.play();
     };
   });
