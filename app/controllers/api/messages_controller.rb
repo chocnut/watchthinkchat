@@ -14,7 +14,7 @@ class Api::MessagesController < ApplicationController
       # store any fb info right away
       case params[:message_type]
       when 'fbName'
-        words = params[:message]
+        words = params[:message].split(' ')
         case words.length
         when 0
           first_name = last_name = nil
