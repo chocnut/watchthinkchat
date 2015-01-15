@@ -248,7 +248,7 @@ angular.module('chatApp').controller('ChatController', function ($scope, $rootSc
   $scope.sendFbMsgToOperator = function(){
     FB.ui({
       method: 'send',
-      link: document.URL,
+      link: 'http://www.watchthinkchat.com/templates/share.html',
       to: $scope.operator_data.uid
     });
   };
