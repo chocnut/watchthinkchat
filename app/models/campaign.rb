@@ -51,13 +51,15 @@ class Campaign < ActiveRecord::Base
   end
 
   # definitions
-  enum status: [:basic,
-                :closed,
-                :opened,
-                :engagement_player,
-                :survey,
-                :share,
-                :community]
+  unless instance_methods.include? :status
+    enum status: [:basic,
+                  :closed,
+                  :opened,
+                  :engagement_player,
+                  :survey,
+                  :share,
+                  :community]
+  end
   translatable :name
   scope :owner, (lambda do
     where('permissions.state = ?', Permission.states[:owner].to_i)
