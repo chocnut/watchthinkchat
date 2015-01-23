@@ -42,6 +42,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'lodash-rails'
 gem 'rabl'
 gem 'oj'
+gem 'angular-rails-templates'
 
 # HTML
 gem 'formtastic'

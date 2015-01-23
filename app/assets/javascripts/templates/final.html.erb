@@ -1,28 +1,28 @@
 <section>
   <div id="main" class="form">
     <div class="container">
-      <h1>{{campaign.share.title}}</h1>
-      <p>{{campaign.share.description}}</p>
+      <h1>Growth Space</h1>
       <!--<p><a href="#" class="button button-narrow">Learn More</a></p>-->
     </div>
   </div>
 </section>
-<section>
+<section ng-if="campaign.share.enabled">
   <div id="content-secondary-section" class="message share-message">
     <div class="container">
       <div class="share-icons">
-        <a href="" ng-click="showEmailForm = !showEmailForm"><img src="/assets/icon_email_640_00d6dc.png" alt="Email" /></a>
-        <a href="" ng-click="facebookShare(visitorInfo.url)"><img src="/assets/icon_facebook_640_00d6dc.png" alt="Facebook" /></a>
-        <a href="" ng-click="twitterShare(visitorInfo.url)"><img src="/assets/icon_twitter_640_00d6dc.png" alt="Twitter" /></a>
+        <a href="" ng-click="showEmailForm = !showEmailForm"><img src="<%= asset_path("icon_email_640_00d6dc.png") %>" alt="Email" /></a>
+        <a href="" ng-click="facebookShare(visitorInfo.url)"><img src="<%= asset_path("icon_facebook_640_00d6dc.png") %>" alt="Facebook" /></a>
+        <a href="" ng-click="twitterShare(visitorInfo.url)"><img src="<%= asset_path("icon_twitter_640_00d6dc.png") %>" alt="Twitter" /></a>
       </div>
-      <h2>Share #FallingPlates with a friend.</h2>
+      <h2>{{campaign.share.title}}</h2>
+      <p>{{campaign.share.description}}</p>
     </div>
   </div>
 </section>
-<section>
+<section ng-if="false">
   <div id="signup-message">
     <div class="container">
-      <form class="form-horizontal" role="form" ng-show="showEmailForm">
+      <form class="form-horizontal" role="form">
         <div class="form-group">
           <label class="col-sm-3 control-label">Your First Name</label>
           <div class="col-sm-9">
@@ -83,13 +83,16 @@
           </div>
         </div>
       </form>
-
-      <div class="video-wrapper-small"></div>
-      <h2>Custom Message</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt felis neque, eget malesuada neque tempor congue. Maecenas eget risus fringilla justo ullamcorper pretium in quis sapien.</p>
-      <p>Morbi non volutpat mi, eget cursus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In nunc nisl, elementum sed orci id, blandit molestie purus.</p>
-      <p>Quisque at lectus dignissim, tempor nunc in.</p>
-      <p><a href="#" class="button button-narrow">Learn More</a></p>
+    </div>
+  </div>
+</section>
+<section ng-if="campaign.community.enabled">
+  <div id="signup-message">
+    <div class="container">
+      <!--<div class="video-wrapper-small"></div>-->
+      <h2>{{campaign.community.title}}</h2>
+      <p>{{campaign.community.description}}</p>
+      <p><a ng-href="{{campaign.community.permalink}}" class="button button-narrow">Learn More</a></p>
     </div>
   </div>
 </section>

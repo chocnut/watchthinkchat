@@ -1,4 +1,4 @@
-angular.module('chatApp').controller('ShareController', function ($scope, $window, api) {
+angular.module('chatApp').controller('FinalController', function ($scope, $window, api) {
   api.call('get', '/v1/visitor', null, function(data){
     $scope.visitorInfo = data;
   });

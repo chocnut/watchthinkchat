@@ -41,7 +41,7 @@ angular.module('chatApp').controller('ChallengeFriendController', function ($sco
     }).error(function (data, status, headers, config) {
       alert('Error: Could not connect to mail service.');
     });
-  }
+  };
 
   $scope.facebookLogin = function () {
     FB.login(function (response) {
