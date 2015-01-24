@@ -1,5 +1,5 @@
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'form-signin'}) do |f| %>
+<%= semantic_form_for resource, as: resource_name, url: session_path(resource_name), html: {class: 'form-signin'} do |f| %>
   <h2 class="form-signin-heading"><%= image_tag 'wtclogo.png' %></h2>
 
   <div class="login-wrap">
@@ -7,25 +7,25 @@
     <%= content_tag(:div, flash[:error], class: "alert alert-danger") if flash[:error] %>
     <%= content_tag(:div, flash[:notice], class: "alert alert-info") if flash[:notice] %>
     <%= content_tag(:div, flash[:alert], class: "alert alert-danger") if flash[:alert] %>
-      <%= f.text_field :email, autofocus: true, placeholder: "Email", class: 'form-control' %>
-      <%= f.password_field :password, autocomplete: "off", placeholder: "Password", class: 'form-control' %>
+      <%= f.text_field :email, autofocus: true, placeholder: t('user.email'), class: 'form-control' %>
+      <%= f.password_field :password, autocomplete: "off", placeholder: t('user.password'), class: 'form-control' %>
     </div>
     <label class="checkbox">
       <% if devise_mapping.rememberable? -%>
-        <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+        <%= f.check_box :remember_me %><%= f.label :remember_me, t('user.remember_me') %>
       <% end -%>
       <%- if devise_mapping.recoverable? %>
         <span class="pull-right">
-          <%= link_to "Forgot your password?", new_password_path(resource_name) %>
+          <%= link_to t('user.forgot_your_password.title'), new_password_path(resource_name) %>
         </span>
       <% end -%>
     </label>
-    <%= f.submit "Sign in", class:"btn btn-lg btn-login btn-block" %>
+    <%= f.submit t('user.sign_in'), class:"btn btn-lg btn-login btn-block" %>
     <%- if devise_mapping.omniauthable? %>
       <div class="user-login-info omniauth">
         <%- resource_class.omniauth_providers.each do |provider| %>
           <a href="<%= omniauth_authorize_path(resource_name, provider)%>" class="btn btn-lg btn-login btn-block btn-<%= provider.to_s %>">
-           <%= fa_icon provider.to_s, text: "Sign in with #{provider.to_s.titleize}" %>
+           <%= fa_icon provider.to_s, text: t('user.sign_in_with_provider', provider: provider.to_s.titleize) %>
          </a>
        <% end -%>
      </div>
@@ -33,9 +33,9 @@
    <div class="registration">
 
     <%- if devise_mapping.registerable? %>
-      <div class="pull-right"><%= link_to "Sign Up", new_registration_path(resource_name) %></div>
+      <div class="pull-right"><%= link_to t('user.sign_up'), new_registration_path(resource_name) %></div>
     <% end -%>
-    <a href="http://www.watchthinkchat.com/" title="Are you lost?">← Back to WatchThinkChat</a>
+    <a href="http://www.watchthinkchat.com/">← <%= t('user.back') %></a>
   </div>
 
   </div>

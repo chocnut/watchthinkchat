@@ -3,14 +3,14 @@ require 'rails_helper'
 describe 'Campaign Builder', type: :feature, js: true do
   let(:manager) { create(:manager) }
   let(:base_locale) { create(:locale, name: 'base') }
-  let(:available_locale) { create(:locale, name: 'available') }
+  let(:alternate_locale) { create(:locale, name: 'available') }
 
   before do
     Warden.test_mode!
     Capybara.app_host = "http://app.#{ENV['base_url']}.lvh.me:7171"
     login_as(manager, scope: :user)
     base_locale.save!
-    available_locale.save!
+    alternate_locale.save!
   end
 
   feature 'build campaign' do
@@ -30,7 +30,7 @@ describe 'Campaign Builder', type: :feature, js: true do
       find '#campaign_url_input.has-error'
       fill_in 'campaign[name]', with: campaign_attributes[:name]
       select base_locale.name, from: 'campaign[locale_id]'
-      select available_locale.name, from: 'campaign[locale_ids][]'
+      select alternate_locale.name, from: 'campaign[locale_ids][]'
       fill_in 'campaign[url]', with: campaign_attributes[:url]
       choose 'CNAME Address'
       click_button 'Next'

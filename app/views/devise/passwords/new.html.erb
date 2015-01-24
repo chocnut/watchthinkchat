@@ -4,14 +4,14 @@
   <div class="login-wrap">
     <div class="user-login-info">
       <%= devise_error_messages! %>
-      <h5>Forgot your password?</h5>
-      <p>Enter your e-mail address below to reset your password.</p>
-      <%= f.text_field :email, placeholder: "Email", class: 'form-control' %>
+      <h5><%= t('user.forgot_your_password.title') %></h5>
+      <p><%= t('user.forgot_your_password.description') %></p>
+      <%= f.text_field :email, placeholder: t('user.email'), class: 'form-control' %>
     </div>
-    <%= f.submit "Reset my password", class:"btn btn-lg btn-login btn-block" %><br>
+    <%= f.submit t('user.forgot_your_password.button'), class:"btn btn-lg btn-login btn-block" %><br>
     <div class="registration">
-      <div class="pull-right"><%= link_to "Sign In", new_user_session_path %></div>
-      <a href="http://www.watchthinkchat.com/" title="Are you lost?">← Back to WatchThinkChat</a>
+      <div class="pull-right"><%= link_to t('user.sign_in'), new_user_session_path %></div>
+      <a href="http://www.watchthinkchat.com/" title="Are you lost?">← <%= t('user.back') %></a>
     </div>
   </div>
 <% end -%>

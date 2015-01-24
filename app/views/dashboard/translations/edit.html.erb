@@ -1,7 +1,7 @@
 <div class="col-md-12">
   <section class="panel">
     <header class="panel-heading">
-      Translation
+      <%= t 'routes.translations' %>
     </header>
     <div class="panel-body panel-index-body">
       <table class="table table-striped index-table">
@@ -14,49 +14,24 @@
                 </a>
               </div>
               <div class="pull-left cover">
-                <h3><%= @translation.campaign.name %></h3>
-                <div><span class="label label-primary"><%= @translation.locale.name %></span></div>
+                <% Globalize.with_locale(@translation.campaign.locale.code) do %>
+                  <h3><%= @translation.campaign.name %></h3>
+                  <div><span class="label label-primary"><%= @translation.locale.decorate.name %></span></div>
+                <% end %>
               </div>
             </td>
           </tr>
         </tbody>
       </table>
-      <div class="panel-content">
-        <div ng-app="translations_edit" ng-controller="translateCtrl">
-          <div class="row">
-            <div class="col-md-5">
-              <strong>Term</strong>
-            </div>
-            <div class="col-md-5">
-              <strong>Translation</strong>
-            </div>
+      <% Globalize.with_locale(@translation.locale.code) do %>
+        <%= semantic_form_for @translation.campaign, url: translation_path(@translation) do |f| %>
+          <div class="panel-content">
+            <%= f.input :name %>
           </div>
-          <div class="row" ng-repeat="t in terms">
-            <div class="col-md-5">
-              {{t.content}}
-            </div>
-            <div class="col-md-5">
-              <div class="form-group">
-                <input type="text" class="form-control" ng-model="transTerm[t.id]">
-              </div>
-            </div>
-            <div class="col-md-2">
-              <button class="btn" ng-click="clearVal(t.id)">Clear</button>
-            </div>
+          <div class="panel-footer text-right">
+            <%= f.submit t('translations.edit.save'), class: 'btn btn-primary' %>
           </div>
-        </div>
-      </div>
-      <div class="panel-footer text-right">
-        <a href="<%= translations_path %>" class="btn btn-primary">Save Translations</a>
-      </div>
+        <% end %>
+      <% end %>
   </section>
 </div>
-<% content_for :javascript do %>
-  <script type="text/javascript">
-    //<![CDATA[
-      var locale_id = <%= @translation.locale.id %>;
-      var base_translations = <%= @base_translation.to_json.html_safe %>;
-    //]]>
-  </script>
-  <%= javascript_include_tag 'dashboard/translations/edit/application' %>
-<% end %>

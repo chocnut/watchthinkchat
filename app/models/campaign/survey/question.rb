@@ -1,7 +1,6 @@
 class Campaign
   class Survey
     class Question < ActiveRecord::Base
-      extend Translatable
       # associations
       belongs_to :survey
       has_many :options, dependent: :destroy
@@ -10,7 +9,6 @@ class Campaign
 
       # callbacks
       after_save :generate_code, on: :create
-      before_destroy :destroy_translations
 
       # validations
       validates :survey, presence: true
@@ -20,7 +18,7 @@ class Campaign
       # definitions
       acts_as_list scope: :survey
       default_scope { order('position ASC') }
-      translatable :title, :help_text
+      translates :title, :help_text
 
       def options_attributes
         options
@@ -32,10 +30,6 @@ class Campaign
 
       def generate_code
         update_column(:code, Base62.encode(id))
-      end
-
-      def destroy_translations
-        Translation.where(resource_id: id).destroy_all
       end
     end
   end

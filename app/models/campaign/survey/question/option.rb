@@ -2,14 +2,12 @@ class Campaign
   class Survey
     class Question
       class Option < ActiveRecord::Base
-        extend Translatable
         # associations
         belongs_to :question
         has_one :conditional_question, class: 'Question'
-        has_many :translations, as: :resource, dependent: :destroy
+
         # callbacks
         after_save :generate_code, on: :create
-        before_destroy :destroy_translations
 
         # validations
         validates :conditional, presence: true
@@ -22,7 +20,7 @@ class Campaign
         # definitions
         enum conditional: [:next, :skip, :finish]
         default_scope { order('created_at ASC') }
-        translatable :title
+        translates :title
 
         delegate :campaign, to: :question
 
@@ -30,10 +28,6 @@ class Campaign
 
         def generate_code
           update_column(:code, Base62.encode(id))
-        end
-
-        def destroy_translations
-          Translation.where(resource_id: id).destroy_all
         end
       end
     end

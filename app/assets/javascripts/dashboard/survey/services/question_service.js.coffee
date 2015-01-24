@@ -2,7 +2,7 @@ app.factory 'Question', ['$resource', ($resource) ->
   class Question
     constructor: () ->
       @service =
-        $resource "/campaigns/#{campaign_id}/build/api/questions/:id",
+        $resource "#{url}/:id",
           { id: '@id' },
           { update: { method: 'PUT' } }
 
