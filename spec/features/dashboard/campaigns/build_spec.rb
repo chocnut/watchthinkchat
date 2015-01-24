@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe 'Campaign Builder', type: :feature, js: true do
   let(:manager) { create(:manager) }
-  let(:base_locale) { create(:locale, name: 'base') }
-  let(:alternate_locale) { create(:locale, name: 'available') }
+  let(:base_locale) { create(:locale, name: 'base', code: 'fr') }
+  let(:alternate_locale) { create(:locale, name: 'available', code: 'de') }
 
   before do
     Warden.test_mode!
@@ -22,17 +22,12 @@ describe 'Campaign Builder', type: :feature, js: true do
              resource: campaign)
     end
     scenario 'basic page' do
-      expect { visit new_campaign_path }.to change(Campaign, :count).by(1)
+      expect { visit new_campaign_path(locale: :en) }.to change(Campaign, :count).by(1)
       campaign_attributes = attributes_for(:campaign)
-      click_button 'Next'
-      find '#campaign_name_input.has-error'
-      find '#campaign_locale_input.has-error'
-      find '#campaign_url_input.has-error'
       fill_in 'campaign[name]', with: campaign_attributes[:name]
-      select base_locale.name, from: 'campaign[locale_id]'
-      select alternate_locale.name, from: 'campaign[locale_ids][]'
+      select 'French', from: 'campaign[locale_id]'
       fill_in 'campaign[url]', with: campaign_attributes[:url]
-      choose 'CNAME Address'
+      choose 'CNAME address'
       click_button 'Next'
       expect(current_path).to eq(campaign_build_path(Campaign.last.id,
                                                      :engagement_player))
@@ -40,7 +35,7 @@ describe 'Campaign Builder', type: :feature, js: true do
     scenario 'engagement player page' do
       campaign.engagement_player!
       engagement_player_attributes = attributes_for(:engagement_player)
-      visit campaign_build_path(campaign, :engagement_player)
+      visit campaign_build_path(campaign, :engagement_player, locale: :en)
       choose 'On'
       click_button 'Next'
       find '#campaign_engagement_player_attributes_media_link.error'

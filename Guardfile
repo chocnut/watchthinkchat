@@ -1,6 +1,3 @@
-# A sample Guardfile
-# More info at https://github.com/guard/guard#readme
-
 guard 'puma', port: 5000, config: 'config/puma.rb' do
   watch('Gemfile.lock')
   watch(%r{^config|lib|api/.*})
@@ -8,11 +5,9 @@ end
 
 guard :bundler do
   watch('Gemfile')
-  # Uncomment next line if your Gemfile contains the `gemspec' command.
-  # watch(/^.+\.gemspec/)
 end
 
-guard :rspec, cmd: 'spring rspec', all_on_start: true do
+guard :rspec, cmd: 'bundle exec spring rspec' do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/rails_helper.rb')  { "spec" }

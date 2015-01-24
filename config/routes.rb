@@ -6,8 +6,22 @@ WatchThinkChat::Application.routes.draw do
     devise_for :users, skip: [:session, :password, :registration, :confirmation], controllers: {
       omniauth_callbacks: 'users/omniauth_callbacks'
     }
+    authenticated :user do
+      scope module: 'dashboard' do
+        resources :campaigns, except: [] do
+          resources :build, controller: 'campaigns/build', except: [] do
+            collection do
+              namespace :api, defaults: { format: :json } do
+                resources :questions
+              end
+            end
+          end
+        end
+      end
+    end
     localized do
-      devise_for :users, path: '', skip: [:omniauth_callbacks]
+      devise_for :users, path: '', skip: [:omniauth_callbacks], controllers: {
+        registrations: 'users/registrations' }
       authenticated :user do
         root to: 'dashboard#index', as: :authenticated_root
         scope module: 'dashboard' do
@@ -15,15 +29,7 @@ WatchThinkChat::Application.routes.draw do
           resources :campaigns, only: [:index, :new, :show, :destroy] do
             resources :invites, module: 'campaigns', as: :user_translator_invites
             resources :permissions, only: [:destroy], module: 'campaigns'
-            resources :build, controller: 'campaigns/build' do
-              collection do
-                namespace :api, defaults: { format: :json } do
-                  resources :questions do
-                    resources :options
-                  end
-                end
-              end
-            end
+            resources :build, controller: 'campaigns/build'
           end
           namespace :api, defaults: { format: :json } do
             get 'campaigns/:campaign_id/locales/:locale_id/translations/:id',

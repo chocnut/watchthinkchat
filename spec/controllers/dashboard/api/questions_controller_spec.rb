@@ -76,7 +76,8 @@ describe Dashboard::Api::QuestionsController do
         delete :destroy,
                campaign_id: @campaign.id,
                id: @old_question.id,
-               format: :json
+               format: :json,
+               locale: :en
         expect(response).to be_success
         expect(json_response)
           .to eq(JSON.parse(@old_question.to_json(except: :updated_at)))
