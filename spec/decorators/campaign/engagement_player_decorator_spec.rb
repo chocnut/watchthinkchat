@@ -28,5 +28,4 @@ describe Campaign::EngagementPlayerDecorator, type: :decorator do
       expect(engagement_player_decorator.youtube_video_id).to be_nil
     end
   end
-
 end

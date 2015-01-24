@@ -30,7 +30,7 @@ module Dashboard
         load_question
         authorize! :destroy, @question.campaign
         @question.destroy
-        render json: @question
+        render json: @question.to_json(except: :updated_at)
       end
 
       protected
@@ -46,21 +46,31 @@ module Dashboard
       end
 
       def build_question
+        set_i18n
         @question ||= question_scope.build
         @question.attributes = question_params
+      end
+
+      def set_i18n
+        return unless load_campaign.locale
+        I18n.locale = Locale.find(load_campaign.locale).code
+      end
+
+      def load_campaign
+        @campaign ||= current_manager.campaigns.find(params[:campaign_id])
+        @campaign
       end
 
       def save_question
         authorize! :update, @question.campaign
         return unless @question.save!
-        render json: @question.to_json(include: :options_attributes)
+        render json: @question.to_json(include: :options_attributes, except: :updated_at)
       end
 
       def question_scope
-        current_manager.campaigns
-                       .find(params[:campaign_id])
-                       .survey
-                       .questions
+        load_campaign
+          .survey
+          .questions
       end
 
       def question_params

@@ -1,7 +1,7 @@
 module Dashboard
   module Campaigns
     class BuildController < Dashboard::BaseController
-      include Wicked::Wizard
+      include Wicked::Wizard::Translated
 
       steps :basic,
             :engagement_player,
@@ -14,12 +14,11 @@ module Dashboard
 
       def show
         load_campaign
-        unless @campaign.opened? || @campaign.status.to_sym == step ||
-               future_step?(@campaign.status.to_sym)
-          return redirect_to(
-          campaign_build_path(campaign_id: @campaign, id: @campaign.status))
+        unless @campaign.opened? || @campaign.status == wizard_value(step) ||
+               future_step?(I18n.t("wicked.#{@campaign.status}"))
+          return redirect_to(campaign_build_path(campaign_id: @campaign, id: I18n.t("wicked.#{@campaign.status}")))
         end
-        present_campaign
+        decorate_campaign
         render_wizard
       end
 
@@ -38,12 +37,21 @@ module Dashboard
       end
 
       def build_campaign
+        set_i18n
         @campaign.attributes = campaign_params
-        @campaign.status = next_step if @campaign.valid?
+        return if future_step?(I18n.t("wicked.#{@campaign.status}"))
+        @campaign.status = wizard_value(next_step)
+        @campaign.status = wizard_value(step) unless @campaign.valid?
       end
 
-      def present_campaign
-        @campaign = @campaign.decorate
+      def set_i18n
+        return unless campaign_params[:locale_id] || @campaign.locale
+        I18n.locale =
+          Locale.find(campaign_params[:locale_id] || @campaign.locale).code.to_sym
+      end
+
+      def decorate_campaign
+        @campaign = @campaign.try(:decorate)
       end
 
       def campaign_scope

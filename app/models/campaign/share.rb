@@ -1,6 +1,6 @@
 class Campaign
   class Share < Component
     # definitions
-    translatable :title, :description
+    translates :title, :description
   end
 end

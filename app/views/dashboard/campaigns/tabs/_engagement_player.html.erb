@@ -1,17 +1,17 @@
-<div class="tab-pane" id="engagement_player">
+<div class="tab-pane" id="<%= t('wicked.engagement_player') %>">
   <div class="row">
     <div class="col-md-8">
-      <h3><%= fa_icon "angle-double-right" %> Media</h3>
+      <h3><%= fa_icon "angle-double-right" %> <%= t 'campaigns.show.engagement_player.media' %></h3>
       <div class="js-video widescreen">
-        <iframe width="560" height="315" src="http://www.youtube.com/embed/<%= campaign.engagement_player.try(:decorate).try(:youtube_video_id) %>?modestbranding=1&amp;rel=0&amp;showinfo=0&amp;theme=light&amp;color=white&amp;autohide=0" frameborder="0"></iframe>
+        <iframe width="560" height="315" src="http://www.youtube.com/embed/<%= @campaign.engagement_player.try(:decorate).try(:youtube_video_id) %>?modestbranding=1&amp;rel=0&amp;showinfo=0&amp;theme=light&amp;color=white&amp;autohide=0" frameborder="0"></iframe>
       </div>
     </div>
     <div class="col-md-4">
-      <h3><%= fa_icon "angle-double-right" %> Survey</h3>
+      <h3><%= fa_icon "angle-double-right" %> <%= t 'campaigns.show.engagement_player.survey' %></h3>
 
       <table class="table table-striped">
         <tbody>
-          <% Campaign::Survey::QuestionDecorator.decorate_collection(campaign.survey.questions).each do |question| %>
+          <% @campaign.survey.questions.decorate.each do |question| %>
             <tr>
               <td>
                 <a href="<%= question.permalink %>" target="_blank">
@@ -20,7 +20,7 @@
                 </a>
                 <h5><%= question.help_text %></h5>
                 <ul>
-                <% Campaign::Survey::Question::OptionDecorator.decorate_collection(question.options).each do |option| %>
+                <% question.options.decorate.each do |option| %>
                   <li>
                     <a href="<%= option.permalink %>" target="_blank">
                       <%= fa_icon "link" %>

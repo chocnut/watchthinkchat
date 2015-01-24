@@ -14,6 +14,7 @@ gem 'kgio'
 # Authentication
 gem 'devise'
 gem 'devise_invitable'
+gem 'devise-i18n'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'cancancan'
@@ -56,6 +57,10 @@ gem 'wicked'
 gem 'acts_as_list'
 gem 'active_type'
 gem 'draper'
+gem 'globalize', '~> 4.0.2'
+gem 'route_translator'
+gem 'rails-i18n', '~> 4.0.0'
+gem 'countries_and_languages', :require => 'countries_and_languages/rails'
 
 # Active Admin
 gem 'activeadmin', github: 'gregbell/active_admin'

@@ -1,9 +1,9 @@
 class Campaign
   class EngagementPlayer < Component
     # validations
-    validates :media_link, presence: true
+    validates :media_link, presence: true, if: :enabled?
 
     # definitions
-    translatable :media_link
+    translates :media_link
   end
 end

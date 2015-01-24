@@ -51,23 +51,14 @@ RSpec.describe Campaign::Community, type: :model do
   end
   it 'creates a translation object when title is set' do
     @community = create(:community)
-    expect(
-      @community.translations.where(field: :title,
-                                    content: @community.title)
-    ).to exist
+    expect(@community.translations.where title: @community.title).to exist
   end
   it 'creates a translation object when url is set' do
     @community = create(:community)
-    expect(
-      @community.translations.where(field: :url,
-                                    content: @community.url)
-    ).to exist
+    expect(@community.translations.where url: @community.url).to exist
   end
   it 'creates a translation object when description is set' do
     @community = create(:community)
-    expect(
-      @community.translations.where(field: :description,
-                                    content: @community.description)
-    ).to exist
+    expect(@community.translations.where description: @community.description).to exist
   end
 end

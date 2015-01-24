@@ -3,39 +3,49 @@ WatchThinkChat::Application.routes.draw do
 
   constraints DomainConstraint.new(["app.#{ENV['base_url']}",
                                     "app.#{ENV['base_url']}.lvh.me"]) do
-    devise_for :users,
-               controllers: { registrations: 'registrations',
-                              omniauth_callbacks: 'users/omniauth_callbacks' }
+    devise_for :users, skip: [:session, :password, :registration, :confirmation], controllers: {
+      omniauth_callbacks: 'users/omniauth_callbacks'
+    }
     authenticated :user do
-      root to: 'dashboard#index', as: :authenticated_root
       scope module: 'dashboard' do
-        resources :campaigns, only: [:index, :new, :show, :destroy] do
-          resources :invites, module: 'campaigns', as: :user_translator_invites
-          resources :permissions, only: [:destroy], module: 'campaigns'
-          resources :build, controller: 'campaigns/build' do
+        resources :campaigns, except: [] do
+          resources :build, controller: 'campaigns/build', except: [] do
             collection do
               namespace :api, defaults: { format: :json } do
-                resources :questions do
-                  resources :options
-                end
+                resources :questions
               end
             end
           end
         end
-        namespace :api, defaults: { format: :json } do
-          get 'campaigns/:campaign_id/locales/:locale_id/translations/:id',
-              to: 'translations#show'
-          put 'campaigns/:campaign_id/locales/:locale_id/translations/:id',
-              to: 'translations#update'
-          delete 'campaigns/:campaign_id/locales/:locale_id/translations/:id',
-                 to: 'translations#destroy'
-        end
-        resources :translations do
-        end
-
       end
     end
-    root to: redirect('users/sign_in'), as: :unauthenticated_root
+    localized do
+      devise_for :users, path: '', skip: [:omniauth_callbacks], controllers: {
+        registrations: 'users/registrations' }
+      authenticated :user do
+        root to: 'dashboard#index', as: :authenticated_root
+        scope module: 'dashboard' do
+          resource :user
+          resources :campaigns, only: [:index, :new, :show, :destroy] do
+            resources :invites, module: 'campaigns', as: :user_translator_invites
+            resources :permissions, only: [:destroy], module: 'campaigns'
+            resources :build, controller: 'campaigns/build'
+          end
+          namespace :api, defaults: { format: :json } do
+            get 'campaigns/:campaign_id/locales/:locale_id/translations/:id',
+                to: 'translations#show'
+            put 'campaigns/:campaign_id/locales/:locale_id/translations/:id',
+                to: 'translations#update'
+            delete 'campaigns/:campaign_id/locales/:locale_id/translations/:id',
+                   to: 'translations#destroy'
+          end
+          resources :translations do
+          end
+        end
+      end
+      root to: redirect("#{I18n.locale}/#{I18n.t('routes.sign_in')}"), as: :unauthenticated_root
+    end
+    root to: redirect(I18n.locale.to_s), as: :no_locale_root
   end
 
   constraints DomainConstraint.new(["api.#{ENV['base_url']}",

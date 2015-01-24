@@ -5,7 +5,7 @@ RSpec.describe User, type: :model do
   it { is_expected.to have_many(:permissions).dependent(:destroy) }
   it do
     is_expected.to have_many(:campaigns).through(:permissions)
-                                        .source(:resource)
+      .source(:resource)
   end
   # definitions
   describe '#as' do

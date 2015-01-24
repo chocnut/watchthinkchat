@@ -18,8 +18,8 @@ module Dashboard
 
       def permission_scope
         current_manager.campaigns
-                       .find(params[:campaign_id])
-                       .permissions
+          .find(params[:campaign_id])
+          .permissions
       end
     end
   end

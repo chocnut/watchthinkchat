@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe CampaignDecorator, type: :decorator do
-
   describe '#permalink' do
     context 'url is a cname' do
       let(:campaign) { create(:campaign) }

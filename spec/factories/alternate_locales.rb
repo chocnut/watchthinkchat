@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :available_locale do
+  factory :alternate_locale do
     campaign
     locale
   end

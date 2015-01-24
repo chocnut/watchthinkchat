@@ -16,7 +16,7 @@ describe 'User', type: :feature do
           fill_in 'user[email]', with:  user[:email]
           fill_in 'user[password]', with:  user[:password]
           fill_in 'user[password_confirmation]', with:  user[:password]
-          click_button 'Sign up'
+          click_button 'Sign Up'
         end.to change(User, :count).by(1)
         expect(current_path).to eq(authenticated_root_path)
       end
@@ -53,7 +53,7 @@ describe 'User', type: :feature do
         visit root_path
         fill_in 'user[email]', with:  user_attributes[:email]
         fill_in 'user[password]', with:  user_attributes[:password]
-        click_button 'Sign in'
+        click_button 'Sign In'
         expect(current_path).to eq(authenticated_root_path)
       end
     end
@@ -63,7 +63,7 @@ describe 'User', type: :feature do
       visit root_path
       fill_in 'user[email]', with:  user_attributes[:email]
       fill_in 'user[password]', with:  user_attributes[:password]
-      click_button 'Sign in'
+      click_button 'Sign In'
 
       expect(page).to have_content 'Invalid email or password.'
     end

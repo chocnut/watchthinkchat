@@ -1,3 +1,4 @@
+<% Globalize.with_locale(@campaign.locale.try(:code) || I18n.locale) do %>
 <%= render 'progress' %>
 <div class="col-md-9">
   <section class="panel">
@@ -41,7 +42,7 @@
     <% end %>
   </section>
 </div>
-<%- content_for :javascript do %>
+<% content_for :javascript do %>
   <script type="text/javascript">
   $('.enabled_fields').hide();
 
@@ -56,4 +57,5 @@
     }
   });
   </script>
-<% end -%>
+<% end %>
+<% end %>

@@ -1,27 +1,111 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  routes:
+    campaigns: campaigns
+    new: new
+    edit: edit
+    build: build
+    translations: translations
+    dashboard: dashboard
+    users: users
+    user: user
+    sign_in: sign_in
+    sign_up: sign_up
+    sign_out: sign_out
+    password: password
+    invites: invites
+  wicked:
+    basic: basic
+    engagement_player: engagement_player
+    survey: survey
+    share: share
+    community: community
+    opened: opened
+    statistics: statistics
+  language: Change language
+  user:
+    first_name: First Name
+    last_name: Last Name
+    email: Email
+    password: Password
+    confirm_password: Confirm Password
+    remember_me: Remember me
+    back: Back to WatchThinkChat
+    invite: Invite New Translator
+    language: Language
+    sign_up: Sign Up
+    sign_up_with_provider: Sign Up with %{provider}
+    sign_in: Sign In
+    sign_in_with_provider: Sign in with %{provider}
+    forgot_your_password:
+      title: Forgot your password?
+      description: Enter your e-mail address below to reset your password.
+      button: Reset my password
+  translations:
+    empty:
+      title: No campaigns ready to translate
+      description: There isn't anything here for you to translate right now.
+    index:
+      title: Campaigns to Translate
+    edit:
+      save: Save Translations
+  campaigns:
+    new_user:
+      title: Start Creating
+      description: Good to have you onboard! Get started by creating your first campaign below. Go on, give it a try!
+    new: Create a New Campaign
+    created_on: Created on %{date}
+    updated_on: Last updated %{time} ago
+    build:
+      title: Campaign Wizard
+      next: Next
+      previous: Previous
+      opened:
+        title: All Done Here
+        description: Your campaign is live
+        button: Go to Campaign Dashboard
+      progress:
+        basic:
+          title: Getting Started
+          description: Basic Campaign Info
+        engagement_player:
+          title: Engagement Player
+          description: Media and Onboarding
+        survey:
+          title: Survey
+          description: Questions and Options
+        share:
+          title: Share
+          description: Share with Friends
+        community:
+          title: Community
+          description: Connect with Visitors
+        opened:
+          title: Finish
+          description: Go Live
+    show:
+      back: Back
+      engagement_player:
+        media: Media
+        survey: Survey
+      share:
+        title: This component is enabled
+      statistics:
+        title: Cool Graphs and Stuff
+      translation:
+        title: Available Languages
+        invite: Invite New Translators
+        locale: Language
+        translators: Translators
+        close: close
   activerecord:
     attributes:
       campaign:
-        permalink: "Operator Link"
+        name: Name
+        locale: Default Language
+        locales: Alternative Languages
+        url: URL
+        subdomain: Subdomain
+        cname_address: CNAME address
+      engagement_player:
+        enabled: Enabled
+        media_link: media_link

@@ -28,5 +28,4 @@ RSpec.describe Base62 do
   it 'encodes & decodes safely' do
     expect(Base62.decode(Base62.encode 10)).to eq(10)
   end
-
 end

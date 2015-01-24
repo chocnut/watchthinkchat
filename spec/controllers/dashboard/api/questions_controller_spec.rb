@@ -52,7 +52,7 @@ describe Dashboard::Api::QuestionsController do
           .to eq(JSON.parse(@survey
                            .questions
                            .find(json_response['id'])
-                           .to_json(include: :options_attributes)))
+                           .to_json(include: :options_attributes, except: :updated_at)))
       end
     end
 
@@ -76,10 +76,11 @@ describe Dashboard::Api::QuestionsController do
         delete :destroy,
                campaign_id: @campaign.id,
                id: @old_question.id,
-               format: :json
+               format: :json,
+               locale: :en
         expect(response).to be_success
         expect(json_response)
-          .to eq(JSON.parse(@old_question.to_json))
+          .to eq(JSON.parse(@old_question.to_json(except: :updated_at)))
       end
     end
   end
