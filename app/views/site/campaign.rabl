@@ -1,4 +1,4 @@
-attribute :id, :name
+attribute :id, :name, :intro, :description
 node(:resource_type) { Campaign }
 child(:engagement_player, if: lambda { |campaign| campaign.engagement_player }) {
   attributes :id, :enabled

@@ -10,6 +10,8 @@ RSpec.describe Campaign, type: :model do
   it { is_expected.to have_one(:survey).validate(true) }
   it { is_expected.to have_one(:community).validate(true) }
   it { is_expected.to have_one(:share).validate(true) }
+  it { is_expected.to have_db_column(:info).of_type(:boolean) }
+  it { is_expected.to have_db_column(:description).of_type(:boolean) }
   it do
     is_expected.to(
       accept_nested_attributes_for(:engagement_player).update_only(true))
