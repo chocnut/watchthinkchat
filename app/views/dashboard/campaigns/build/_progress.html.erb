@@ -14,6 +14,13 @@
       <h4><%= t('campaigns.build.progress.engagement_player.title') %></h4>
       <small><%= t('campaigns.build.progress.engagement_player.description') %></small>
     </a>
+    <a href="<%= wizard_path t('wicked.growthspace') %>" class="<%= step_class t('wicked.growthspace')%>">
+      <%- if @campaign.status.to_sym == :growthspace %>
+        <div class="pull-right"><%= fa_icon 'angle-right' %></div>
+      <% end -%>
+      <h4><%= t('campaigns.build.progress.growthspace.title') %></h4>
+      <small><%= t('campaigns.build.progress.growthspace.description') %></small>
+    </a>
     <a href="<%= wizard_path t('wicked.survey') %>" class="<%= step_class t('wicked.survey') %>">
       <%- if @campaign.status.to_sym == :survey %>
         <div class="pull-right"><%= fa_icon 'angle-right' %></div>

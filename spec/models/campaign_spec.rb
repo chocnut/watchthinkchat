@@ -10,6 +10,7 @@ RSpec.describe Campaign, type: :model do
   it { is_expected.to have_one(:survey).validate(true) }
   it { is_expected.to have_one(:community).validate(true) }
   it { is_expected.to have_one(:share).validate(true) }
+  it { is_expected.to have_one(:growthspace).validate(true) }
   it { is_expected.to have_db_column(:intro).of_type(:string) }
   it { is_expected.to have_db_column(:description).of_type(:text) }
   it do
@@ -27,6 +28,10 @@ RSpec.describe Campaign, type: :model do
   it do
     is_expected.to(
       accept_nested_attributes_for(:share).update_only(true))
+  end
+  it do
+    is_expected.to(
+      accept_nested_attributes_for(:growthspace).update_only(true))
   end
   it { is_expected.to belong_to :locale }
 
@@ -89,7 +94,8 @@ RSpec.describe Campaign, type: :model do
                                                   :engagement_player,
                                                   :survey,
                                                   :share,
-                                                  :community])
+                                                  :community,
+                                                  :growthspace])
   end
   context 'after create' do
     let(:campaign) { create(:campaign, status: :basic) }

@@ -21,6 +21,7 @@ fr:
     community: communauté
     opened: ouvert
     statistics: statistiques
+    growthspace: l'espace_de_croissance
   language: Changer de langue
   user:
     first_name: Prénom
@@ -70,6 +71,9 @@ fr:
         engagement_player:
           title: Engagement Joueur
           description: Médias et Onboarding
+        growthspace:
+          title: L'espace De Croissance
+          description: Connectez visiteurs de Contenu
         survey:
           title: Enquête
           description: Questions et Options

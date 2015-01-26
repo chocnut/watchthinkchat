@@ -52,14 +52,21 @@
                   </div>
                   <div class="col-sm-4 no-pad">
                     <div class="row">
-                      <div class="col-sm-6">
+                      <div class="col-sm-4">
+                        <select name ="new_route_id" class="form-control" ng-model="option.route_id">
+                          <% Campaign::Growthspace::Route.all.each do |route| %>
+                          <option value="<%= route.id %>"><%= route.name %></option>
+                          <% end %>
+                        </select>
+                      </div>
+                      <div class="col-sm-4">
                         <select class="form-control" ng-model="option.conditional" required>
                           <option value="next">Continue</option>
                           <option value="skip">Skip to</option>
                           <option value="finish">Finish</option>
                         </select>
                       </div>
-                      <div class="row col-sm-6">
+                      <div class="row col-sm-4">
                         <select class="form-control" ng-model="option.conditional_question_id" ng-required="option.conditional == 'skip'" ng-show="option.conditional == 'skip'">
                           <option ng-repeat="question in questions" value="{{question.id}}">Q{{questions.indexOf(question)}} ({{question.title | characters:15: false}})</option>
                         </select>
@@ -116,14 +123,21 @@
               </div>
               <div class="col-sm-4 no-pad">
                 <div class="row">
-                  <div class="col-sm-6">
+                  <div class="col-sm-4">
+                    <select name ="new_route_id" class="form-control" ng-model="option.route_id">
+                      <% Campaign::Growthspace::Route.all.each do |route| %>
+                      <option value="<%= route.id %>"><%= route.name %></option>
+                      <% end %>
+                    </select>
+                  </div>
+                  <div class="col-sm-4">
                     <select name ="new_conditional" class="form-control" ng-model="option.conditional" required>
                       <option value="next">Continue</option>
                       <option value="skip">Skip to</option>
                       <option value="finish">Finish</option>
                     </select>
                   </div>
-                  <div class="row col-sm-6">
+                  <div class="row col-sm-4">
                     <select class="form-control" ng-model="option.conditional_question_id" ng-required="option.conditional == 'skip'" ng-show="option.conditional == 'skip'" ng-change="option.conditional_question_id=parseInt(option.conditional_question_id)">
                       <option ng-repeat="question in questions" value="{{question.id}}">Q{{questions.indexOf(question)}} ({{question.title | characters:15: false}})</option>
                     </select>

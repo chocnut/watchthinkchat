@@ -21,6 +21,7 @@ en:
     community: community
     opened: opened
     statistics: statistics
+    growthspace: growthspace
   language: Change language
   user:
     first_name: First Name
@@ -70,6 +71,9 @@ en:
         engagement_player:
           title: Engagement Player
           description: Media and Onboarding
+        growthspace:
+          title: Growthspaces
+          description: Connect Visitors to Content
         survey:
           title: Survey
           description: Questions and Options

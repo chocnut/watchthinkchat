@@ -23,10 +23,15 @@ class Campaign < ActiveRecord::Base
           dependent: :destroy,
           class_name: 'Campaign::Share',
           validate: true
+  has_one :growthspace,
+          dependent: :destroy,
+          class_name: 'Campaign::Growthspace',
+          validate: true
   accepts_nested_attributes_for :engagement_player, update_only: true
   accepts_nested_attributes_for :survey, update_only: true
   accepts_nested_attributes_for :community, update_only: true
   accepts_nested_attributes_for :share, update_only: true
+  accepts_nested_attributes_for :growthspace, update_only: true
 
   # validations
   validates :name, presence: true, unless: :basic?
@@ -54,7 +59,8 @@ class Campaign < ActiveRecord::Base
                 :engagement_player,
                 :survey,
                 :share,
-                :community] unless instance_methods.include? :status
+                :community,
+                :growthspace] unless instance_methods.include? :status
   translates :name, :intro, :description
   scope :owner, (lambda do
     where('permissions.state = ?', Permission.states[:owner].to_i)

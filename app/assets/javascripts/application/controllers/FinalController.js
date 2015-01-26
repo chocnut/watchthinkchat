@@ -3,6 +3,16 @@ angular.module('chatApp').controller('FinalController', function ($scope, $windo
     $scope.visitorInfo = data;
   });
 
+  $scope.submitGrowthChallenge = function(){
+    var visitorInfo = angular.copy($scope.visitorInfo);
+    visitorInfo.subscribe = true;
+    api.call('put', '/v1/visitor', visitorInfo, function(){
+      $scope.growthChallengeSubscribe = true;
+    }, function(){
+      alert('An error occurred while submitting your information.');
+    });
+  };
+
   $scope.facebookShare = function(url){
     $window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), 'fbShare', 'height=250,width=650');
   };
