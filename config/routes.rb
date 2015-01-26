@@ -81,5 +81,5 @@ WatchThinkChat::Application.routes.draw do
     root 'site#index'
   end
 
-  root to: redirect(I18n.locale.to_s), as: :no_locale_visitor_root
+  root to: redirect("#{I18n.locale}/"), as: :no_locale_visitor_root
 end
