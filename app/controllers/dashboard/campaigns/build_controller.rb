@@ -5,6 +5,7 @@ module Dashboard
 
       steps :basic,
             :engagement_player,
+            :growthspace,
             :survey,
             :share,
             :community,
@@ -18,6 +19,7 @@ module Dashboard
                future_step?(I18n.t("wicked.#{@campaign.status}"))
           return redirect_to(campaign_build_path(campaign_id: @campaign, id: I18n.t("wicked.#{@campaign.status}")))
         end
+        send wizard_value(step) if self.class.method_defined? wizard_value(step).to_sym
         decorate_campaign
         render_wizard
       end
@@ -30,6 +32,13 @@ module Dashboard
       end
 
       protected
+
+      def survey
+        return unless @campaign.growthspace.try(:enabled?)
+        return if @campaign.growthspace.api_key.blank? || @campaign.growthspace.api_secret.blank?
+        Campaign::Growthspace::Route.access_id = @campaign.growthspace.api_key
+        Campaign::Growthspace::Route.access_secret = @campaign.growthspace.api_secret
+      end
 
       def load_campaign
         @campaign ||= campaign_scope.find(params[:campaign_id])
@@ -95,6 +104,12 @@ module Dashboard
              :other_campaign,
              :child_campaign_id,
              :description,
+             :enabled],
+          growthspace_attributes:
+            [:id,
+             :title,
+             :api_key,
+             :api_secret,
              :enabled]
         )
       end

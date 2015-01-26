@@ -4,6 +4,7 @@ class Campaign
       class Option < ActiveRecord::Base
         # associations
         belongs_to :question
+        belongs_to :route, class: 'Campaign::Growthspace::Route'
         has_one :conditional_question, class: 'Question'
 
         # callbacks

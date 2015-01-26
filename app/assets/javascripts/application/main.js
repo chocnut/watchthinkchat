@@ -32,11 +32,26 @@ angular.module('chatApp', ['ngRoute', 'templates', 'ui.bootstrap', 'youtube-embe
       }).otherwise({
         redirectTo: '/'
       });
-    }).run(function ($rootScope, $window, api) {
+    }).run(function ($rootScope, $window, $modal, api) {
       $rootScope.campaign = $window.campaign;
 
       $rootScope.back = function(){
         $window.history.back();
+      };
+
+      $rootScope.privacyModal = function(){
+        $modal.open({
+          templateUrl: 'modals/privacyModal.html',
+          controller: function($scope, $location, $sce, $modalInstance){
+            var lang = $location.absUrl().split('/')[3];
+            $scope.frameUrl = $sce.trustAsResourceUrl('/' + lang + '/privacy');
+
+            $scope.close = function () {
+              $modalInstance.dismiss();
+            };
+          },
+          size: 'lg'
+        });
       };
 
       $rootScope.$on('$routeChangeStart', function(event, next, current) {

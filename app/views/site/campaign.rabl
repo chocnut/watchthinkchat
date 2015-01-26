@@ -15,7 +15,7 @@ child(:survey, if: lambda { |campaign| campaign.survey }) {
       attributes :id, :title, :code, :help_text
       node(:resource_type) { Campaign::Survey::Question }
       child(:options, root: 'options', object_root: false) {
-        attributes :id, :title, :code, :conditional
+        attributes :id, :title, :code, :conditional, :route_id, :conditional_question_id
         node(:resource_type) { Campaign::Survey::Question::Option }
       }
     }
@@ -36,5 +36,12 @@ child(:community, if: lambda { |campaign| campaign.community }) {
     unless root_object.other_campaign?
       attributes :title, :description
     end
+  end
+}
+child(:growthspace, if: lambda { |campaign| campaign.growthspace }) {
+  attributes :id, :enabled
+  node(:resource_type) { Campaign::Growthspace }
+  if root_object.enabled?
+    attributes :title
   end
 }

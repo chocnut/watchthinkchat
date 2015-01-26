@@ -47,6 +47,19 @@ describe 'Campaign Builder', type: :feature, js: true do
               with: '10'
       click_button 'Next'
       expect(current_path).to eq(campaign_build_path(campaign,
+                                                     :growthspace))
+    end
+    scenario 'growthspace page' do
+      campaign.growthspace!
+      growthspace_attributes = attributes_for(:growthspace)
+      visit campaign_build_path(campaign, :growthspace, locale: :en)
+      choose 'On'
+      click_button 'Next'
+      find '#campaign_growthspace_attributes_title.error'
+      fill_in 'campaign[growthspace_attributes][title]',
+              with: growthspace_attributes[:title]
+      click_button 'Next'
+      expect(current_path).to eq(campaign_build_path(campaign,
                                                      :survey))
     end
     scenario 'survey page' do

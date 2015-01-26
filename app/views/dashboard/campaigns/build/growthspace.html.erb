@@ -1,0 +1,63 @@
+<% Globalize.with_locale(@campaign.locale.try(:code) || I18n.locale) do %>
+<%= render 'progress' %>
+<div class="col-md-9">
+  <section class="panel">
+    <header class="panel-heading">
+      <%= t 'campaigns.build.title' %>
+    </header>
+    <%= semantic_form_for @campaign, url: wizard_path, method: :put, html: {class: 'form-horizontal'} do |f| %>
+      <%= f.semantic_fields_for :growthspace, @campaign.growthspace || @campaign.build_growthspace do |c| %>
+        <%=  c.hidden_field :id %>
+        <div class="panel-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <%= c.input :enabled, as: :radio, collection: [['On', true], ['Off', false]] %>
+              </div>
+            </div>
+            <div class="enabled_fields">
+              <div class="row">
+                <div class="col-md-12">
+                  <%=  c.input :title %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <%=  c.input :api_key %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <%=  c.input :api_secret %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      <div class="panel-footer clearfix">
+        <div class="pull-right">
+          <a href="<%= previous_wizard_path %>" class="btn"><%= t('campaigns.build.previous') %></a>&nbsp;
+          <%= f.submit t('campaigns.build.next'), class: 'btn btn-primary' %>
+        </div>
+      </div>
+    <% end %>
+  </section>
+</div>
+<% content_for :javascript do %>
+  <script type="text/javascript">
+  $('.enabled_fields').hide();
+
+  if ($("input:radio[name='campaign[growthspace_attributes][enabled]']:checked").val() == "true" )
+    $('.enabled_fields').show();
+
+  $('#campaign_growthspace_attributes_enabled_input input').change(function () {
+    if ($(this).val() == "true") {
+      $('.enabled_fields').show();
+    } else {
+      $('.enabled_fields').hide();
+    }
+  });
+  </script>
+<% end %>
+<% end %>

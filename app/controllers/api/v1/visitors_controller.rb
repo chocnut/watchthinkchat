@@ -9,6 +9,7 @@ module Api
         load_visitor
         build_visitor
         save_visitor
+        subscribe_visitor if params[:subscribe]
         render 'show', status: :ok
       end
 
@@ -22,6 +23,10 @@ module Api
       def build_visitor
         @visitor ||= visitor_scope.build
         @visitor.attributes = visitor_params
+      end
+
+      def subscribe_visitor
+        @visitor.decorate.subscribe(@campaign)
       end
 
       def save_visitor

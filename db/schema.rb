@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150125042732) do
+ActiveRecord::Schema.define(version: 20150126183417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,27 @@ ActiveRecord::Schema.define(version: 20150125042732) do
     t.integer  "media_stop"
   end
 
+  create_table "campaign_growthspace_translations", force: true do |t|
+    t.integer  "campaign_growthspace_id", null: false
+    t.string   "locale",                  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+  end
+
+  add_index "campaign_growthspace_translations", ["campaign_growthspace_id"], name: "index_3ea70921eeab99eb5d671fe1f0b0bab113e4e2b8", using: :btree
+  add_index "campaign_growthspace_translations", ["locale"], name: "index_campaign_growthspace_translations_on_locale", using: :btree
+
+  create_table "campaign_growthspaces", force: true do |t|
+    t.integer  "campaign_id"
+    t.boolean  "enabled",     default: true
+    t.string   "title"
+    t.string   "api_key"
+    t.string   "api_secret"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "campaign_share_translations", force: true do |t|
     t.integer  "campaign_share_id", null: false
     t.string   "locale",            null: false
@@ -126,6 +147,7 @@ ActiveRecord::Schema.define(version: 20150125042732) do
     t.integer  "conditional_question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "route_id"
   end
 
   create_table "campaign_survey_question_translations", force: true do |t|
