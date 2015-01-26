@@ -77,6 +77,9 @@ WatchThinkChat::Application.routes.draw do
     end
   end
 
-  root 'site#index'
-  get '*path', to: redirect('/')
+  localized do
+    root 'site#index'
+  end
+
+  root to: redirect(I18n.locale.to_s), as: :no_locale_visitor_root
 end
