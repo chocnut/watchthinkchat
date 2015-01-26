@@ -5,7 +5,13 @@
       <div id="header">
         <div class="container">
           <a href="" ng-click="back()" class="back">Back</a>
-          <a href="" class="language">English</a>
+          <div class="btn-group pull-right" dropdown>
+            <a href="" class="language" dropdown-toggle>English</a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="/en">English</a></li>
+              <li><a href="/es">Español</a></li>
+            </ul>
+          </div>
           <div class="logo">{{campaign.name}}</div>
         </div>
       </div>

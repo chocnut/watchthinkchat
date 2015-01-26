@@ -11,6 +11,10 @@ angular.module('chatApp').controller('FinalController', function ($scope, $windo
     $window.open('https://twitter.com/share?url=' + encodeURIComponent(url), 'twitterShare', 'height=400,width=650');
   };
 
+  $scope.toggleEmailForm = function(){
+    $scope.showEmailForm = !$scope.showEmailForm;
+  };
+
   $scope.sendEmailShare = function(){
     //update visitor
     api.call('put', '/v1/visitor', $scope.visitorInfo, function(){

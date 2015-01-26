@@ -150,6 +150,10 @@ fieldset {
 	display:block;
 }
 
+#header .language + ul a {
+    color:#000;
+}
+
 #header .language:after {
 	border-bottom: 6px solid transparent;
 	border-left: 5px solid #ffffff;

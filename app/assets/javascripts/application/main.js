@@ -1,4 +1,4 @@
-angular.module('chatApp', ['ngRoute', 'templates', 'youtube-embed'])
+angular.module('chatApp', ['ngRoute', 'templates', 'ui.bootstrap', 'youtube-embed'])
     .config(function ($routeProvider) {
       $routeProvider.when('/', {
         template: '',
