@@ -9,7 +9,7 @@ html, body {
 }
 #wrapper {
   min-height: 100%;
-  margin-bottom: -100px; 
+  margin-bottom: -100px;
 	padding-bottom:40px;
 }
 
@@ -19,7 +19,7 @@ html, body {
 }
 
 footer, #wrapper:after {
-  height: 100px 
+  height: 100px
 }
 
 body, input, textarea {
@@ -65,7 +65,7 @@ input[type=submit] {
 	font-weight:300;
 	display:block;
 	margin-bottom:18px;
-} 
+}
 
 .button-narrow {
 	padding:10px 15px;
@@ -114,6 +114,13 @@ fieldset {
 	padding:0;
 }
 
+#app {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
 
 /* Header */
 
@@ -305,23 +312,23 @@ fieldset {
 }
 
 @media (max-width: 767px) {
-	
+
 	h1 {
 		font-size:22px;
 	}
-	
+
 	h2 {
 		font-size:22px;
 	}
-	
+
 	.survey-response .container .row > div {
 		padding:0 15px;
 	}
-	
+
 	.button {
 		margin-bottom:15px;
 	}
-	
+
 	#header .logo {
 		font-size:14px;
 		width:185px;
@@ -335,16 +342,16 @@ fieldset {
 		letter-spacing:.2em;
 		line-height:30px;
 	}
-	
-	
+
+
 	.message {
 		font-size:16px;
 	}
-	
+
 	.form h1 {
 		font-size:28px;
 	}
-	
+
 	#signup-message {
 		padding:44px 0;
 		font-size:14px;
@@ -353,7 +360,7 @@ fieldset {
 	#signup-message h2 {
 		font-size:30px;
 	}
-	
+
 	.language {
 		text-align:center;
 	}
