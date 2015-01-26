@@ -38,3 +38,10 @@ child(:community, if: lambda { |campaign| campaign.community }) {
     end
   end
 }
+child(:growthspace, if: lambda { |campaign| campaign.growthspace }) {
+  attributes :id, :enabled
+  node(:resource_type) { Campaign::Growthspace }
+  if root_object.enabled?
+    attributes :title
+  end
+}

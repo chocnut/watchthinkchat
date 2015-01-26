@@ -1,17 +1,30 @@
-<section>
+<section ng-show="campaign.growthspace.enabled">
   <div id="main" class="form">
     <div class="container">
-      <h1>Growth Space</h1>
       <div class="form-group">
-        <label class="col-sm-3 control-label">Name</label>
-        <div class="col-sm-9">
-          <input type="text" class="form-control" ng-model="growthSpace.name">
+        <div class="col-sm-12">
+          <h1>{{campaign.growthspace.title}}</h1>
+          <h2>{{visitorInfo.content.name}}</h2>
+          <p>{{visitorInfo.content.summary}}</p>
+          <br />
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-3 control-label">Email</label>
-        <div class="col-sm-9">
-          <input type="email" class="form-control" ng-model="growthSpace.email">
+        <label class="col-sm-12 control-label">First Name</label>
+        <div class="col-sm-12">
+          <input type="text" class="form-control" ng-model="visitorInfo.first_name">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-12 control-label">Last Name</label>
+        <div class="col-sm-12">
+          <input type="text" class="form-control" ng-model="visitorInfo.last_name">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-12 control-label">Email</label>
+        <div class="col-sm-12">
+          <input type="email" class="form-control" ng-model="visitorInfo.email">
         </div>
       </div>
       <div class="form-group">
@@ -19,7 +32,6 @@
           <p><a href="" class="button button-narrow">Submit</a></p>
         </div>
       </div>
-
     </div>
   </div>
 </section>
