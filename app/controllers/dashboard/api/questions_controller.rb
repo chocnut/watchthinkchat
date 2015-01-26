@@ -83,7 +83,7 @@ module Dashboard
           :title, :help_text, :position,
           options_attributes: [:id, :title, :conditional,
                                :conditional_question_id,
-                               :_destroy])
+                               :route_id, :_destroy])
       end
     end
   end

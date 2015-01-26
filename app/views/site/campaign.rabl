@@ -15,7 +15,7 @@ child(:survey, if: lambda { |campaign| campaign.survey }) {
       attributes :id, :title, :code, :help_text
       node(:resource_type) { Campaign::Survey::Question }
       child(:options, root: 'options', object_root: false) {
-        attributes :id, :title, :code, :conditional
+        attributes :id, :title, :code, :conditional, :route_id
         node(:resource_type) { Campaign::Survey::Question::Option }
       }
     }

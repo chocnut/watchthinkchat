@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150126171338) do
+ActiveRecord::Schema.define(version: 20150126183417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(version: 20150126171338) do
     t.integer  "conditional_question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "route_id"
   end
 
   create_table "campaign_survey_question_translations", force: true do |t|

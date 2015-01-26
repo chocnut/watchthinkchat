@@ -40,6 +40,10 @@ GEM
       activemodel (= 4.1.6)
       activesupport (= 4.1.6)
       arel (~> 5.0.0)
+    activeresource (4.0.0)
+      activemodel (~> 4.0)
+      activesupport (~> 4.0)
+      rails-observers (~> 0.1.1)
     activesupport (4.1.6)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
@@ -444,6 +448,7 @@ PLATFORMS
 DEPENDENCIES
   active_type
   activeadmin!
+  activeresource
   acts_as_list
   airbrake
   angular-rails-templates

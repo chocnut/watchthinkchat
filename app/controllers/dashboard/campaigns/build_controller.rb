@@ -19,6 +19,7 @@ module Dashboard
                future_step?(I18n.t("wicked.#{@campaign.status}"))
           return redirect_to(campaign_build_path(campaign_id: @campaign, id: I18n.t("wicked.#{@campaign.status}")))
         end
+        send wizard_value(step) if self.class.method_defined? wizard_value(step).to_sym
         decorate_campaign
         render_wizard
       end
@@ -31,6 +32,12 @@ module Dashboard
       end
 
       protected
+
+      def survey
+        return unless @campaign.growthspace.try(:enabled?)
+        Campaign::Growthspace::Route.access_id = @campaign.growthspace.api_key unless @campaign.growthspace.api_key.blank?
+        Campaign::Growthspace::Route.access_secret = @campaign.growthspace.api_secret unless @campaign.growthspace.api_secret.blank?
+      end
 
       def load_campaign
         @campaign ||= campaign_scope.find(params[:campaign_id])
