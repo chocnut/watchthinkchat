@@ -1,4 +1,4 @@
-angular.module('chatApp').controller('ShareControllerx', function ($scope, api, facebook) {
+angular.module('chatApp').controller('ShareController', function ($scope, api, facebook) {
   $scope.currentInvites = [];
 
   var getCurrentInvites = function(){
