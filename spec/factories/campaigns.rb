@@ -5,6 +5,8 @@ FactoryGirl.define do
     sequence(:url) { |n| "campaign-#{n}.#{Faker::Internet.domain_name}" }
     subdomain false
     locale
+    intro { Faker::Lorem.sentence }
+    description { Faker::Hacker.say_something_smart }
     factory :subdomain_campaign do
       sequence(:url) { |n| "campaign-#{n}#{Faker::Internet.domain_word}" }
       subdomain true
