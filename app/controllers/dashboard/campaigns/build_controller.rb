@@ -5,6 +5,7 @@ module Dashboard
 
       steps :basic,
             :engagement_player,
+            :growthspace,
             :survey,
             :share,
             :community,
@@ -95,6 +96,12 @@ module Dashboard
              :other_campaign,
              :child_campaign_id,
              :description,
+             :enabled],
+          growthspace_attributes:
+            [:id,
+             :title,
+             :api_key,
+             :api_secret,
              :enabled]
         )
       end
