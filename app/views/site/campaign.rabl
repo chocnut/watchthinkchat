@@ -4,7 +4,7 @@ child(:engagement_player, if: lambda { |campaign| campaign.engagement_player }) 
   attributes :id, :enabled
   node(:resource_type) { Campaign::EngagementPlayer }
   if root_object.enabled?
-    attributes :media_link, :media_start, :media_stop, :enabled
+    attributes :youtube_video_id, :media_start, :media_stop, :enabled
   end
 }
 child(:survey, if: lambda { |campaign| campaign.survey }) {
