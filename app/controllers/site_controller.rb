@@ -4,6 +4,9 @@ class SiteController < ApplicationController
 
   def index
     return render 'no_campaign' unless @campaign
+    return if @campaign.locales.find_by(code: I18n.locale) ||
+              @campaign.locale.code.try(:to_sym) == I18n.locale
+    redirect_to("/#{@campaign.locale.code}")
   end
 
   protected

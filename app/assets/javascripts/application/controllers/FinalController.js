@@ -1,4 +1,4 @@
-angular.module('chatApp').controller('ShareController', function ($scope, $window, api) {
+angular.module('chatApp').controller('FinalController', function ($scope, $window, api) {
   api.call('get', '/v1/visitor', null, function(data){
     $scope.visitorInfo = data;
   });
@@ -9,6 +9,10 @@ angular.module('chatApp').controller('ShareController', function ($scope, $windo
 
   $scope.twitterShare = function(url){
     $window.open('https://twitter.com/share?url=' + encodeURIComponent(url), 'twitterShare', 'height=400,width=650');
+  };
+
+  $scope.toggleEmailForm = function(){
+    $scope.showEmailForm = !$scope.showEmailForm;
   };
 
   $scope.sendEmailShare = function(){

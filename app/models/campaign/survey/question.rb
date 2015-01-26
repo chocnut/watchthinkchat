@@ -5,7 +5,6 @@ class Campaign
       belongs_to :survey
       has_many :options, dependent: :destroy
       accepts_nested_attributes_for :options, allow_destroy: true
-      has_many :translations, as: :resource, dependent: :destroy
 
       # callbacks
       after_save :generate_code, on: :create

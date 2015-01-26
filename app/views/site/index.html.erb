@@ -1,12 +1,23 @@
 <div id="fb-root"></div>
-<div ng-app="chatApp" ng-cloak>
+<div id="app" ng-app="chatApp" ng-cloak>
   <div id="wrapper">
     <header>
       <div id="header">
         <div class="container">
           <a href="" ng-click="back()" class="back">Back</a>
-          <a href="" class="language">English</a>
-          <div class="logo">#FALLINGPLATES</div>
+          <% unless @campaign.locales.blank? %>
+
+            <div class="btn-group pull-right" dropdown>
+              <a href="" class="language" dropdown-toggle><%= language(I18n.locale).titleize %></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/<%= @campaign.locale.try(:code) %>"><%= language(@campaign.locale.try(:code)).titleize %></a></li>
+                <% @campaign.locales.each do |locale| %>
+                  <li><a href="/<%= locale.try(:code) %>"><%= language(locale.try(:code)).titleize %></a></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="logo">{{campaign.name}}</div>
         </div>
       </div>
     </header>

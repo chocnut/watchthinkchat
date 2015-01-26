@@ -51,6 +51,8 @@ module Dashboard
       return {} unless campaign_params
       campaign_params.permit(
         :name,
+        :intro,
+        :description,
         engagement_player_attributes:
           [:id,
            :enabled,

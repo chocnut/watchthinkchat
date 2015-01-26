@@ -1,13 +1,13 @@
-angular.module('chatApp', ['ngRoute', 'youtube-embed'])
+angular.module('chatApp', ['ngRoute', 'templates', 'ui.bootstrap', 'youtube-embed'])
     .config(function ($routeProvider) {
       $routeProvider.when('/', {
         template: '',
         controller: 'MainController'
       }).when('/player', {
-        templateUrl: '/templates/video.html',
+        templateUrl: 'video.html',
         controller: 'VideoController'
       }).when('/q/:questionId', {
-        templateUrl: '/templates/question.html',
+        templateUrl: 'question.html',
         controller: 'QuestionController',
         resolve: {
           question: ['$rootScope', '$route', function ($rootScope, $route) {
@@ -26,15 +26,9 @@ angular.module('chatApp', ['ngRoute', 'youtube-embed'])
             return _.find(_.flatten($rootScope.campaign.survey.questions, 'options'), { 'code': $route.current.params.jumpId });
           }]
         }
-      }).when('/complete', {
-        templateUrl: '/templates/complete.html',
-        controller: 'CompleteController'
-      }).when('/pair', {
-        templateUrl: '/templates/share.html',
-        controller: 'PairController'
-      }).when('/share', {
-        templateUrl: '/templates/share.html',
-        controller: 'ShareController'
+      }).when('/final', {
+        templateUrl: 'final.html',
+        controller: 'FinalController'
       }).otherwise({
         redirectTo: '/'
       });
@@ -45,7 +39,7 @@ angular.module('chatApp', ['ngRoute', 'youtube-embed'])
         $window.history.back();
       };
 
-      $rootScope.$on("$routeChangeStart", function(event, next, current) {
+      $rootScope.$on('$routeChangeStart', function(event, next, current) {
         var nextController = next.$$route.controller;
         var currentController = '';
         if(angular.isDefined(current)){ currentController = current.$$route.controller; }
@@ -81,10 +75,8 @@ angular.module('chatApp', ['ngRoute', 'youtube-embed'])
             return $rootScope.campaign.engagement_player;
           case 'QuestionController':
             return $rootScope.campaign.survey;
-          case 'ShareController':
+          case 'FinalController':
             return $rootScope.campaign.share;
-          case 'PairController':
-            return $rootScope.campaign.guided_pair;
           default:
             return null;
         }

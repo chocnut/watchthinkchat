@@ -9,7 +9,7 @@ describe 'Site', type: :feature, js: true do
     scenario 'visitor comes to root_path' do
       visit root_path
       expect(evaluate_script('campaign')).to(
-        eq(JSON.parse(Rabl::Renderer.json(campaign,
+        eq(JSON.parse(Rabl::Renderer.json(campaign.decorate,
                                           'site/campaign',
                                           view_path: 'app/views')))
         )
@@ -25,7 +25,7 @@ describe 'Site', type: :feature, js: true do
     scenario 'visitor comes to root_path' do
       visit root_path
       expect(evaluate_script('campaign')).to(
-        eq(JSON.parse(Rabl::Renderer.json(campaign,
+        eq(JSON.parse(Rabl::Renderer.json(campaign.decorate,
                                           'site/campaign',
                                           view_path: 'app/views')))
         )

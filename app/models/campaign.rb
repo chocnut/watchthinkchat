@@ -55,7 +55,7 @@ class Campaign < ActiveRecord::Base
                 :survey,
                 :share,
                 :community] unless instance_methods.include? :status
-  translates :name
+  translates :name, :intro, :description
   scope :owner, (lambda do
     where('permissions.state = ?', Permission.states[:owner].to_i)
   end)

@@ -1,5 +1,5 @@
 body {
-	background:url("/assets/backgroundfallingplates.jpg") #E6E6E6 no-repeat center top;
+	background:image-url("/assets/backgroundfallingplates.jpg") #E6E6E6 no-repeat center top;
 	background-size:cover;
 	background-attachment:fixed;
 }

@@ -72,6 +72,8 @@ module Dashboard
           :locale_id,
           :url,
           :subdomain,
+          :intro,
+          :description,
           locale_ids: [],
           engagement_player_attributes:
             [:id,

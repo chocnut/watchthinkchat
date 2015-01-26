@@ -27,6 +27,21 @@
         <%= semantic_form_for @translation.campaign, url: translation_path(@translation) do |f| %>
           <div class="panel-content">
             <%= f.input :name %>
+            <%= f.input :intro %>
+            <%= f.input :description %>
+            <% if @translation.campaign.engagement_player.try(:enabled) %>
+              <%= f.semantic_fields_for :engagement_player, @translation.campaign.engagement_player do |c| %>
+                <%= c.input :media_link %>
+              <% end %>
+            <% end %>
+            <% if @translation.campaign.share.try(:enabled) %>
+              <%= f.semantic_fields_for :share, @translation.campaign.share do |c| %>
+                <%= c.input :title %>
+                <%= c.input :description %>
+                <%= c.input :subject %>
+                <%= c.input :message %>
+              <% end %>
+            <% end %>
           </div>
           <div class="panel-footer text-right">
             <%= f.submit t('translations.edit.save'), class: 'btn btn-primary' %>

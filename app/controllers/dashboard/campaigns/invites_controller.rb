@@ -6,10 +6,12 @@ module Dashboard
       end
 
       def new
+        load_campaign
         build_invite
       end
 
       def create
+        load_campaign
         build_invite
         if save_invite
           redirect_to action: :index
@@ -22,15 +24,23 @@ module Dashboard
       protected
 
       def build_invite
-        @invite = User::Translator::Invite.new
-        @invite.campaign_id = Campaign.find(params[:campaign_id]).id
+        @invite = User::Translator::Invite.new(campaign: @campaign)
         @invite.attributes = invite_params
-        authorize! :read, @invite.campaign
+        authorize! :read, @campaign
       end
 
       def save_invite
-        authorize! :update, @invite.campaign
+        authorize! :update, @campaign
         @invite.save
+      end
+
+      def load_campaign
+        @campaign ||= campaign_scope.find(params[:campaign_id])
+        authorize! :read, @campaign
+      end
+
+      def campaign_scope
+        current_manager.campaigns
       end
 
       def invite_params

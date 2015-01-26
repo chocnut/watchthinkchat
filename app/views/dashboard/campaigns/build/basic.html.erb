@@ -22,6 +22,12 @@
               <%= f.input :url %>
               <%= f.input :subdomain, as: :radio, collection: [[t('activerecord.attributes.campaign.subdomain'), true], [t('activerecord.attributes.campaign.cname_address'), false]], label: false %>
             </div>
+            <div class="col-md-12">
+              <%=  f.input :intro %>
+            </div>
+            <div class="col-md-12">
+              <%=  f.input :description, input_html: { rows: 5 } %>
+            </div>
           </div>
         </div>
       </div>
