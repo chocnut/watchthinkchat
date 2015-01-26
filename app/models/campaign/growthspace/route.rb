@@ -17,11 +17,11 @@ class Campaign
       end
 
       def self.growthspaces_access_id
-        self.access_id || ENV['growthspaces_access_id']
+        access_id || ENV['growthspaces_access_id']
       end
 
       def self.growthspaces_access_secret
-        self.access_secret || ENV['growthspaces_access_secret']
+        access_secret || ENV['growthspaces_access_secret']
       end
     end
   end
