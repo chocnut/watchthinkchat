@@ -52,6 +52,10 @@ class Campaign < ActiveRecord::Base
     campaign.create_survey
   end
 
+  before_save do |campaign|
+    campaign.url = campaign.url.downcase
+  end
+
   # definitions
   enum status: [:basic,
                 :closed,
