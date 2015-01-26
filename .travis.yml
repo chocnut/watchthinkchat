@@ -12,6 +12,8 @@ env:
   - base_url=watchthinkchat.com
   - SECRET_KEY_BASE=gopgfkgokghojkghjp345jb6kjb45jkb
   - RAILS_ENV=test
+  - secure: "hTAW1DdfaRLXqXCuMJ7kdjxWqxFL5WAFnrAS5knEmf7QfACJ9OJq97om7IFpmc2ClT1SjgwOCDgJegOvIyWK4mCWzUNgExibv+Pf2Ms9SUK1aS8P4mRKj2Oy/FuvOPBDfQjHL6Dkley6iHRiq2H8b4fonSVSbPjwot56nUpihas="
+  - secure: "R+oytcnLjaVzYA2EYI1NRog9eW0jW5X6DF/M80fRNLZHnFU+y7GFG0VCHoDBPE9OQyWmNCWLm05Wm0IFjG9uWcsCUaSvmbBTsT+iRe4NxtYLfeAS+9+qmv6bHggcmDPDCg8/v7exLSkddENll4FvFDIUhnqwgjVwh+KL1g8qQas="
 before_install:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
