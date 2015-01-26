@@ -35,8 +35,9 @@ module Dashboard
 
       def survey
         return unless @campaign.growthspace.try(:enabled?)
-        Campaign::Growthspace::Route.access_id = @campaign.growthspace.api_key unless @campaign.growthspace.api_key.blank?
-        Campaign::Growthspace::Route.access_secret = @campaign.growthspace.api_secret unless @campaign.growthspace.api_secret.blank?
+        return if @campaign.growthspace.api_key.blank? || @campaign.growthspace.api_secret.blank?
+        Campaign::Growthspace::Route.access_id = @campaign.growthspace.api_key
+        Campaign::Growthspace::Route.access_secret = @campaign.growthspace.api_secret
       end
 
       def load_campaign
