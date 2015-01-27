@@ -5,6 +5,7 @@ class Campaign
     class Content < ActiveResource::Base
       include ActiveResource::Singleton
       self.site = 'https://www.growthspaces.org/api/v1'
+      self.ssl_options = { verify_mode: OpenSSL::SSL::NONE }
       cattr_accessor :static_headers
       cattr_accessor :access_id
       cattr_accessor :access_secret
