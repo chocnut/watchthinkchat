@@ -34,24 +34,24 @@ h2 {
 }
 
 :-moz-placeholder { /* Firefox 18- */
-  color:#8c8c8c; 
+  color:#8c8c8c;
 	opacity:1 !important;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-  color:#8c8c8c;  
+  color:#8c8c8c;
 	opacity:1 !important;
 }
 
-:-ms-input-placeholder {  
-  color:#8c8c8c;  
+:-ms-input-placeholder {
+  color:#8c8c8c;
 	opacity:1 !important;
 }
 
 input[type=text],
 input[type=email] {
 	color:#8c8c8c;
-	background:url("/assets/u183-sprite.png") repeat-x left top #ffffff;
+	background: image-url("/assets/u183-sprite.png") repeat-x left top #ffffff;
 }
 
 /* Header */
@@ -70,7 +70,7 @@ input[type=email] {
 	background:#727272;
 	background-color: rgba(0,0,0,.25);
 	border-color: transparent;
-	border-style: none; 
+	border-style: none;
 	color:#ffffff;
 }
 
@@ -83,7 +83,7 @@ input[type=email] {
 }
 
 #header .back {
-	background-image:url("/assets/icon_backarrow_640_ffffff.png");
+	background-image: image-url("/assets/icon_backarrow.png");
 	opacity:.6;
 }
 
@@ -165,9 +165,9 @@ input[type=email] {
 }
 
 #footer .privacy {
-	background-image:url("/assets/icon_privacy_640_000000.png");
+	background-image: image-url("/assets/icon_privacy.png");
 }
 
 #footer .info {
-	background-image:url("/assets/icon_info_640_000000.png");
+	background-image: image-url("/assets/icon_info.png");
 }
