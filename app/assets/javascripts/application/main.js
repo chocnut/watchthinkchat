@@ -34,6 +34,7 @@ angular.module('chatApp', ['ngRoute', 'templates', 'ui.bootstrap', 'youtube-embe
       });
     }).run(function ($rootScope, $window, $modal, api) {
       $rootScope.campaign = $window.campaign;
+      $rootScope.translations = $window.translations;
 
       $rootScope.back = function(){
         $window.history.back();

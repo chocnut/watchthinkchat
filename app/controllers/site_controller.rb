@@ -3,6 +3,7 @@ class SiteController < ApplicationController
   decorates_assigned :campaign
 
   def index
+    load_translations
     return render 'no_campaign' unless @campaign
     return if @campaign.locales.find_by(code: I18n.locale) ||
               @campaign.locale.code.try(:to_sym) == I18n.locale
@@ -10,6 +11,11 @@ class SiteController < ApplicationController
   end
 
   protected
+
+  def load_translations
+    @translations = I18n.backend.send(:translations)
+    @translations = @translations[I18n.locale][:front_end]
+  end
 
   def load_campaign
     url = request.host

@@ -1,4 +1,27 @@
 fr:
+  front_end:
+    complete:
+      thank_you: Merci!
+      continue_to: "continuer à:"
+    final:
+      first_name: First Name
+      last_name: Last Name
+      email: Email
+      friends_first_name: Friend's First Name
+      friends_last_name: Friend's Last Name
+      friends_email: Friend's Email
+      message: Message
+      growthspace_thanks: Thank you!
+      notify_me: Notify me when friend comes to WTC
+      send_invite: Send Invite
+      learn_more: Learn More
+      submit: Submit
+      thank_you: Thank you!
+    privacy_modal:
+      privacy_policy: Privacy Policy
+    share_link:
+      share: Share
+      share_link: "Share the link below:"
   routes:
     campaigns: campagnes
     new: nouveau

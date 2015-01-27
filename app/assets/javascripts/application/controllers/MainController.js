@@ -1,5 +1,4 @@
 angular.module('chatApp').controller('MainController', function ($scope, $rootScope, $location) {
-  console.log($rootScope.campaign);
 
   if($rootScope.campaign.engagement_player.enabled){
     $location.path('/player');

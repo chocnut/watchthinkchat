@@ -44,6 +44,7 @@
     // <![CDATA[
       var campaign = <%= Rabl::Renderer.json(@campaign.decorate, 'site/campaign', view_path: 'app/views').html_safe %>;
       var apiUrl = "http://api.<%= "#{ENV['base_url']}:#{request.port}" %>"
+      var translations = <%= @translations.to_json.html_safe %>;
 
       // Clicky
       try{ clicky.init(100711607); }catch(e){}
