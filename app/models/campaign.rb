@@ -56,7 +56,7 @@ class Campaign < ActiveRecord::Base
   end
 
   before_save do |campaign|
-    campaign.url = campaign.url.downcase
+    campaign.url = campaign.url.try(:downcase)
   end
 
   # definitions
