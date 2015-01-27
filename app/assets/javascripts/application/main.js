@@ -18,7 +18,7 @@ angular.module('chatApp', ['ngRoute', 'templates', 'ui.bootstrap', 'youtube-embe
             return $rootScope.campaign.survey.questions[questionIndex + 1];
           }]
         }
-      }).when('/jumpTo/:jumpId', {
+      }).when('/o/:jumpId', {
         template: '',
         controller: 'JumpToController',
         resolve: {
@@ -34,6 +34,7 @@ angular.module('chatApp', ['ngRoute', 'templates', 'ui.bootstrap', 'youtube-embe
       });
     }).run(function ($rootScope, $window, $modal, api) {
       $rootScope.campaign = $window.campaign;
+      console.log($rootScope.campaign);
       $rootScope.translations = $window.translations;
 
       $rootScope.back = function(){
