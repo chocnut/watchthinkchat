@@ -28,7 +28,8 @@ RSpec.describe Api::V1::VisitorsController, type: :request do
       expect(json_response.keys).to(
         eq %w(id first_name last_name email notify_me_on_share url content)
       )
-      expect(json_response['url']).to eq("#{campaign.decorate.permalink}/i/#{@current_visitor.share_token}")
+      expect(json_response['url']).to(
+        eq("#{campaign.decorate.permalink}/#{I18n.locale}/i/#{@current_visitor.share_token}"))
       expect(response).to have_http_status :ok
     end
   end
@@ -41,7 +42,8 @@ RSpec.describe Api::V1::VisitorsController, type: :request do
       expect(json_response.keys).to(
         eq %w(id first_name last_name email notify_me_on_share url content)
       )
-      expect(json_response['url']).to eq("#{campaign.decorate.permalink}/i/#{@current_visitor.share_token}")
+      expect(json_response['url']).to(
+        eq("#{campaign.decorate.permalink}/#{I18n.locale}/i/#{@current_visitor.share_token}"))
       expect(response).to have_http_status :ok
     end
   end

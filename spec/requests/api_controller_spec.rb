@@ -47,7 +47,7 @@ RSpec.describe ApiController, type: :request do
               expect do
                 get "http://api.#{ENV['base_url']}/token.js",
                     {},
-                    referer: "http://#{campaign.url}/i/#{@invitation.token}"
+                    referer: "http://#{campaign.url}/#{I18n.locale}/i/#{@invitation.token}"
               end.to change(Visitor, :count).by(0)
               expect(response.body[/\".*?\"/].gsub(/"/, '')).to(
                 eq(@invitee.authentication_token))
@@ -67,7 +67,7 @@ RSpec.describe ApiController, type: :request do
               expect do
                 get "http://api.#{ENV['base_url']}/token.js",
                     {},
-                    referer: "http://#{campaign.url}/i/#{@invitation.token}"
+                    referer: "http://#{campaign.url}/#{I18n.locale}/i/#{@invitation.token}"
               end.to change(Visitor, :count).by(-1)
               expect { @invitee.reload }.to(
                 raise_error ActiveRecord::RecordNotFound)
@@ -118,7 +118,7 @@ RSpec.describe ApiController, type: :request do
               expect do
                 get "http://api.#{ENV['base_url']}/token.js",
                     {},
-                    referer: "http://#{campaign.url}/s/#{@sharer.share_token}"
+                    referer: "http://#{campaign.url}/#{I18n.locale}/s/#{@sharer.share_token}"
               end.to change(Visitor::Invitation, :count).by(1)
             end
           end
@@ -132,7 +132,7 @@ RSpec.describe ApiController, type: :request do
               expect do
                 get "http://api.#{ENV['base_url']}/token.js",
                     {},
-                    referer: "http://#{campaign.url}/s/#{@sharer.share_token}"
+                    referer: "http://#{campaign.url}/#{I18n.locale}/s/#{@sharer.share_token}"
               end.to change(Visitor, :count).by(0)
               expect(response.body[/\".*?\"/].gsub(/"/, '')).to(
                 eq(@current_visitor.authentication_token))

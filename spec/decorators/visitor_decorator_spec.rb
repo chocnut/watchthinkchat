@@ -12,7 +12,7 @@ describe VisitorDecorator, type: :decorator do
 
   describe '.share_url' do
     it 'returns full url' do
-      expect(visitor.url(campaign)).to eq("#{campaign.permalink}/i/#{visitor.share_token}")
+      expect(visitor.url(campaign)).to eq("#{campaign.permalink}/#{I18n.locale}/i/#{visitor.share_token}")
     end
   end
 end
