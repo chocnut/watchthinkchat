@@ -85,35 +85,13 @@ module Dashboard
           :description,
           locale_ids: [],
           engagement_player_attributes:
-            [:id,
-             :enabled,
-             :media_link,
-             :media_start,
-             :media_stop],
+            [:id, :enabled, :media_link, :media_start, :media_stop],
           share_attributes:
-            [:id,
-             :title,
-             :description,
-             :enabled,
-             :facebook,
-             :twitter,
-             :email,
-             :link],
+            [:id, :title, :description, :enabled, :facebook, :twitter, :email, :link],
           community_attributes:
-            [:id,
-             :title,
-             :url,
-             :other_campaign,
-             :child_campaign_id,
-             :description,
-             :enabled],
+            [:id, :title, :url, :other_campaign, :child_campaign_id, :description, :enabled],
           growthspace_attributes:
-            [:id,
-             :title,
-             :api_key,
-             :api_secret,
-             :description,
-             :enabled]
+            [:id, :title, :api_key, :api_secret, :description, :enabled]
         )
       end
       # rubocop:enable Metrics/MethodLength
