@@ -41,9 +41,10 @@
   <div id="content-secondary-section" class="message share-message">
     <div class="container">
       <div class="share-icons">
-        <a href="" ng-click="toggleEmailForm()"><img src="<%= asset_path("icon_email_640_00d6dc.png") %>" alt="Email" /></a>
-        <a href="" ng-click="facebookShare(visitorInfo.url)"><img src="<%= asset_path("icon_facebook_640_00d6dc.png") %>" alt="Facebook" /></a>
-        <a href="" ng-click="twitterShare(visitorInfo.url)"><img src="<%= asset_path("icon_twitter_640_00d6dc.png") %>" alt="Twitter" /></a>
+        <a href="" ng-if="campaign.share.email" ng-click="toggleEmailForm()"><img src="<%= asset_path("icon_email_640_00d6dc.png") %>" alt="Email" /></a>
+        <a href="" ng-if="campaign.share.facebook" ng-click="facebookShare(visitorInfo.url)"><img src="<%= asset_path("icon_facebook_640_00d6dc.png") %>" alt="Facebook" /></a>
+        <a href="" ng-if="campaign.share.twitter" ng-click="twitterShare(visitorInfo.url)"><img src="<%= asset_path("icon_twitter_640_00d6dc.png") %>" alt="Twitter" /></a>
+        <a href="" ng-if="campaign.share.link" ng-click="linkShare(visitorInfo.url)"><img src="<%= asset_path("icon_link.png") %>" alt="Link" /></a>
       </div>
       <h2>{{campaign.share.title}}</h2>
       <p>{{campaign.share.description}}</p>
