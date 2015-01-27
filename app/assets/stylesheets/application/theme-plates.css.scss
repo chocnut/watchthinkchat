@@ -1,5 +1,5 @@
 body {
-	background:image-url("/assets/backgroundfallingplates.jpg") #E6E6E6 no-repeat center top;
+	background: image-url('backgroundfallingplates.jpg') #E6E6E6 no-repeat center top;
 	background-size:cover;
 	background-attachment:fixed;
 }
@@ -51,7 +51,7 @@ h2 {
 input[type=text],
 input[type=email] {
 	color:#8c8c8c;
-	background: image-url("/assets/u183-sprite.png") repeat-x left top #ffffff;
+	background: image-url('u183-sprite.png') repeat-x left top #ffffff;
 }
 
 /* Header */
@@ -83,7 +83,7 @@ input[type=email] {
 }
 
 #header .back {
-	background-image: image-url("/assets/icon_backarrow.png");
+	background-image: image-url('/assets/icon_backarrow.png');
 	opacity:.6;
 }
 
@@ -165,9 +165,9 @@ input[type=email] {
 }
 
 #footer .privacy {
-	background-image: image-url("/assets/icon_privacy.png");
+	background-image: image-url('icon_privacy.png');
 }
 
 #footer .info {
-	background-image: image-url("/assets/icon_info.png");
+	background-image: image-url('icon_info.png');
 }
