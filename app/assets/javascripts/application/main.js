@@ -18,7 +18,7 @@ angular.module('chatApp', ['ngRoute', 'templates', 'ui.bootstrap', 'youtube-embe
             return $rootScope.campaign.survey.questions[questionIndex + 1];
           }]
         }
-      }).when('/jumpTo/:jumpId', {
+      }).when('/o/:jumpId', {
         template: '',
         controller: 'JumpToController',
         resolve: {
