@@ -112,6 +112,7 @@ module Dashboard
              :title,
              :api_key,
              :api_secret,
+             :description,
              :enabled]
         )
       end

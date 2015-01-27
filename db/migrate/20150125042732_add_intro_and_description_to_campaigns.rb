@@ -6,8 +6,8 @@ class AddIntroAndDescriptionToCampaigns < ActiveRecord::Migration
   end
 
   def down
-    remove_column :post_translations, :intro
-    remove_column :post_translations, :description
+    remove_column :campaign_translations, :intro
+    remove_column :campaign_translations, :description
     remove_column :campaigns, :intro
     remove_column :campaigns, :description
   end

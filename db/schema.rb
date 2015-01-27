@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150126183417) do
+ActiveRecord::Schema.define(version: 20150127030419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20150126183417) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
+    t.text     "description"
   end
 
   add_index "campaign_growthspace_translations", ["campaign_growthspace_id"], name: "index_3ea70921eeab99eb5d671fe1f0b0bab113e4e2b8", using: :btree
@@ -103,6 +104,7 @@ ActiveRecord::Schema.define(version: 20150126183417) do
     t.string   "api_secret"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "description"
   end
 
   create_table "campaign_share_translations", force: true do |t|

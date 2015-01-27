@@ -42,6 +42,12 @@
                 <%= c.input :message %>
               <% end %>
             <% end %>
+            <% if @translation.campaign.growthspace.try(:enabled) %>
+              <%= f.semantic_fields_for :growthspace, @translation.campaign.growthspace do |c| %>
+                <%= c.input :title %>
+                <%= c.input :description %>
+              <% end %>
+            <% end %>
           </div>
           <div class="panel-footer text-right">
             <%= f.submit t('translations.edit.save'), class: 'btn btn-primary' %>

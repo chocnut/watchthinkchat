@@ -4,6 +4,6 @@ class Campaign
     validates :title, presence: true, if: :enabled?
 
     # definitions
-    translates :title
+    translates :title, :description
   end
 end
