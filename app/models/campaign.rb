@@ -27,6 +27,9 @@ class Campaign < ActiveRecord::Base
           dependent: :destroy,
           class_name: 'Campaign::Growthspace',
           validate: true
+  has_many :interactions,
+           dependent: :destroy,
+           class_name: 'Visitor::Interaction'
   accepts_nested_attributes_for :engagement_player, update_only: true
   accepts_nested_attributes_for :survey, update_only: true
   accepts_nested_attributes_for :community, update_only: true

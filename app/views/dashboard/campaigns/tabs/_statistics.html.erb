@@ -1,3 +1,43 @@
 <div class="tab-pane active" id="<%= t('wicked.statistics') %>">
-<%= t 'campaigns.show.statistics.title' %>
+  <div class="row">
+    <div class="col-md-3">
+      <h5 class="text-muted">
+        <%= t 'campaigns.show.statistics.unique_visitors' %>
+      </h5>
+      <h1><%= @campaign.unique_visitors %></h1>
+    </div>
+    <div class="col-md-3">
+      <h5 class="text-muted">
+        <%= t 'campaigns.show.statistics.starting_video' %>
+      </h5>
+      <h1><%= @campaign.starting_video_percentage %>%</h1>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= @campaign.starting_video_percentage %>%;">
+          <span class="sr-only"><%= @campaign.starting_video_percentage %>% Complete</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <h5 class="text-muted">
+        <%= t 'campaigns.show.statistics.finishing_video' %>
+      </h5>
+      <h1><%= @campaign.finishing_video_percentage %>%</h1>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= @campaign.finishing_video_percentage %>%;">
+          <span class="sr-only"><%= @campaign.finishing_video_percentage %>% Complete</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <h5 class="text-muted">
+        <%= t 'campaigns.show.statistics.signing_up' %>
+      </h5>
+      <h1><%= @campaign.signing_up_percentage %>%</h1>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= @campaign.signing_up_percentage %>%;">
+          <span class="sr-only"><%= @campaign.signing_up_percentage %>% Complete</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
