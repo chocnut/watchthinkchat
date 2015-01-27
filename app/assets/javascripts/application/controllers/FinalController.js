@@ -1,4 +1,4 @@
-angular.module('chatApp').controller('FinalController', function ($scope, $window, $modal, api) {
+angular.module('chatApp').controller('FinalController', function ($scope, $rootScope, $window, $modal, api) {
   api.call('get', '/v1/visitor', null, function(data){
     $scope.visitorInfo = data;
   });
@@ -8,6 +8,14 @@ angular.module('chatApp').controller('FinalController', function ($scope, $windo
     visitorInfo.subscribe = true;
     api.call('put', '/v1/visitor', visitorInfo, function(){
       $scope.growthChallengeSubscribe = true;
+
+      api.interaction({
+        interaction: {
+          resource_id: $rootScope.campaign.growthspace.id,
+          resource_type: $rootScope.campaign.growthspace.resource_type,
+          action: 'finish'
+        }
+      });
     }, function(){
       alert('An error occurred while submitting your information.');
     });
