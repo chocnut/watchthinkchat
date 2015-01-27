@@ -53,6 +53,8 @@ module Dashboard
         :name,
         :intro,
         :description,
+        growthspace_attributes:
+          [:id, :title, :description],
         engagement_player_attributes:
           [:id, :media_link],
         share_attributes:
