@@ -4,24 +4,24 @@ fr:
       thank_you: Merci!
       continue_to: "continuer à:"
     final:
-      first_name: First Name
-      last_name: Last Name
+      first_name: Prénom
+      last_name: Nom de famille
       email: Email
-      friends_first_name: Friend's First Name
-      friends_last_name: Friend's Last Name
-      friends_email: Friend's Email
+      friends_first_name: Prénom de votre ami
+      friends_last_name: Nom de votre ami
+      friends_email: Email de votre ami
       message: Message
-      growthspace_thanks: Thank you!
-      notify_me: Notify me when friend comes to WTC
-      send_invite: Send Invite
-      learn_more: Learn More
-      submit: Submit
-      thank_you: Thank you!
+      growthspace_thanks: Merci!
+      notify_me: Prévenez-moi lorsque ami vient WTC
+      send_invite: Envoyer Invitez
+      learn_more: En savoir plus
+      submit: Soumettre
+      thank_you: Merci!
     privacy_modal:
-      privacy_policy: Privacy Policy
+      privacy_policy: Politique de confidentialité
     share_link:
-      share: Share
-      share_link: "Share the link below:"
+      share: Partager
+      share_link: "Partagez le lien ci-dessous:"
   routes:
     campaigns: campagnes
     new: nouveau
