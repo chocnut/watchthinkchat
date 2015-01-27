@@ -1,0 +1,13 @@
+<div class="tab-pane" id="<%= t('wicked.survey') %>">
+  <%= f.semantic_fields_for :survey, @translation.campaign.survey do |c| %>
+    <%= c.semantic_fields_for :questions, c.object.questions do |q| %>
+      <%= q.hidden_field :id %>
+      <%= q.input :title %>
+      <%= q.input :help_text, input_html: { rows: 5 } %>
+      <%= q.semantic_fields_for :options, q.object.options do |o| %>
+        <%= o.hidden_field :id %>
+        <%= o.input :title %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

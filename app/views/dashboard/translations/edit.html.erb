@@ -26,28 +26,55 @@
       <% Globalize.with_locale(@translation.locale.code) do %>
         <%= semantic_form_for @translation.campaign, url: translation_path(@translation) do |f| %>
           <div class="panel-content">
-            <%= f.input :name %>
-            <%= f.input :intro %>
-            <%= f.input :description %>
-            <% if @translation.campaign.engagement_player.try(:enabled) %>
-              <%= f.semantic_fields_for :engagement_player, @translation.campaign.engagement_player do |c| %>
-                <%= c.input :media_link %>
-              <% end %>
-            <% end %>
-            <% if @translation.campaign.share.try(:enabled) %>
-              <%= f.semantic_fields_for :share, @translation.campaign.share do |c| %>
-                <%= c.input :title %>
-                <%= c.input :description %>
-                <%= c.input :subject %>
-                <%= c.input :message %>
-              <% end %>
-            <% end %>
-            <% if @translation.campaign.growthspace.try(:enabled) %>
-              <%= f.semantic_fields_for :growthspace, @translation.campaign.growthspace do |c| %>
-                <%= c.input :title %>
-                <%= c.input :description %>
-              <% end %>
-            <% end %>
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="active">
+                <a href="#<%= t('wicked.basic') %>" role="tab" data-toggle="tab"><%= t('wicked.basic').titleize %></a>
+              </li>
+              <%- unless @translation.campaign.engagement_player.blank? %>
+                <li>
+                  <a href="#<%= t('wicked.engagement_player') %>" role="tab" data-toggle="tab"><%= t('wicked.engagement_player').titleize %></a>
+                </li>
+              <% end -%>
+              <%- unless @translation.campaign.share.blank? || !@translation.campaign.share.enabled? %>
+                <li>
+                  <a href="#<%= t('wicked.share') %>" role="tab" data-toggle="tab"><%= t('wicked.share').titleize %></a>
+                </li>
+              <% end -%>
+              <%- unless @translation.campaign.community.blank? || !@translation.campaign.community.enabled? %>
+                <li>
+                  <a href="#<%= t('wicked.community') %>" role="tab" data-toggle="tab"><%= t('wicked.community').titleize %></a>
+                </li>
+              <% end -%>
+              <%- unless @translation.campaign.growthspace.blank? || !@translation.campaign.growthspace.enabled? %>
+                <li>
+                  <a href="#<%= t('wicked.growthspace') %>" role="tab" data-toggle="tab"><%= t('wicked.growthspace').titleize %></a>
+                </li>
+              <% end -%>
+              <%- unless @translation.campaign.survey.blank? || !@translation.campaign.survey.enabled? %>
+                <li>
+                  <a href="#<%= t('wicked.survey') %>" role="tab" data-toggle="tab"><%= t('wicked.survey').titleize %></a>
+                </li>
+              <% end -%>
+            </ul>
+
+            <div class="tab-content">
+              <%= render partial: 'dashboard/translations/tabs/basic', locals: { f: f } %>
+              <%- unless @translation.campaign.engagement_player.blank? %>
+                <%= render partial: 'dashboard/translations/tabs/engagement_player', locals: { f: f } %>
+              <% end -%>
+              <%- unless @translation.campaign.share.blank? || !@translation.campaign.share.enabled? %>
+                <%= render partial: 'dashboard/translations/tabs/share', locals: { f: f } %>
+              <% end -%>
+              <%- unless @translation.campaign.community.blank? || !@translation.campaign.community.enabled? %>
+                <%= render partial: 'dashboard/translations/tabs/community', locals: { f: f } %>
+              <% end -%>
+              <%- unless @translation.campaign.growthspace.blank? || !@translation.campaign.growthspace.enabled? %>
+                <%= render partial: 'dashboard/translations/tabs/growthspace', locals: { f: f } %>
+              <% end -%>
+              <%- unless @translation.campaign.survey.blank? || !@translation.campaign.survey.enabled? %>
+                <%= render partial: 'dashboard/translations/tabs/survey', locals: { f: f } %>
+              <% end -%>
+            </div>
           </div>
           <div class="panel-footer text-right">
             <%= f.submit t('translations.edit.save'), class: 'btn btn-primary' %>

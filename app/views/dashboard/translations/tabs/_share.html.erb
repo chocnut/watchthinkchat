@@ -1,0 +1,9 @@
+<div class="tab-pane" id="<%= t('wicked.share') %>">
+  <%= f.semantic_fields_for :share, @translation.campaign.share do |c| %>
+    <%= c.hidden_field :id %>
+    <%= c.input :title %>
+    <%= c.input :description, input_html: { rows: 5 } %>
+    <%= c.input :subject %>
+    <%= c.input :message %>
+  <% end %>
+</div>
