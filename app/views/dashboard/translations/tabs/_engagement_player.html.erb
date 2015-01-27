@@ -1,0 +1,6 @@
+<div class="tab-pane" id="<%= t('wicked.engagement_player') %>">
+  <%= f.semantic_fields_for :engagement_player, @translation.campaign.engagement_player do |c| %>
+    <%= c.hidden_field :id %>
+    <%= c.input :media_link %>
+  <% end %>
+</div>

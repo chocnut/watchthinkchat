@@ -1,0 +1,8 @@
+<div class="tab-pane" id="<%= t('wicked.community') %>">
+  <%= f.semantic_fields_for :community, @translation.campaign.community do |c| %>
+    <%= c.input :url %>
+    <%= c.input :description, input_html: { rows: 5 } %>
+    <%= c.input :title %>
+    <%= c.hidden_field :id %>
+  <% end %>
+</div>

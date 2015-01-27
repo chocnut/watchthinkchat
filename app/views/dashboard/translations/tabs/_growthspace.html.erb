@@ -1,0 +1,7 @@
+<div class="tab-pane" id="<%= t('wicked.growthspace') %>">
+  <%= f.semantic_fields_for :growthspace, @translation.campaign.growthspace do |c| %>
+    <%= c.hidden_field :id %>
+    <%= c.input :title %>
+    <%= c.input :description, input_html: { rows: 5 } %>
+  <% end %>
+</div>

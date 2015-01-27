@@ -54,26 +54,17 @@ module Dashboard
         :intro,
         :description,
         engagement_player_attributes:
-          [:id,
-           :enabled,
-           :media_link,
-           :media_start,
-           :media_stop],
+          [:id, :media_link],
         share_attributes:
-          [:id,
-           :title,
-           :description,
-           :subject,
-           :message,
-           :enabled],
+          [:id, :title, :description, :subject, :message],
         community_attributes:
-          [:id,
-           :title,
-           :url,
-           :other_campaign,
-           :child_campaign_id,
-           :description,
-           :enabled]
+          [:id, :title, :url, :description],
+        survey_attributes:
+          [questions_attributes:
+            [:id, :title, :help_text, options_attributes:
+              [:id, :title]
+            ]
+          ]
       )
     end
     # rubocop:enable Metrics/MethodLength
