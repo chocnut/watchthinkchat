@@ -7,7 +7,7 @@ class Visitor
     decorates_association :campaign
 
     def url
-      "#{campaign.permalink}/i/#{token}"
+      "#{campaign.permalink}/#{I18n.locale}/i/#{token}"
     end
   end
 end

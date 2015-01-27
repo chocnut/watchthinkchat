@@ -25,7 +25,7 @@ class ApiController < ApplicationController
   end
 
   def visitor_from_share
-    share = URI(request.referer).path.match(%r{/s/(?<token>.*)/?})
+    share = URI(request.referer).path.match(%r{/(?<locale>.*)/s/(?<token>.*)/?})
     return unless share
     load_campaign
     inviter = Visitor::Inviter.find_by(share_token: share[:token])
@@ -38,7 +38,7 @@ class ApiController < ApplicationController
   end
 
   def visitor_from_invitation
-    invite = URI(request.referer).path.match(%r{/i/(?<token>.*)/?})
+    invite = URI(request.referer).path.match(%r{/(?<locale>.*)/i/(?<token>.*)/?})
     return unless invite
     unless visitor_signed_in?
       return Visitor::Invitation.find_by(token: invite[:token]).try(:invitee)

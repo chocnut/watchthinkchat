@@ -79,6 +79,8 @@ WatchThinkChat::Application.routes.draw do
 
   localized do
     root 'site#index'
+    get '/i/:invite_code', to: 'site#index'
+    get '/s/:share_code', to: 'site#index'
   end
 
   root to: redirect("#{I18n.locale}/"), as: :no_locale_visitor_root

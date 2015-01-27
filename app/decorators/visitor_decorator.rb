@@ -6,7 +6,7 @@ class VisitorDecorator < Draper::Decorator
   end
 
   def url(campaign)
-    "#{campaign.try(:decorate).try(:permalink)}/i/#{share_token}"
+    "#{campaign.try(:decorate).try(:permalink)}/#{I18n.locale}/i/#{share_token}"
   end
 
   def content(campaign)
