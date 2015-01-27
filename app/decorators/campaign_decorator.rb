@@ -11,30 +11,33 @@ class CampaignDecorator < Draper::Decorator
   end
 
   def unique_visitors
-    1000
+    campaign.interactions.group(:visitor_id).count.size
   end
 
   def starting_video
-    86
+    campaign.interactions.where(resource_type: 'Campaign::EngagementPlayer').start.count
   end
 
   def starting_video_percentage
+    return 0 if unique_visitors == 0
     ((starting_video.to_d / unique_visitors.to_d) * 100).to_i
   end
 
   def finishing_video
-    90
+    campaign.interactions.where(resource_type: 'Campaign::EngagementPlayer').finish.count
   end
 
   def finishing_video_percentage
+    return 0 if unique_visitors == 0
     ((finishing_video.to_d / unique_visitors.to_d) * 100).to_i
   end
 
   def signing_up
-    500
+    0
   end
 
   def signing_up_percentage
+    return 0 if unique_visitors == 0
     ((signing_up.to_d / unique_visitors.to_d) * 100).to_i
   end
 end
