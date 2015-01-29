@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127030419) do
+ActiveRecord::Schema.define(version: 20150129203119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -251,21 +251,16 @@ ActiveRecord::Schema.define(version: 20150127030419) do
   add_index "permissions", ["user_id"], name: "index_permissions_on_user_id", using: :btree
 
   create_table "translations", force: true do |t|
-    t.string   "content"
-    t.integer  "resource_id"
-    t.integer  "campaign_id"
-    t.integer  "locale_id"
-    t.string   "field"
+    t.string   "locale"
+    t.string   "key"
+    t.text     "value"
+    t.text     "interpolations"
+    t.boolean  "is_proc",        default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "resource_type"
-    t.boolean  "base",          default: false
   end
 
-  add_index "translations", ["campaign_id"], name: "index_translations_on_campaign_id", using: :btree
-  add_index "translations", ["field"], name: "index_translations_on_field", using: :btree
-  add_index "translations", ["locale_id"], name: "index_translations_on_locale_id", using: :btree
-  add_index "translations", ["resource_id"], name: "index_translations_on_resource_id", using: :btree
+  add_index "translations", ["locale", "key"], name: "index_translations_on_locale_and_key", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: ""
