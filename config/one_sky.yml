@@ -1,0 +1,4 @@
+api_key:     <%= ENV["ONESKY_API_KEY"] %>
+api_secret:  <%= ENV["ONESKY_API_SECRET"] %>
+project:     <%= ENV["ONESKY_PROJECT"] %>
+platform_id: <%= ENV["ONESKY_PLATFORM_ID"] %>

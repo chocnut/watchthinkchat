@@ -60,6 +60,7 @@ gem 'draper'
 gem 'globalize', '~> 4.0.2'
 gem 'route_translator'
 gem 'rails-i18n', '~> 4.0.0'
+gem 'i18n-one_sky'
 gem 'countries_and_languages', :require => 'countries_and_languages/rails'
 gem 'activeresource'
 
