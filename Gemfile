@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.1.4'
+ruby '2.1.5'
 
 # Core
-gem 'rails', '4.1.6'
+gem 'rails', '4.1.8'
 gem 'rails-observers'
 
 # Data Storage
@@ -21,13 +21,12 @@ gem 'cancancan'
 gem 'role_model'
 
 # Public API
-gem 'pusher'
 gem 'rest-client'
 gem 'platform-api'
 gem 'versionist'
 
 # Assets CSS
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails'
 gem 'font-awesome-rails'
 gem 'bootstrap-sass'
 
@@ -39,7 +38,7 @@ gem 'angular-ui-rails'
 gem 'angular-ui-bootstrap-rails'
 gem 'select2-rails'
 gem 'coffee-rails'
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 gem 'lodash-rails'
 gem 'rabl'
 gem 'oj'
@@ -57,16 +56,13 @@ gem 'wicked'
 gem 'acts_as_list'
 gem 'active_type'
 gem 'draper'
-gem 'globalize', '~> 4.0.2'
+gem 'globalize'
 gem 'route_translator'
-gem 'rails-i18n', '~> 4.0.0'
-gem 'i18n-one_sky'
+gem 'rails-i18n'
+gem 'i18n-active_record', github: 'svenfuchs/i18n-active_record'
+gem 'i18n-one_sky', path: 'vendor/i18n-one_sky-ruby'
 gem 'countries_and_languages', :require => 'countries_and_languages/rails'
 gem 'activeresource'
-
-# Active Admin
-gem 'activeadmin', github: 'gregbell/active_admin'
-gem 'ransack'
 
 group :test do
   gem 'database_cleaner'
@@ -97,7 +93,6 @@ group :test, :development do
 end
 
 group :development do
-  gem 'rails-footnotes', '>= 3.7.9'
   gem 'quiet_assets'
   gem 'guard'
   gem 'guard-rspec', require: false

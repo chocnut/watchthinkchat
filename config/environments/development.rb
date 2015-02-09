@@ -40,6 +40,8 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { address: '127.0.0.1', port: 1025 }
+  config.action_controller.asset_host = 'http://app.dev.watchthinkchat.com:5000'
+  config.action_mailer.asset_host = config.action_controller.asset_host
 
   BetterErrors::Middleware.allow_ip! ENV['TRUSTED_IP'] if ENV['TRUSTED_IP']
 end

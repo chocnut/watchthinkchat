@@ -1,0 +1,28 @@
+### <%= t 'invite_mailer.header', inviter_name: @inviter.try(:name), campaign_name: @campaign.try(:name), locale_name: @locale.try(:name) %>
+------------------------------------------
+
+<%= t 'invite_mailer.salutation', invitee_name: @user.first_name %>
+<%= t 'invite_mailer.subtitle' %>
+
+<%= t 'invite_mailer.paragraph_a', campaign_name: @campaign.try(:name), locale_name: @locale.try(:name) %>
+
+<%= t 'invite_mailer.paragraph_b' %>
+
+<%= t('invite_mailer.start_translating') %>
+[<%= accept_invitation_url(@resource, invitation_token: @resource.raw_invitation_token) %>]
+
+<%= t 'invite_mailer.paragraph_c' %>
+
+<%= t 'invite_mailer.closing' %>
+
+
+<%= @inviter.try(:name) %>
+------------------------------------------
+<%= t 'invite_mailer.footer.twitter' %> [https://twitter.com/indigitous]
+<%= t 'invite_mailer.footer.facebook' %> [https://facebook.com/indigitous]
+<%= t 'invite_mailer.footer.google' %> [https://plus.google.com/107252654086575328224/about]
+------------------------------------------
+<%= t 'invite_mailer.footer.copyright', year: Time.now.year %>
+<%= t 'invite_mailer.footer.mailing_address' %> contact@watchthinkchat.com
+<%= t 'invite_mailer.footer.reason', inviter_name: @inviter.try(:first_name) %>
+<%= t 'invite_mailer.footer.is_error' %> contact@watchthinkchat.com

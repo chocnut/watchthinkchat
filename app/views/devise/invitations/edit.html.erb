@@ -1,0 +1,17 @@
+<%= semantic_form_for(resource, as: resource_name, url: invitation_path(resource_name), html: {class: 'form-signin'}) do |f| %>
+  <h2 class="form-signin-heading"><%= image_tag 'wtclogo.png' %></h2>
+
+  <div class="login-wrap">
+    <div class="user-login-info">
+      <%= devise_error_messages! %>
+      <%= f.hidden_field :invitation_token %>
+      <%= f.password_field :password, autocomplete: "off", placeholder: t('user.password'), class: 'form-control' %>
+      <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: t('user.confirm_password'), class: 'form-control' %>
+    </div>
+    <%= f.submit t('user.sign_up'), class:"btn btn-lg btn-login btn-block" %>
+    <br />
+    <div class="registration">
+      <a href="http://www.watchthinkchat.com/">← <%= t('user.back') %></a>
+    </div>
+  </div>
+<% end %>
