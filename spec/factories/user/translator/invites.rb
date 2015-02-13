@@ -5,5 +5,6 @@ FactoryGirl.define do
     last_name { Faker::Name.last_name }
     campaign
     locale
+    user
   end
 end
