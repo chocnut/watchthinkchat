@@ -11,6 +11,12 @@ describe 'Campaign Builder', type: :feature, js: true do
     login_as(manager, scope: :user)
     base_locale.save!
     alternate_locale.save!
+    page.driver.allow_url "app.#{ENV['base_url']}.lvh.me"
+    page.driver.allow_url 'use.typekit.net'
+    page.driver.allow_url 'www.google.com'
+    page.driver.allow_url 's.ytimg.com'
+    page.driver.allow_url 'www.youtube.com'
+    page.driver.allow_url "app.#{ENV['base_url']}"
   end
 
   feature 'build campaign' do

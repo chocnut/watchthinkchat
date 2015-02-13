@@ -76,6 +76,7 @@ group :test do
   gem 'capybara-angular'
   gem 'launchy'
   gem 'vcr'
+  gem 'formulaic'
 end
 
 group :test, :development do
