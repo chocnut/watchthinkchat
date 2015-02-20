@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe Visitor, type: :model do
   # associations
@@ -11,15 +11,15 @@ RSpec.describe Visitor, type: :model do
   it { is_expected.to have_db_column(:notify_me_on_share).of_type(:boolean) }
   # definitions
   describe '#as' do
-    let(:visitor) { create(:visitor) }
+    let(:visitor) { build_stubbed(:visitor) }
     context ':inviter' do
       it 'returns inviter object' do
-        expect(visitor.as(:inviter)).to be_a(Visitor::Inviter)
+        expect(visitor.as(:inviter)).to be_a(VisitorInvite::Inviter)
       end
     end
     context ':invitee' do
       it 'returns invitee object' do
-        expect(visitor.as(:invitee)).to be_a(Visitor::Invitee)
+        expect(visitor.as(:invitee)).to be_a(VisitorInvite::Invitee)
       end
     end
   end

@@ -27,10 +27,10 @@ class ApiController < ApplicationController
   def visitor_from_share(share = parse_request('s'))
     return unless share
     load_campaign
-    inviter = Visitor::Inviter.find_by(share_token: share[:token])
+    inviter = VisitorInvite::Inviter.find_by(share_token: share[:token])
     return unless inviter
     Visitor::Invitation.create(
-      invitee: current_visitor.try(:as, :invitee) || Visitor::Invitee.create,
+      invitee: current_visitor.try(:as, :invitee) || VisitorInvite::Invitee.create,
       inviter: inviter,
       campaign: @campaign
     ).invitee.becomes Visitor

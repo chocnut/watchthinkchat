@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe User, type: :model do
   # associations
@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
   end
   # definitions
   describe '#as' do
-    let(:user) { create(:user) }
+    let(:user) { build_stubbed(:user) }
     context ':manager' do
       context 'is manager' do
         it 'returns manager object' do

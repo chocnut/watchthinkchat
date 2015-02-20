@@ -1,11 +1,11 @@
 class CampaignObserver < ActiveRecord::Observer
   def before_validation(campaign)
     validate_domain(campaign)
-    add_domain(campaign) if campaign.errors.empty?
   end
 
   def after_validation(campaign)
-    remove_domain(campaign) unless campaign.errors.empty?
+    return remove_domain(campaign) unless campaign.errors.empty?
+    add_domain(campaign)
   end
 
   def before_destroy(campaign)

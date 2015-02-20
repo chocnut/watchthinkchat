@@ -1,4 +1,3 @@
-require 'campaign/survey'
 class Campaign
   class Survey
     class QuestionDecorator < Draper::Decorator

@@ -1,11 +1,11 @@
-class Visitor
+module VisitorInvite
   class Invitee
     class Email < ActiveType::Object
       attribute :subject, :string
       attribute :message, :string
       attribute :invitation_id, :integer
 
-      belongs_to :invitation
+      belongs_to :invitation, class_name: 'Visitor::Invitation'
 
       validates :subject, presence: true
       validates :message, presence: true

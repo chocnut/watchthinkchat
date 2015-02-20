@@ -6,6 +6,7 @@ class Campaign
     # validations
     validates :other_campaign,
               inclusion: [true, false],
+              presence: true,
               if: -> { enabled? }
     validates :child_campaign,
               presence: true,

@@ -1,6 +1,6 @@
-require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe Visitor::Invitee, type: :model do
+RSpec.describe VisitorInvite::Invitee, type: :model do
   # associations
   it { is_expected.to have_many(:invitations) }
   it { is_expected.to have_db_column(:notify_inviter).of_type(:boolean) }

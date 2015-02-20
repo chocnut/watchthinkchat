@@ -1,6 +1,4 @@
-require 'visitor'
-require 'visitor/invitee'
-class Visitor
+module VisitorInvite
   class Invitee
     class EmailDecorator < Draper::Decorator
       delegate_all

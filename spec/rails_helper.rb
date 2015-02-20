@@ -1,31 +1,17 @@
-if ENV['CODECLIMATE_REPO_TOKEN']
-  require 'codeclimate-test-reporter'
-  CodeClimate::TestReporter.start
-else
-  require 'simplecov'
-  SimpleCov.start 'rails'
-end
+require 'common_helper'
 
-ENV['RAILS_ENV'] = 'test'
-
-require File.expand_path('../../config/environment', __FILE__)
-
-require 'rspec/rails'
 require 'capybara/rspec'
-require 'capybara-screenshot/rspec'
-require 'shoulda/matchers'
 require 'draper/test/rspec_integration'
+require 'capybara/poltergeist'
 
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |file| require file }
-Dir['../../spec/factories/*.rb'].each { |file| require_relative file }
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+ActiveRecord::Migration.maintain_test_schema!
 
 module Features
-  # Extend this module in spec/support/features/*.rb
   include Formulaic::Dsl
 end
 
 RSpec.configure do |config|
-  config.infer_base_class_for_anonymous_controllers = false
   config.infer_spec_type_from_file_location!
   config.use_transactional_fixtures = false
   config.include FactoryGirl::Syntax::Methods
@@ -36,7 +22,17 @@ RSpec.configure do |config|
   config.include IntegrationHelpers, type: :feature
   config.include Warden::Test::Helpers, type: :feature
   config.include Capybara::Angular::DSL, type: :feature
+  config.before do
+    ActiveRecord::Base.observers.disable :all
+  end
 end
 
-ActiveRecord::Migration.maintain_test_schema!
-Capybara.javascript_driver = :webkit
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, js_errors: false)
+end
+
+Capybara.configure do |config|
+  config.always_include_port = true
+  config.javascript_driver = :poltergeist
+  config.server_port = 7171
+end

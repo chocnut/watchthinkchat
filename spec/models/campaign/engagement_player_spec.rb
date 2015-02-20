@@ -1,17 +1,15 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe Campaign::EngagementPlayer, type: :model do
-  it 'is invalid without an enabled' do
-    expect(build(:engagement_player, enabled: nil)).not_to be_valid
+  it { is_expected.to belong_to :campaign }
+  it { is_expected.to validate_presence_of :campaign }
+  it { is_expected.to validate_presence_of :enabled }
+  context 'if enabled' do
+    before { subject.stub(:enabled?) { true } }
+    it { is_expected.to validate_presence_of(:media_link) }
   end
-  it 'is invalid without a media link' do
-    expect(build(:engagement_player, media_link: nil)).not_to be_valid
-  end
-  it 'is invalid without a campaign' do
-    expect(build(:engagement_player, campaign: nil)).not_to be_valid
-  end
-  it 'creates a translation object when media_link is set' do
-    @engagement_player = create(:engagement_player)
-    expect(@engagement_player.translations.where media_link: @engagement_player.media_link).to exist
+  context 'if disabled' do
+    before { subject.stub(:enabled?) { false } }
+    it { is_expected.to_not validate_presence_of(:media_link) }
   end
 end

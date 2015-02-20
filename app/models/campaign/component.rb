@@ -8,5 +8,6 @@ class Campaign
     # validations
     validates :campaign, presence: true
     validates :enabled, inclusion: [true, false]
+    validates :enabled, presence: true
   end
 end

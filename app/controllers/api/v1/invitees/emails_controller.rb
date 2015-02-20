@@ -12,7 +12,7 @@ module Api
         protected
 
         def build_email
-          @email ||= Visitor::Invitee::Email.new
+          @email ||= VisitorInvite::Invitee::Email.new
           @email.attributes = email_params
         end
 

@@ -1,27 +1,16 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe Campaign::Survey::Question, type: :model do
-  it 'is invalid without survey' do
-    expect(build(:question, survey: nil)).not_to be_valid
+  it { is_expected.to validate_presence_of :survey }
+  it { is_expected.to validate_presence_of :title }
+  it { is_expected.to have_many(:options).dependent(:destroy) }
+  it do
+    is_expected.to accept_nested_attributes_for(:options).allow_destroy(true)
   end
-  it 'is invalid without title' do
-    expect(build(:question, title: nil)).not_to be_valid
-  end
-  it 'is destroyed when survey is destroyed' do
-    @question = create(:question)
-    @question.survey.destroy!
-    expect { @question.reload }.to raise_error(ActiveRecord::RecordNotFound)
-  end
-  it 'generates a unique code' do
-    @question = create(:question)
-    expect(@question.code).to eq(Base62.encode(@question.id))
-  end
-  it 'creates a translation object when title is set' do
-    @question = create(:question)
-    expect(@question.translations.where title: @question.title).to exist
-  end
-  it 'creates a translation object when help_text is set' do
-    @question = create(:question)
-    expect(@question.translations.where help_text: @question.help_text).to exist
+  describe '#code' do
+    before { subject.stub(:id) { 123 } }
+    it 'returns correct code' do
+      expect(subject.code).to eq(Base62.encode(subject.id))
+    end
   end
 end

@@ -7,16 +7,10 @@ describe 'Campaign Builder', type: :feature, js: true do
 
   before do
     Warden.test_mode!
-    Capybara.app_host = "http://app.#{ENV['base_url']}.lvh.me:7171"
+    Capybara.app_host = "http://app.#{ENV['base_url']}.lvh.me"
     login_as(manager, scope: :user)
     base_locale.save!
     alternate_locale.save!
-    page.driver.allow_url "app.#{ENV['base_url']}.lvh.me"
-    page.driver.allow_url 'use.typekit.net'
-    page.driver.allow_url 'www.google.com'
-    page.driver.allow_url 's.ytimg.com'
-    page.driver.allow_url 'www.youtube.com'
-    page.driver.allow_url "app.#{ENV['base_url']}"
   end
 
   feature 'build campaign' do
@@ -28,20 +22,20 @@ describe 'Campaign Builder', type: :feature, js: true do
              resource: campaign)
     end
     scenario 'basic page' do
-      expect { visit new_campaign_path(locale: :en) }.to change(Campaign, :count).by(1)
+      expect { visit "en#{new_campaign_path}" }.to change(Campaign, :count).by(1)
       campaign_attributes = attributes_for(:campaign)
       fill_in 'campaign[name]', with: campaign_attributes[:name]
       select 'French', from: 'campaign[locale_id]'
       fill_in 'campaign[url]', with: campaign_attributes[:url]
       choose 'CNAME address'
       click_button 'Next'
-      expect(current_path).to eq(campaign_build_path(Campaign.last.id,
+      expect(current_path).to eq(campaign_build_path(Campaign.last,
                                                      :engagement_player))
     end
     scenario 'engagement player page' do
       campaign.engagement_player!
       engagement_player_attributes = attributes_for(:engagement_player)
-      visit campaign_build_path(campaign, :engagement_player, locale: :en)
+      visit campaign_build_path(campaign, :engagement_player)
       choose 'On'
       click_button 'Next'
       find '#campaign_engagement_player_attributes_media_link.error'
@@ -58,7 +52,7 @@ describe 'Campaign Builder', type: :feature, js: true do
     scenario 'growthspace page' do
       campaign.growthspace!
       growthspace_attributes = attributes_for(:growthspace)
-      visit campaign_build_path(campaign, :growthspace, locale: :en)
+      visit campaign_build_path(campaign, :growthspace)
       choose 'On'
       click_button 'Next'
       find '#campaign_growthspace_attributes_title.error'

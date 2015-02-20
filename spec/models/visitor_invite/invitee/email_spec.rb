@@ -1,6 +1,6 @@
-require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe Visitor::Invitee::Email, type: :model do
+RSpec.describe VisitorInvite::Invitee::Email, type: :model do
   subject(:email) { build(:invitee_email) }
   # validations
   it { is_expected.to validate_presence_of(:invitation) }

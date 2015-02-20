@@ -71,7 +71,7 @@ group :test do
   gem 'simplecov'
   gem 'faker'
   gem 'capybara'
-  gem 'capybara-webkit'
+  gem 'poltergeist'
   gem 'capybara-screenshot'
   gem 'capybara-angular'
   gem 'launchy'
@@ -94,6 +94,7 @@ group :test, :development do
 end
 
 group :development do
+  gem 'parallel_tests'
   gem 'quiet_assets'
   gem 'guard'
   gem 'guard-rspec', require: false

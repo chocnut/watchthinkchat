@@ -1,5 +1,3 @@
-require 'campaign/survey'
-require 'campaign/survey/question'
 class Campaign
   class Survey
     class Question
