@@ -3,7 +3,6 @@ require 'spec_helper'
 RSpec.describe Campaign::EngagementPlayer, type: :model do
   it { is_expected.to belong_to :campaign }
   it { is_expected.to validate_presence_of :campaign }
-  it { is_expected.to validate_presence_of :enabled }
   context 'if enabled' do
     before { subject.stub(:enabled?) { true } }
     it { is_expected.to validate_presence_of(:media_link) }

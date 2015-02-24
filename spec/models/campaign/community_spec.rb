@@ -3,10 +3,8 @@ require 'spec_helper'
 RSpec.describe Campaign::Community, type: :model do
   it { is_expected.to belong_to :campaign }
   it { is_expected.to validate_presence_of :campaign }
-  it { is_expected.to validate_presence_of :enabled }
   context 'if enabled' do
     before { subject.stub(:enabled?) { true } }
-    it { is_expected.to validate_presence_of(:other_campaign) }
     context 'if other_campaign' do
       before { subject.stub(:other_campaign?) { true } }
       it { is_expected.to validate_presence_of :child_campaign }

@@ -94,7 +94,7 @@ group :test, :development do
 end
 
 group :development do
-  gem 'parallel_tests'
+  gem 'rack-mini-profiler'
   gem 'quiet_assets'
   gem 'guard'
   gem 'guard-rspec', require: false

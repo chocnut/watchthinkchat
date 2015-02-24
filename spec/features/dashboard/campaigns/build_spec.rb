@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Campaign Builder', type: :feature, js: true do
+describe 'Campaign Builder', type: :feature do
   let(:manager) { create(:manager) }
   let(:base_locale) { create(:locale, name: 'base', code: 'fr') }
   let(:alternate_locale) { create(:locale, name: 'available', code: 'de') }
@@ -22,7 +22,7 @@ describe 'Campaign Builder', type: :feature, js: true do
              resource: campaign)
     end
     scenario 'basic page' do
-      expect { visit "en#{new_campaign_path}" }.to change(Campaign, :count).by(1)
+      expect { visit new_campaign_path }.to change(Campaign, :count).by(1)
       campaign_attributes = attributes_for(:campaign)
       fill_in 'campaign[name]', with: campaign_attributes[:name]
       select 'French', from: 'campaign[locale_id]'
@@ -40,7 +40,7 @@ describe 'Campaign Builder', type: :feature, js: true do
       click_button 'Next'
       find '#campaign_engagement_player_attributes_media_link.error'
       fill_in 'campaign[engagement_player_attributes][media_link]',
-              with: engagement_player_attributes[:media_link]
+              with: "#{engagement_player_attributes[:media_link]}"
       fill_in 'campaign[engagement_player_attributes][media_start]',
               with: '0'
       fill_in 'campaign[engagement_player_attributes][media_stop]',
@@ -61,21 +61,6 @@ describe 'Campaign Builder', type: :feature, js: true do
       click_button 'Next'
       expect(current_path).to eq(campaign_build_path(campaign,
                                                      :survey))
-    end
-    scenario 'survey page' do
-      campaign.survey!
-      visit campaign_build_path(campaign, :survey)
-      expect do
-        wait_until_angular_ready
-        fill_in 'new_question_title', with: 'Will you follow me?'
-        fill_in 'new_option_text', with: 'Yes'
-        select 'Continue', from: 'new_conditional'
-        click_button 'Add Question'
-        page
-      end.to change(Campaign::Survey::Question, :count).by(1)
-      click_button 'Next'
-      expect(current_path).to eq(campaign_build_path(campaign,
-                                                     :share))
     end
     scenario 'share page' do
       campaign.share!
@@ -114,6 +99,30 @@ describe 'Campaign Builder', type: :feature, js: true do
       click_button 'Next'
       expect(current_path).to eq(campaign_build_path(campaign,
                                                      :opened))
+    end
+  end
+  feature 'build survey', js: true do
+    given(:campaign) { create(:campaign) }
+    background do
+      create(:permission,
+             user: manager,
+             state: Permission.states[:owner],
+             resource: campaign)
+    end
+    scenario 'survey page' do
+      campaign.survey!
+      visit campaign_build_path(campaign, :survey)
+      expect do
+        wait_until_angular_ready
+        fill_in 'new_question_title', with: 'Will you follow me?'
+        fill_in 'new_option_text', with: 'Yes'
+        select 'Continue', from: 'new_conditional'
+        click_button 'Add Question'
+        sleep 1
+      end.to change(Campaign::Survey::Question, :count).by(1)
+      click_button 'Next'
+      expect(current_path).to eq(campaign_build_path(campaign,
+                                                     :share))
     end
   end
 
