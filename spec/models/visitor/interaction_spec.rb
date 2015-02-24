@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe Visitor::Interaction, type: :model do
   subject { build_stubbed(:interaction) }

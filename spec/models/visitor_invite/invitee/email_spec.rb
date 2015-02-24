@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe VisitorInvite::Invitee::Email, type: :model do
   subject(:email) { build(:invitee_email) }

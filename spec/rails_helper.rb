@@ -5,14 +5,14 @@ else
   require 'simplecov'
   SimpleCov.start 'rails'
 end
-
-require 'common_helper'
-
+require 'shoulda/matchers'
+require 'rspec/rails'
 require 'capybara/rspec'
 require 'draper/test/rspec_integration'
 require 'capybara/poltergeist'
-
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+Dir['../../spec/factories/*.rb'].each { |file| require_relative file }
+
 ActiveRecord::Migration.maintain_test_schema!
 
 module Features
