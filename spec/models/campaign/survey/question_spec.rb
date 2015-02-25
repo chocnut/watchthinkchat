@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe Campaign::Survey::Question, type: :model do
   it { is_expected.to validate_presence_of :survey }
