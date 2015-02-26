@@ -2,16 +2,15 @@ require 'campaign'
 class Campaign
   class CommunityDecorator < Draper::Decorator
     decorates Campaign::Community
+    decorates_association :child_campaign
     delegate_all
 
     def permalink
-      return child_campaign.decorate.permalink if other_campaign?
-      url
+      child_campaign.try(:permalink) || url
     end
 
     def display_title
-      return child_campaign.name if other_campaign?
-      title
+      child_campaign.try(:name) || title
     end
   end
 end

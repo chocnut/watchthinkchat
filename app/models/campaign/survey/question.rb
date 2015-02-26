@@ -6,9 +6,6 @@ class Campaign
       has_many :options, dependent: :destroy
       accepts_nested_attributes_for :options, allow_destroy: true
 
-      # callbacks
-      after_save :generate_code, on: :create
-
       # validations
       validates :survey, presence: true
       validates :title, presence: true
@@ -19,16 +16,14 @@ class Campaign
       default_scope { order('position ASC') }
       translates :title, :help_text
 
+      delegate :campaign, to: :survey
+
       def options_attributes
         options
       end
 
-      delegate :campaign, to: :survey
-
-      protected
-
-      def generate_code
-        update_column(:code, Base62.encode(id))
+      def code
+        Base62.encode id
       end
     end
   end

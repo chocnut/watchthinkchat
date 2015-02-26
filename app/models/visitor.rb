@@ -4,7 +4,7 @@ class Visitor < ActiveRecord::Base
   devise :database_authenticatable
 
   def as(role)
-    becomes "Visitor::#{role.to_s.camelize}".constantize
+    becomes "VisitorInvite::#{role.to_s.camelize}".constantize
   end
 
   private

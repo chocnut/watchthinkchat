@@ -1,7 +1,7 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe Visitor::Interaction, type: :model do
-  subject { create(:interaction) }
+  subject { build_stubbed(:interaction) }
   # associations
   it { is_expected.to belong_to(:campaign) }
   it { is_expected.to have_db_index(:campaign_id) }
@@ -23,9 +23,8 @@ RSpec.describe Visitor::Interaction, type: :model do
                                                   :click])
   end
   it { is_expected.to serialize(:data) }
-  it 'only allows interactions where resources are related to campaigns' do
-    @interaction = build(:interaction)
-    @interaction.resource = create(:campaign)
-    expect(@interaction).to_not be_valid
+  context 'if resource not related to campaign' do
+    before { subject.stub(:resource) { build_stubbed(:campaign) } }
+    it { is_expected.to_not be_valid }
   end
 end
