@@ -1,3 +1,4 @@
+require 'visitor_invite/invitee'
 module VisitorInvite
   class Invitee
     class EmailDecorator < Draper::Decorator
