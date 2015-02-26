@@ -1,4 +1,3 @@
-require 'visitor'
 class Visitor
   class InvitationDecorator < Draper::Decorator
     delegate_all

@@ -124,6 +124,23 @@ en:
         locale: Language
         translators: Translators
         close: close
+  invite_mailer:
+    header: '%{inviter_name} has invited you to translate %{campaign_name} into %{locale_name}'
+    salutation: 'Hey %{invitee_name},'
+    subtitle: 'Come help change the world!'
+    start_translating: Start Translating
+    paragraph_a: "I've invited you to translate %{campaign_name} into %{locale_name}."
+    paragraph_b: "To start translating, click the link below. You'll have to set a password. Once you've signed in, you will be able to translate the campaign."
+    paragraph_c: "To translate, click on each of the tabs at the top, replace the original text with your proper translation, then hit the 'Save Translations' button."
+    closing: Thanks for your help,
+    footer:
+      twitter: Follow on Twitter
+      facebook: Like on Facebook
+      google: Follow on Google+
+      copyright: 'Copyright © %{year} Indigitous, All rights reserved.'
+      mailing_address: 'Our mailing address is:'
+      reason: "You received this email because %{inviter_name} thought you'd make a great translator."
+      is_error: "If this is an error please send an email to:"
   activerecord:
     attributes:
       campaign:

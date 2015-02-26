@@ -72,9 +72,9 @@ RSpec.describe ApiController, type: :request do
               expect { @invitee.reload }.to(
                 raise_error ActiveRecord::RecordNotFound)
               expect(@invitation.reload.invitee).to(
-                eq(Visitor::Invitee.first))
+                eq(Visitor.first))
               expect(response.body[/\".*?\"/].gsub(/"/, '')).to(
-                eq(Visitor::Invitee.first.authentication_token))
+                eq(VisitorInvite::Invitee.first.authentication_token))
             end
           end
         end

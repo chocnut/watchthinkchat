@@ -1,6 +1,4 @@
 WatchThinkChat::Application.routes.draw do
-  ActiveAdmin.routes(self)
-
   constraints DomainConstraint.new(["app.#{ENV['base_url']}",
                                     "app.#{ENV['base_url']}.lvh.me"]) do
     devise_for :users, skip: [:session, :password, :registration, :confirmation], controllers: {
@@ -46,6 +44,7 @@ WatchThinkChat::Application.routes.draw do
       root to: redirect("#{I18n.locale}/#{I18n.t('routes.sign_in')}"), as: :unauthenticated_root
     end
     root to: redirect(I18n.locale.to_s), as: :no_locale_root
+    match '*path', to: redirect("#{I18n.locale}/#{I18n.t('routes.sign_in')}"), via: :all
   end
 
   constraints DomainConstraint.new(["api.#{ENV['base_url']}",

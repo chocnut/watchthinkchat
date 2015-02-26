@@ -1,10 +1,10 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe Campaign::Survey, type: :model do
-  it 'is invalid without an enabled' do
-    expect(build(:survey, enabled: nil)).not_to be_valid
-  end
-  it 'is invalid without campaign' do
-    expect(build(:survey, campaign: nil)).not_to be_valid
+  it { is_expected.to belong_to :campaign }
+  it { is_expected.to validate_presence_of :campaign }
+  it { is_expected.to have_many(:questions).dependent(:destroy) }
+  it do
+    is_expected.to accept_nested_attributes_for(:questions).allow_destroy(true)
   end
 end

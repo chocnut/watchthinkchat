@@ -1,8 +1,8 @@
 class Visitor
   class Invitation < ActiveRecord::Base
     belongs_to :campaign
-    belongs_to :invitee
-    belongs_to :inviter
+    belongs_to :invitee, class_name: 'Visitor'
+    belongs_to :inviter, class_name: 'Visitor'
     before_validation :generate_token, on: :create
     validates :invitee, presence: true
     validates :inviter, presence: true

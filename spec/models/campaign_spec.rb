@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe Campaign, type: :model do
   # associations
@@ -37,33 +37,24 @@ RSpec.describe Campaign, type: :model do
   it { is_expected.to belong_to :locale }
 
   # validations
-  context 'when status is opened' do
-    it 'is invalid without a name' do
-      expect(build(:campaign, name: nil, status: :opened)).not_to be_valid
-    end
-    it 'is invalid without a locale' do
-      expect(build(:campaign, locale: nil, status: :opened)).not_to be_valid
-    end
-    it 'is invalid without a url' do
-      expect(build(:campaign, url: nil, status: :opened)).not_to be_valid
-    end
-    it 'is invalid when url is not unique' do
-      @campaign = create(:campaign)
-      expect(build(:campaign,
-                   url: @campaign.url,
-                   status: :opened)).not_to be_valid
-    end
+  context 'when status is not basic' do
+    before { subject.stub(:basic?) { false } }
+    it { is_expected.to validate_presence_of :name }
+    it { is_expected.to validate_presence_of :locale }
+    it { is_expected.to validate_presence_of :url }
+    it { is_expected.to validate_uniqueness_of :url }
   end
   describe 'when url is a subdomain' do
-    before { subject.subdomain = true }
+    before { subject.stub(:subdomain?) { true } }
     it { is_expected.to ensure_length_of(:url).is_at_most(63) }
     it { is_expected.to_not allow_value('-gwtbesr-', '!@#$%').for(:url) }
     it { is_expected.to_not allow_value('app').for(:url) }
+    it { is_expected.to_not allow_value('OnTheJourney').for(:url) }
     it { is_expected.to allow_value('web', 'test', 'falling-plates').for(:url) }
   end
 
   describe 'when url is a cname' do
-    before { subject.subdomain = false }
+    before { subject.stub(:subdomain?) { false } }
     it { is_expected.to ensure_length_of(:url).is_at_most(255) }
     it do
       is_expected.to_not allow_value('goober',
