@@ -5,6 +5,7 @@ class InviteMailer < Devise::Mailer
     load_inviter
     load_locale
     opts[:subject] = subject
+    opts[:reply_to] = @invite.user.try(:email)
     devise_mail(record, :translator_invitation_instructions, opts)
   end
 
