@@ -8,6 +8,7 @@ class Ability
     alias_action :read, to: :translator
 
     can :manage, Dashboard if user.is? :manager
+    can :manage, Dashboard if user.is? :translator
     can :create, Campaign if user.is? :manager
     user.permissions.each do |permission|
       can permission.state.to_sym, permission.resource
