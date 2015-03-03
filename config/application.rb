@@ -13,7 +13,7 @@ Bundler.require(*Rails.groups)
 module WatchThinkChat
   class Application < Rails::Application
     config.i18n.available_locales =
-      [:en, :fr, :am, :ar, :de, :'es-ES', :fil, :fr, :'hi-IN', :hu, :ja,
+      [:en, :am, :ar, :de, :'es-ES', :fr, :'hi-IN', :hu, :ja,
        :ko,  :nl, :pl, :'pt-BR', :ro, :ru,  :th, :uk, :'zh-CN']
     config.autoload_paths << Rails.root.join('lib')
     config.assets.initialize_on_precompile = false
