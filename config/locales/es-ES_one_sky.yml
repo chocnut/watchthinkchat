@@ -4,4 +4,249 @@
 # Language name: Español (España)
 # Language English name: Spanish (Spain)
 ---
-es-ES: ~
+es-ES:
+  devise:
+    confirmations:
+      confirmed: "Tu cuenta ha sido confirmada exitosamente. Ahora estas registrado."
+      send_instructions: "Recibirás un email con instrucciones sobre como confirmar tu cuenta en unos pocos minutos."
+      send_paranoid_instructions: "Si tu email ya existe en nuestra base de datos, recibirás un email con instrucciones sobre como confirmar tu cuenta en unos pocos minutos."
+    failure:
+      already_authenticated: "Ya estas registrado."
+      inactive: "Tu cuenta no ha sido activada todavía."
+      invalid: "Email o contraseña incorrecta."
+      invalid_token: "Permiso de identificación incorrecto."
+      locked: "Tu cuenta ha sido bloqueada."
+      not_found_in_database: "Email o contraseña incorrecta."
+      timeout: "Tu sesión ha expirado, por favor ingresa nuevamente para continuar."
+      unauthenticated: "Necesitas crear una cuenta o iniciar sesión antes de continuar."
+      unconfirmed: "Tienes que confirmar tu cuenta antes de continuar."
+    mailer:
+      confirmation_instructions:
+        subject: "Instrucciones para la confirmación."
+      reset_password_instructions:
+        subject: "Instrucciones para cambiar de contraseña."
+      unlock_instructions:
+        subject: "Instrucciones para desbloquear."
+      invitation_instructions:
+        subject: "Instrucciones para recibir invitación."
+        hello: "Hola %{email}"
+        someone_invited_you: "Alguien te ha invitado a %{url}, puedes aceptarlo a través del siguiente link."
+        accept: "Aceptar invitación"
+        ignore: "Si no deseas aceptar la invitación, por favor ignora este email.<br />Tu cuenta no sera creada hasta que ingreses en el link de arriba y crees una contraseña."
+    omniauth_callbacks:
+      failure: "No se pudo confirmarte por %{kind} porque \"%{reason}\"."
+      success: "Exitosamente confirmada desde %{kind} cuenta."
+    passwords:
+      no_token: "No puedes acceder a esta pagina sin venir desde el email de cambio de contraseña. Si vienes del email de cambio de contraseña, por favor asegurate de usar la completa URL provista."
+      send_instructions: "Recibirás un email con instrucciones sobre como cambiar tu contraseña en unos pocos minutos."
+      send_paranoid_instructions: "Si tu email ya existe en nuestra base de datos, recibirás un email con link para recuperar tu contraseña en unos pocos minutos."
+      updated: "Tu contraseña ha sido cambiada exitosamente. Ahora puedes iniciar sesión."
+      updated_not_active: "Tu contraseña ha sido cambiada exitosamente."
+    registrations:
+      destroyed: "Adiós! Tu cuenta ha sido exitosamente cancelada. Esperamos pronto verte de nuevo."
+      signed_up: "Bienvenido! Has sido registrado exitosamente."
+      signed_up_but_inactive: "Has sido registrado exitosamente. Aun así, no hemos podido iniciar sesión porque tu cuenta no ha sido activada todavía."
+      signed_up_but_locked: "Has sido registrado exitosamente. Aun así, no hemos podido iniciar sesión porque tu cuenta ha sido bloqueada."
+      signed_up_but_unconfirmed: "Un mensaje con un link de confirmación ha sido enviado a tu correo electrónico. Por favor, abre el link para activar tu cuenta."
+      update_needs_confirmation: "Has actualizado exitosamente tu cuenta, pero necesitamos verificar tu nuevo correo electrónico. Por favor chequea tu email y haz click en el link de confirmación para comprobar tu nuevo correo electrónico."
+      updated: "Has actualizado tu cuenta exitosamente."
+    sessions:
+      signed_in: "Registrado exitosamente."
+      signed_out: "Sesión finalizada exitosamente."
+    unlocks:
+      send_instructions: "Recibirás un email con instrucciones sobre como desbloquear tu cuenta en unos pocos minutos."
+      send_paranoid_instructions: "Si tu cuenta existe, recibirás un email con instrucciones sobre como desbloquearlo en unos pocos minutos."
+      unlocked: "Tu cuenta ha sido desbloqueada exitosamente. Por favor ingresa nuevamente para continuar."
+    invitations:
+      send_instructions: "Un email de invitación ha sido enviado a %{email}."
+      invitation_token_invalid: "El permiso de invitación provisto no es valido!"
+      updated: "Tu contraseña fue creada exitosamente. Ahora estas registrado."
+      no_invitations_remaining: "No hay invitaciones pendientes"
+      invitation_removed: "Tu invitación fue eliminada."
+      new:
+        header: "Mandar invitación"
+        submit_button: "Enviar una invitación"
+      edit:
+        header: "Crea tu contraseña"
+        submit_button: "Crear mi contraseña"
+  errors:
+    messages:
+      already_confirmed: "ya fue confirmada, por favor trata de ingresar nuevamente"
+      confirmation_period_expired: "necesita ser confirmado dentro de %{period}, por favor solicita uno nuevo"
+      expired: "ha expirado, por favor solicita uno nuevo"
+      not_found: "no encontrado"
+      not_locked: "no fue bloqueado"
+      not_saved:
+        one: "1 error no ha permitido que esto %{resource} fuera guardado:"
+        other: "%{count} errores no han permitido que esto %{resource} sea guardado:"
+  front_end:
+    complete:
+      thank_you: Gracias!
+      continue_to: "Continua a:"
+    final:
+      first_name: "Primer Nombre"
+      last_name: Apellido
+      email: Email
+      friends_first_name: "Primer nombre del amigo"
+      friends_last_name: "Apellido del amigo"
+      friends_email: "Email del amigo"
+      message: Mensaje
+      growthspace_thanks: Gracias!
+      notify_me: "Notificarme cuando el amigo viene a WTC"
+      send_invite: "Mandar invitacion"
+      learn_more: "Conocer mas"
+      submit: Enviar
+      thank_you: Gracias!
+    privacy_modal:
+      privacy_policy: "Política Privada"
+    share_link:
+      share: Compartir
+      share_link: "Compartir el siguiente link:"
+  routes:
+    campaigns: campañas
+    new: nuevo
+    edit: editar
+    build: construir
+    translations: traducciones
+    dashboard: "panel de control"
+    users: usuarios
+    user: usuario
+    sign_in: ingresar
+    sign_up: registrar
+    sign_out: "cerrar sesión"
+    password: contraseña
+    invites: invita
+  wicked:
+    basic: básico
+    engagement_player: "objeto de involucramiento"
+    survey: encuesta
+    share: compartir
+    community: comunidad
+    opened: abiertos
+    statistics: estadísticas
+    growthspace: "espacio de crecimiento"
+  language: "Cambiar lenguaje"
+  user:
+    first_name: "Primer Nombre"
+    last_name: Apellido
+    email: Email
+    password: Contraseña
+    confirm_password: "Confirmar contraseña"
+    remember_me: Recordarme
+    back: "Regresar a WatchThinkChat"
+    invite: "Invitar Nuevo Traductor"
+    language: Lenguaje
+    sign_up: Registrar
+    sign_up_with_provider: "Registrar con %{provider}"
+    sign_in: "Iniciar sesión"
+    sign_in_with_provider: "Iniciar sesión con %{provider}"
+    forgot_your_password:
+      title: "Olvidaste tu contraseña?"
+      description: "Ingresa tu email abajo para cambiar tu contraseña."
+      button: "Cambiar mi contraseña"
+  translations:
+    empty:
+      title: "No hay campañas listas para traducir"
+      description: "No hay nada aca para ti para traducir ahora mismo."
+    index:
+      title: "Campañas para Traducir"
+    edit:
+      save: "Guardar traducciones"
+  campaigns:
+    new_user:
+      title: "Comenzar a crear"
+      description: "Que bueno que estas a bordo! Comienza por crear tu primera campaña abajo. Vamos, pruébalo!"
+    new: "Crear una Nueva Campaña"
+    created_on: "Creada en %{date}"
+    updated_on: "Ultima actualización %{time} atrás"
+    build:
+      title: "Mago de Campaña"
+      next: Siguiente
+      previous: Anterior
+      opened:
+        title: "Todo listo aquí"
+        description: "Tu campaña esta en vivo"
+        button: "Ir al Panel de Control de Campaña"
+      progress:
+        basic:
+          title: Comenzando
+          description: "Información básica de la Campaña"
+        engagement_player:
+          title: "Objeto de Involucramiento"
+          description: "Media e Involucramiento"
+        growthspace:
+          title: "Espacios para crecer"
+          description: "Conectar visitantes al contenido"
+        survey:
+          title: Encuesta
+          description: "Preguntas y Opciones"
+        share:
+          title: Compartir
+          description: "Compartir con amigos"
+        community:
+          title: Comunidad
+          description: "Conectar con visitantes"
+        opened:
+          title: Terminar
+          description: "Al Aire"
+    show:
+      back: Anterior
+      engagement_player:
+        media: Media
+        survey: Encuesta
+      share:
+        title: "Este componente esta habilitado"
+      statistics:
+        title: "Gráficos y Cosas Geniales"
+      translation:
+        title: "Lenguajes Disponibles"
+        invite: "Invitar Nuevos Traductores"
+        locale: Lenguaje
+        translators: Traductores
+        close: cerrar
+  invite_mailer:
+    header: "%{inviter_name} te ha invitado a traducir      %{campaign_name} a %{locale_name}"
+    salutation: "Hola %{invitee_name},"
+    subtitle: "Ven ayuda a cambiar el mundo!"
+    start_translating: "Comenzar a traducir"
+    paragraph_a: "Te he invitado a traducir %{campaign_name} a  %{locale_name}."
+    paragraph_b: "Para comenzar a traducir, haz click abajo. Tienes que establecer una contraseña. Una vez que te has registrado, podrás traducir esta campaña."
+    paragraph_c: "Para traducir, haz clic en cada una de las pestañas en la parte superior, cambia el texto original con tu traducción apropiada, después haz clic en el botón 'Guardar Traducciones'."
+    closing: "Gracias por tu ayuda,"
+    footer:
+      twitter: "Síguenos en Twitter"
+      facebook: "Me gusta en Facebook"
+      google: "Síguenos en Google+"
+      copyright: "Copyright © %{year} Indigitous, Todos los derechos reservados."
+      mailing_address: "Nuestro correo electrónico es:"
+      reason: "Has recibido un correo porque %{inviter_name} pensó que podrías ser un gran traductor."
+      is_error: "Si esto es un error, por favor envía un email a:"
+  activerecord:
+    attributes:
+      campaign:
+        name: Nombre
+        locale: "Lenguaje Predeterminado"
+        locales: "Lenguajes Alternativos"
+        url: URL
+        subdomain: Subdominio
+        cname_address: "dirección CNAME"
+      engagement_player:
+        enabled: Habilitado
+        media_link: "link a media"
+  mailers:
+    api:
+      v1:
+        invitees:
+          mailer:
+            salutation: "Hola %{name}"
+            organization:
+              name: Indigitous
+              tag: "Somos un movimiento apasionado por conectar personas a Jesús usando Estrategias Digitales"
+            why: "Estas recibiendo este Email porque has sido invitado por %{name}"
+  models:
+    campaign:
+      share:
+        title: Compartir
+        description: "Instrucción predeterminada"
+        subject: "Email predeterminado del individuo"
+        message: "Mensaje de email predeterminado"
