@@ -37,7 +37,7 @@ class Campaign < ActiveRecord::Base
   accepts_nested_attributes_for :growthspace, update_only: true
 
   # validations
-  validates :url, uniqueness: true
+  validates :url, uniqueness: true, allow_blank: true
   validates :name, presence: true, unless: :basic?
   validates :locale, presence: true, unless: :basic?
   validates :url, presence: true, unless: :basic?
