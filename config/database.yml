@@ -1,6 +1,0 @@
-production:
-  adapter: postgresql
-  database: dbbfs4fnuieh4j
-  username: <%= ENV["DB_ENV_POSTGRESQL_USER"] %>
-  password: <%= ENV["DB_ENV_POSTGRESQL_PASS"] %>
-  host: <%= ENV["DB_PORT_5432_TCP_ADDR"] %>
