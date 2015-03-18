@@ -85,8 +85,8 @@ Rails.application.configure do
 
   # Heroku requires logging to go to stdout
   # config.logger = Logger.new(STDOUT)
-  STDOUT.sync
-  config.log_level = :debug
+  # STDOUT.sync
+  config.log_level = :info
   # config.logger.level = Logger::DEBUG
 
   # smtp
