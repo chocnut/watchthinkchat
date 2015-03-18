@@ -7,7 +7,6 @@
 .idea
 secret.yml
 vendor/ruby
-database.yml
 *.swp
 .env
 
