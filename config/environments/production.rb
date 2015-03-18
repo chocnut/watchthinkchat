@@ -77,10 +77,7 @@ Rails.application.configure do
 
   if ENV['MEMCACHEDCLOUD_SERVERS']
     config.cache_store = :dalli_store,
-                         ENV['MEMCACHEDCLOUD_SERVERS'].split(','),
-                         { username: ENV['MEMCACHEDCLOUD_USERNAME'],
-                           password: ENV['MEMCACHEDCLOUD_PASSWORD'],
-                           pool_size: ENV['MAX_THREADS'] || 16 }
+                         ENV['MEMCACHEDCLOUD_SERVERS'].split(',')
   end
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
