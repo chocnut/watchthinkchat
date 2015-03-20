@@ -77,10 +77,7 @@ Rails.application.configure do
 
   if ENV['MEMCACHEDCLOUD_SERVERS']
     config.cache_store = :dalli_store,
-                         ENV['MEMCACHEDCLOUD_SERVERS'].split(','),
-                         { username: ENV['MEMCACHEDCLOUD_USERNAME'],
-                           password: ENV['MEMCACHEDCLOUD_PASSWORD'],
-                           pool_size: ENV['MAX_THREADS'] || 16 }
+                         ENV['MEMCACHEDCLOUD_SERVERS'].split(',')
   end
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
@@ -88,8 +85,8 @@ Rails.application.configure do
 
   # Heroku requires logging to go to stdout
   # config.logger = Logger.new(STDOUT)
-  STDOUT.sync
-  config.log_level = :debug
+  # STDOUT.sync
+  config.log_level = :info
   # config.logger.level = Logger::DEBUG
 
   # smtp
