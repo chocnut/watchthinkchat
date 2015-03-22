@@ -1,19 +1,37 @@
-
-<header class="header fixed-top clearfix">
+<header class="header clearfix">
   <div class="brand">
     <a href="index.html" class="logo">
       <%= image_tag 'wtclogo.png' %>
     </a>
   </div>
-  <div class="nav notify-row" id="top_menu">
-  </div>
+
   <div class="top-nav clearfix">
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="<%= unauthenticated_root_path %>" class="<%= 'active' if current_page?("/#{I18n.locale}") %>">
+          <%=t('routes.dashboard').titleize %>
+        </a>
+      </li>
+      <% if current_user.has_role? :manager %>
+      <li>
+        <a href="<%= campaigns_path %>" class="<%= 'active' if request.path.match(campaigns_path) %>">
+          <%=t('routes.campaigns').titleize %>
+        </a>
+      </li>
+      <% end %>
+      <% if current_user.has_role? :translator %>
+      <li>
+        <a href="<%= translations_path %>" class="<%= 'active' if request.path.match(translations_path) %>">
+          <%=t('routes.translations').titleize %>
+        </a>
+      </li>
+      <% end %>
+    </ul>
     <ul class="nav pull-right top-menu">
       <li class="dropdown">
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-          <img alt="" src="<%= current_user.profile_pic %>">
-          <span class="username"><%= current_user.name %></span>
           <b class="caret"></b>
+          <img alt="" src="<%= current_user.profile_pic %>">
         </a>
         <ul class="dropdown-menu extended logout">
           <li><%= link_to("#{fa_icon 'sign-out'} #{t('routes.sign_out').humanize}".html_safe, destroy_user_session_path, :method => :delete) %><li>

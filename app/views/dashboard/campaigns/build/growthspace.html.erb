@@ -1,68 +1,67 @@
 <% Globalize.with_locale(@campaign.locale.try(:code) || I18n.locale) do %>
-<%= render 'progress' %>
-<div class="col-md-9">
-  <section class="panel">
-    <header class="panel-heading">
-      <%= t 'campaigns.build.title' %>
-    </header>
-    <%= semantic_form_for @campaign, url: wizard_path, method: :put, html: {class: 'form-horizontal'} do |f| %>
-      <%= f.semantic_fields_for :growthspace, @campaign.growthspace || @campaign.build_growthspace do |c| %>
+  <%= render 'header' %>
+  <%= semantic_form_for @campaign, url: wizard_path, method: :put, html: {class: 'form-horizontal'} do |f| %>
+    <%= f.semantic_fields_for :growthspace, @campaign.growthspace || @campaign.build_growthspace do |c| %>
         <%=  c.hidden_field :id %>
-        <div class="panel-body">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-12">
-                <%= c.input :enabled, as: :radio, collection: [['On', true], ['Off', false]] %>
-              </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 title">
+            <h2><%= t 'campaigns.build.progress.growthspace.title' %></h2>
+            <h5><%= t 'campaigns.build.progress.growthspace.description' %></h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <%= c.input :enabled, as: :radio, collection: [[t('activerecord.attributes.common.open'), true], [t('activerecord.attributes.common.closed'), false]], label: t('activerecord.attributes.common.enabled') %>
+          </div>
+        </div>
+        <div class="enabled_fields">
+          <div class="row">
+            <div class="col-md-12">
+              <%=  c.input :title, label: t('activerecord.attributes.growthspace.title') %>
             </div>
-            <div class="enabled_fields">
-              <div class="row">
-                <div class="col-md-12">
-                  <%=  c.input :title %>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <%=  c.input :description, input_html: { rows: 10 } %>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <%=  c.input :api_key, label: 'Access ID' %>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <%=  c.input :api_secret, label: 'Access Secret' %>
-                </div>
-              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <%=  c.input :description, input_html: { rows: 5 }, label: t('activerecord.attributes.growthspace.description') %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h3 class="border-above"><%= t 'campaigns.build.progress.growthspace.advanced_settings' %></h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <%=  c.input :api_key, label: t('activerecord.attributes.growthspace.api_key') %>
+              <div class="field-help"><%= t('activerecord.attributes.growthspace.field_help.api_key', url: link_to('growthspaces.org', 'https://www.growthspaces.org')).html_safe %></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <%=  c.input :api_secret, label: t('activerecord.attributes.growthspace.api_secret') %>
+              <div class="field-help"><%= t 'activerecord.attributes.growthspace.field_help.api_secret' %></div>
             </div>
           </div>
         </div>
-        <% end %>
-      <div class="panel-footer clearfix">
-        <div class="pull-right">
-          <a href="<%= previous_wizard_path %>" class="btn"><%= t('campaigns.build.previous') %></a>&nbsp;
-          <%= f.submit t('campaigns.build.next'), class: 'btn btn-primary' %>
-        </div>
       </div>
     <% end %>
-  </section>
-</div>
-<% content_for :javascript do %>
-  <script type="text/javascript">
-  $('.enabled_fields').hide();
-
-  if ($("input:radio[name='campaign[growthspace_attributes][enabled]']:checked").val() == "true" )
-    $('.enabled_fields').show();
-
-  $('#campaign_growthspace_attributes_enabled_input input').change(function () {
-    if ($(this).val() == "true") {
-      $('.enabled_fields').show();
-    } else {
+    <%= render partial: 'progress', locals: { f: f } %>
+  <% end %>
+  <% content_for :javascript do %>
+    <script type="text/javascript">
       $('.enabled_fields').hide();
-    }
-  });
-  </script>
-<% end %>
+
+      if ($("input:radio[name='campaign[growthspace_attributes][enabled]']:checked").val() == "true" )
+        $('.enabled_fields').show();
+
+      $('#campaign_growthspace_attributes_enabled_input input').change(function () {
+        if ($(this).val() == "true") {
+          $('.enabled_fields').show();
+        } else {
+          $('.enabled_fields').hide();
+        }
+      });
+    </script>
+  <% end %>
 <% end %>

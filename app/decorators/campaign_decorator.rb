@@ -6,6 +6,7 @@ class CampaignDecorator < Draper::Decorator
   delegate_all
 
   def permalink
+    return nil unless url
     return "http://#{url}.#{ENV['base_url']}" if subdomain?
     "http://#{url}"
   end
@@ -39,5 +40,9 @@ class CampaignDecorator < Draper::Decorator
   def signing_up_percentage
     return 0 if unique_visitors == 0
     ((signing_up.to_d / unique_visitors.to_d) * 100).to_i
+  end
+
+  def name
+    object.name || 'Untitled'
   end
 end

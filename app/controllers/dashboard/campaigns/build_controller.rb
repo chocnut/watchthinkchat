@@ -3,6 +3,8 @@ module Dashboard
     class BuildController < Dashboard::BaseController
       include Wicked::Wizard::Translated
 
+      layout 'dashboard/build'
+
       steps :basic,
             :engagement_player,
             :growthspace,
