@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Core
-gem 'rails', '4.1.6'
+gem 'rails', '4.1.8'
 gem 'rails-observers'
 
 # Data Storage
@@ -26,7 +26,7 @@ gem 'platform-api'
 gem 'versionist'
 
 # Assets CSS
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails'
 gem 'font-awesome-rails'
 gem 'bootstrap-sass'
 
