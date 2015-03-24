@@ -5,8 +5,9 @@
       <%=  c.hidden_field :id %>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-12">
-            <h2>Share</h2>
+          <div class="col-md-12 title">
+            <h2><%= t 'campaigns.build.progress.share.title' %></h2>
+            <h5><%= t 'campaigns.build.progress.share.description' %></h5>
           </div>
         </div>
         <div class="row">
@@ -15,34 +16,38 @@
           </div>
           <div class="enabled_fields">
             <div class="col-md-12">
-              <%=  c.input :title, input_html: { value: c.object.decorate.title } %>
+              <%=  c.input :title, input_html: { value: c.object.decorate.title }, label: t('activerecord.attributes.share.title') %>
             </div>
             <div class="col-md-12">
-              <%=  c.input :description, input_html: { value: c.object.decorate.description } %>
+              <%=  c.input :description, input_html: { value: c.object.decorate.description }, label: t('activerecord.attributes.share.description') %>
             </div>
             <div class="col-md-12">
-              <p>Allow Visitors to Share Campaign On:</p>
+            <h3 class="border-above"><%= t 'campaigns.build.progress.share.share_campaign' %></h3>
+            </div>
+            <div class="col-md-12">
               <div class="row">
                 <div class="col-md-3">
-                  <%=  c.input :facebook %>
+                  <%=  c.input :facebook, label: false %>
                 </div>
                 <div class="col-md-3">
-                  <%=  c.input :twitter %>
+                  <%=  c.input :twitter, label: false %>
                 </div>
                 <div class="col-md-3">
-                  <%=  c.input :link %>
+                  <%=  c.input :link, label: false %>
                 </div>
                 <div class="col-md-3">
-                  <%=  c.input :email %>
+                  <%=  c.input :email, label: false %>
                 </div>
               </div>
             </div>
-            <p>Custom Email Invite</p>
             <div class="col-md-12">
-              <%=  c.input :subject, input_html: { value: c.object.subject } %>
+            <h3 class="border-above"><%= t 'campaigns.build.progress.share.custom_email_invite' %></h3>
             </div>
             <div class="col-md-12">
-              <%=  c.input :message, input_html: { value: c.object.message } %>
+              <%=  c.input :subject, input_html: { value: c.object.subject }, label: t('activerecord.attributes.share.subject') %>
+            </div>
+            <div class="col-md-12">
+              <%=  c.input :message, input_html: { value: c.object.message, rows: 5 }, label: t('activerecord.attributes.share.message') %>
             </div>
           </div>
         </div>

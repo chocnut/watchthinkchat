@@ -106,6 +106,8 @@ en:
         share:
           title: Share
           description: Share with Friends
+          custom_email_invite: Custom Email Invite
+          share_campaign: Share Networks
         community:
           title: Community
           description: Connect with Visitors
@@ -196,6 +198,11 @@ en:
         click_to_add_option: Click to add option
         add_question:
         save_question:
+      share:
+        title: Title
+        description: Description
+        subject: Subject
+        message: Message
       community:
         campaign: Campaign
         url: URL
