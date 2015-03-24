@@ -91,18 +91,23 @@ en:
         basic:
           title: Getting Started
           description: Basic Campaign Info
+          internationalization: Internationalization
         engagement_player:
           title: Engagement Player
           description: Media and Onboarding
+          media_settings: Media Settings
         growthspace:
           title: Growthspaces
           description: Connect Visitors to Content
+          advanced_settings: Advanced Settings
         survey:
           title: Survey
           description: Questions and Options
         share:
           title: Share
           description: Share with Friends
+          custom_email_invite: Custom Email Invite
+          share_campaign: Share Networks
         community:
           title: Community
           description: Connect with Visitors
@@ -118,6 +123,10 @@ en:
         title: This component is enabled
       statistics:
         title: Cool Graphs and Stuff
+        unique_visitors: Unique Visitors
+        starting_video: Starting Video
+        finishing_video: Finishing Video
+        signing_up: Signing Up
       translation:
         title: Available Languages
         invite: Invite New Translators
@@ -143,6 +152,10 @@ en:
       is_error: "If this is an error please send an email to:"
   activerecord:
     attributes:
+      common:
+        enabled: Enabled
+        open: "On"
+        closed: "Off"
       campaign:
         name: Name
         locale: Default Language
@@ -150,6 +163,57 @@ en:
         url: URL
         subdomain: Subdomain
         cname_address: CNAME address
+        field_help:
+          name: "The name of your campaign. Ex: '#FallingPlates'"
+          intro: Something to draw your visitors to engage with your campaign
+          description: A simple summary of your campaign to help orientate your visitors
+          url: To let visitors see your campaign, you have to specify an address (This can either be a URL that you control or a subdomain of watchthinkchat.com)
+          locales: When you choose alternative languages, you'll be able to invite translators to translate from your campaign's default language into that language.
       engagement_player:
-        enabled: Enabled
-        media_link: media_link
+        media_link: Media Link
+        media_start: Media Start
+        media_stop: Media Stop
+        use_current: Use Current
+        field_help:
+          media_link: Your Youtube Video URL
+          media_start: Start time in milliseconds
+          media_stop: Stop time in milliseconds
+      growthspace:
+        title: Title
+        description: Description
+        api_key: Access ID
+        api_secret: Access Secret
+        field_help:
+          api_key: Copy the Access ID from your app on %{url}
+          api_secret: Copy the Access Secret from your app
+      survey:
+        question: Question
+        help_text: Help Text
+        options: Options
+        option: Option
+        continue: Continue
+        skip_to: Skip to
+        finish: Finish
+        click_to_add_question: Click to add question
+        click_to_add_option: Click to add option
+        add_question:
+        save_question:
+      share:
+        title: Title
+        description: Description
+        subject: Subject
+        message: Message
+      community:
+        campaign: Campaign
+        url: URL
+        other_campaign: Link to
+        title: Title
+        description: Description
+        field_help:
+          other_campaign: Choose where to link your visitor once they are finished on WatchThinkChat
+          title: The title of the site you are connecting your visitor to
+          description: A brief description of what your visitor will experience if they click your community link
+          url: The URL of the site you want your visitor to be connected to
+          campaign: Select one of your campaigns that you have access to
+
+

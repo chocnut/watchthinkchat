@@ -12,6 +12,7 @@ Bundler.require(*Rails.groups)
 
 module WatchThinkChat
   class Application < Rails::Application
+    config.action_view.raise_on_missing_translations = true
     config.i18n.available_locales =
       [:en, :am, :ar, :de, :'es-ES', :fr, :'hi-IN', :hu, :ja,
        :ko,  :nl, :pl, :'pt-BR', :ro, :ru,  :th, :uk, :'zh-CN']

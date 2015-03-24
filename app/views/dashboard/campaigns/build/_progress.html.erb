@@ -1,50 +1,53 @@
-<div class="col-md-3">
-  <div class="list-group wizard-progress">
-    <a href="<%= wizard_path t('wicked.basic') %>" class="<%= step_class t('wicked.basic') %>">
-      <%- if @campaign.status.to_sym == :basic %>
-        <div class="pull-right"><%= fa_icon 'angle-right' %></div>
-      <% end -%>
-      <h4><%= t('campaigns.build.progress.basic.title') %></h4>
-      <small><%= t('campaigns.build.progress.basic.description') %></small>
+<div class="wizard-progress">
+  <% unless current_page? previous_wizard_path %>
+  <a class="back-button progress-button pull-left" href="<%= previous_wizard_path %>">
+    <%= fa_icon 'angle-left' %>&nbsp; <%= t 'campaigns.build.previous' %>
+  </a>
+  <% end %>
+  <% if f %>
+    <button type="submit" class="next-button progress-button pull-right">
+    <%= t 'campaigns.build.next' %> &nbsp;<%= fa_icon 'angle-right' %>
+    </button>
+  <% else %>
+    <a href="<%= campaign_path(@campaign) %>" class="next-button progress-button pull-right">
+      <%= t 'campaigns.build.progress.opened.title' %> &nbsp;<%= fa_icon 'angle-right' %>
     </a>
-    <a href="<%= wizard_path t('wicked.engagement_player') %>" class="<%= step_class t('wicked.engagement_player')%>">
-      <%- if @campaign.status.to_sym == :engagement_player %>
-        <div class="pull-right"><%= fa_icon 'angle-right' %></div>
-      <% end -%>
-      <h4><%= t('campaigns.build.progress.engagement_player.title') %></h4>
-      <small><%= t('campaigns.build.progress.engagement_player.description') %></small>
-    </a>
-    <a href="<%= wizard_path t('wicked.growthspace') %>" class="<%= step_class t('wicked.growthspace')%>">
-      <%- if @campaign.status.to_sym == :growthspace %>
-        <div class="pull-right"><%= fa_icon 'angle-right' %></div>
-      <% end -%>
-      <h4><%= t('campaigns.build.progress.growthspace.title') %></h4>
-      <small><%= t('campaigns.build.progress.growthspace.description') %></small>
-    </a>
-    <a href="<%= wizard_path t('wicked.survey') %>" class="<%= step_class t('wicked.survey') %>">
-      <%- if @campaign.status.to_sym == :survey %>
-        <div class="pull-right"><%= fa_icon 'angle-right' %></div>
-      <% end -%>
-      <h4><%= t('campaigns.build.progress.survey.title') %></h4>
-      <small><%= t('campaigns.build.progress.survey.description') %></small>
-    </a>
-    <a href="<%= wizard_path t('wicked.share') %>" class="<%= step_class t('wicked.share') %>">
-      <%- if @campaign.status.to_sym == :share %>
-        <div class="pull-right"><%= fa_icon 'angle-right' %></div>
-      <% end -%>
-      <h4><%= t('campaigns.build.progress.share.title') %></h4>
-      <small><%= t('campaigns.build.progress.share.description') %></small>
-    </a>
-    <a href="<%= wizard_path t('wicked.community') %>" class="<%= step_class t('wicked.community') %>">
-      <%- if @campaign.status.to_sym == :community %>
-        <div class="pull-right"><%= fa_icon 'angle-right' %></div>
-      <% end -%>
-      <h4><%= t('campaigns.build.progress.community.title') %></h4>
-      <small><%= t('campaigns.build.progress.community.description') %></small>
-    </a>
-    <a href="<%= wizard_path t('wicked.opened') %>" class="<%= step_class t('wicked.opened') %>">
-      <h4><%= t('campaigns.build.progress.opened.title') %></h4>
-      <small><%= t('campaigns.build.progress.opened.description') %></small>
-    </a>
-  </div>
+  <% end %>
+  <ul class="hidden-sm">
+    <li class="<%= step_class t('wicked.basic') %>">
+      <a href="<%= wizard_path t('wicked.basic') %>">
+        <%= t('campaigns.build.progress.basic.title') %>
+      </a>
+    </li>
+    <li class="<%= step_class t('wicked.engagement_player')%>">
+      <a href="<%= wizard_path t('wicked.engagement_player') %>">
+        <%= t('campaigns.build.progress.engagement_player.title') %>
+      </a>
+    </li>
+    <li class="<%= step_class t('wicked.growthspace')%>">
+      <a href="<%= wizard_path t('wicked.growthspace') %>">
+        <%= t('campaigns.build.progress.growthspace.title') %>
+      </a>
+    </li>
+    <li class="<%= step_class t('wicked.survey') %>">
+      <a href="<%= wizard_path t('wicked.survey') %>">
+        <%= t('campaigns.build.progress.survey.title') %>
+      </a>
+    </li>
+    <li class="<%= step_class t('wicked.share') %>">
+      <a href="<%= wizard_path t('wicked.share') %>">
+        <%= t('campaigns.build.progress.share.title') %>
+      </a>
+    </li>
+    <li class="<%= step_class t('wicked.community') %>">
+      <a href="<%= wizard_path t('wicked.community') %>">
+        <%= t('campaigns.build.progress.community.title') %>
+      </a>
+    </li>
+    <li class="<%= step_class t('wicked.opened') %>">
+      <a href="<%= wizard_path t('wicked.opened') %>">
+        <%= t('campaigns.build.progress.opened.title') %>
+      </a>
+    </li>
+  </ul>
 </div>
