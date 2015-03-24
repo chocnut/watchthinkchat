@@ -49,4 +49,8 @@ class CampaignDecorator < Draper::Decorator
   def icon
     %w(cloud cube coffee diamond)[id % 4]
   end
+
+  def background
+    %w(#cfb396 #f35b00 #f19e00 #5811af #e12814 #3494c7)[id % 6]
+  end
 end

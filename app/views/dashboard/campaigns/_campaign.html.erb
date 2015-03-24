@@ -3,7 +3,7 @@
   <% if campaign.engagement_player.try(:decorate).try(:youtube_video_id) %>
     <img class="img-responsive" src="//img.youtube.com/vi/<%= campaign.engagement_player.try(:decorate).try(:youtube_video_id) %>/maxresdefault.jpg">
   <% else %>
-    <div class="empty-space">
+    <div class="empty-space" style="background-color: <%= campaign.background %>">
     <%= fa_icon campaign.icon %>
     </div>
   <% end %>
