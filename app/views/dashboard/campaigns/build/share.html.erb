@@ -1,15 +1,11 @@
 <% Globalize.with_locale(@campaign.locale.try(:code) || I18n.locale) do %>
   <%= render 'header' %>
+  <% content_for(:title) { t 'campaigns.build.progress.share.title' } %>
+  <% content_for(:subtitle) { t 'campaigns.build.progress.share.description' } %>
   <%= semantic_form_for @campaign, url: wizard_path, method: :put, html: {class: 'form-horizontal'} do |f| %>
     <%= f.semantic_fields_for :share, @campaign.share || @campaign.build_share.decorate do |c| %>
       <%=  c.hidden_field :id %>
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12 title">
-            <h2><%= t 'campaigns.build.progress.share.title' %></h2>
-            <h5><%= t 'campaigns.build.progress.share.description' %></h5>
-          </div>
-        </div>
         <div class="row">
           <div class="col-md-12">
             <%= c.input :enabled, as: :radio, collection: [[t('activerecord.attributes.common.open'), true], [t('activerecord.attributes.common.closed'), false]], label: t('activerecord.attributes.common.enabled') %>

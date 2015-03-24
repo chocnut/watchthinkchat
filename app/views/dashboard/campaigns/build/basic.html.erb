@@ -1,13 +1,9 @@
 <% Globalize.with_locale(@campaign.locale.try(:code) || I18n.locale) do %>
   <%= render 'header' %>
+  <% content_for(:title) { t 'campaigns.build.progress.basic.title' } %>
+  <% content_for(:subtitle) { t 'campaigns.build.progress.basic.description' } %>
   <%= semantic_form_for @campaign, url: wizard_path, method: :put, html: {class: 'form-horizontal'} do |f| %>
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12 title">
-          <h2><%= t 'campaigns.build.progress.basic.title' %></h2>
-            <h5><%= t 'campaigns.build.progress.basic.description' %></h5>
-        </div>
-      </div>
       <div class="row">
         <div class="col-md-6">
           <%=  f.input :name, input_html: { class: 'form-control' } %>

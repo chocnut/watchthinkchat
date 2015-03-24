@@ -1,12 +1,8 @@
 <% Globalize.with_locale(@campaign.locale.try(:code) || I18n.locale) do %>
   <%= render 'header' %>
+  <% content_for(:title) { t 'campaigns.build.progress.survey.title' } %>
+  <% content_for(:subtitle) { t 'campaigns.build.progress.survey.description' } %>
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12 title">
-        <h2><%= t 'campaigns.build.progress.survey.title' %></h2>
-        <h5><%= t 'campaigns.build.progress.survey.description' %></h5>
-      </div>
-    </div>
     <div ng-app="survey_generator" ng-controller="SurveyController" ng-init="init()" class="survey_generator">
       <ul id="question_list" ui-sortable="questionSortable" ng-model="questions">
         <li ng-repeat="question in questions | orderBy:'question.position'" ng-class="{active: active_question==question}" class="clearfix">

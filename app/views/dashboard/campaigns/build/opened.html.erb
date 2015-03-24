@@ -1,5 +1,7 @@
 <% Globalize.with_locale(@campaign.locale.try(:code) || I18n.locale) do %>
   <%= render 'header' %>
+  <% content_for(:title) { t 'campaigns.build.progress.opened.title' } %>
+  <% content_for(:subtitle) { t 'campaigns.build.progress.opened.description' } %>
   <div class="container-fluid">
     <div class="text-center">
       <h1 class="big-circle"><%= fa_stacked_icon "bolt inverse", base: "circle" %></h1>

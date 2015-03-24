@@ -196,6 +196,16 @@ a {
   }
 }
 
+.page-title {
+  border-bottom: 1px solid #ccc;
+  background-color: #fff;
+  padding: 20px 0;
+  > .container h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
 /* campaigns */
 .campaigns {
   .campaign {
@@ -249,6 +259,9 @@ a {
 /* build */
 .build {
   background-color: #fff;
+  .page-title {
+    margin-top: 50px;
+  }
   h2 {
     font-size: 25px;
     line-height: 1.44em;
@@ -264,21 +277,12 @@ a {
     font-style: italic;
     color: #484848;
   }
-  .title {
-    h2 {
-      margin-bottom: 0;
-    }
-    h5 {
-      padding-bottom: 40px;
-      border-bottom: 1px solid #e0e0e0;
-    }
-  }
   .header {
     background-color: #2281b4;
     top: 0;
   }
   .content {
-    margin-top: 100px;
+    margin-top: 20px;
     margin-bottom: 80px;
     .form-horizontal {
       .control-label {

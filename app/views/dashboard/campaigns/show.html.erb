@@ -1,4 +1,6 @@
 <% Globalize.with_locale(@campaign.locale.try(:code) || I18n.locale) do %>
+<% content_for(:title) { @campaign.name } %>
+<% content_for(:subtitle) { t('routes.campaigns').titleize } %>
 <div class="campaigns">
   <div class="col-md-4">
     <%= render partial: 'campaign', locals: { campaign: @campaign } %>

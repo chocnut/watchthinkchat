@@ -14,7 +14,12 @@
 </head>
 <body>
   <%= render 'header' %>
-  <!--main content start-->
+  <div class="page-title">
+    <div class="container">
+      <h2><%= content_for :title %></h2>
+      <h5><%= content_for :subtitle %></h5>
+    </div>
+  </div>
   <div id="main-content">
     <div class="container">
       <div class="row">
@@ -22,7 +27,6 @@
       </div>
     </div>
   </div>
-  <!--main content end-->
   <%= javascript_include_tag "dashboard/application" %>
   <%= yield :javascript %>
 </body>
