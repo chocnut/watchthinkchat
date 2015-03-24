@@ -196,4 +196,17 @@ en:
         click_to_add_option: Click to add option
         add_question:
         save_question:
+      community:
+        campaign: Campaign
+        url: URL
+        other_campaign: Link to
+        title: Title
+        description: Description
+        field_help:
+          other_campaign: Choose where to link your visitor once they are finished on WatchThinkChat
+          title: The title of the site you are connecting your visitor to
+          description: A brief description of what your visitor will experience if they click your community link
+          url: The URL of the site you want your visitor to be connected to
+          campaign: Select one of your campaigns that you have access to
+
 

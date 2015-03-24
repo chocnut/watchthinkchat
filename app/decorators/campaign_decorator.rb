@@ -45,4 +45,8 @@ class CampaignDecorator < Draper::Decorator
   def name
     object.name || 'Untitled'
   end
+
+  def icon
+    %w(cloud cube coffee diamond)[id % 4]
+  end
 end

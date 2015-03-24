@@ -9,8 +9,8 @@
     <%= t 'campaigns.build.next' %> &nbsp;<%= fa_icon 'angle-right' %>
     </button>
   <% else %>
-    <a class="next-button progress-button pull-right">
-      <%= t 'campaigns.build.next' %> &nbsp;<%= fa_icon 'angle-right' %>
+    <a href="<%= campaign_path(@campaign) %>" class="next-button progress-button pull-right">
+      <%= t 'campaigns.build.progress.opened.title' %> &nbsp;<%= fa_icon 'angle-right' %>
     </a>
   <% end %>
   <ul class="hidden-sm">

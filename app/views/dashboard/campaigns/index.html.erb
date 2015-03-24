@@ -13,10 +13,11 @@
   </div>
   <% else %>
     <div class="campaigns">
+      <%= render 'actions' %>
       <% @campaigns.decorate.in_groups_of(3) do |campaign_group| %>
-        <div class="row-same-height row-full-height">
+        <div class="row">
           <% campaign_group.each do |campaign| %>
-            <div class="col-md-4 col-md-height">
+            <div class="col-md-4">
               <% if campaign %>
                 <% Globalize.with_locale(campaign.locale.try(:code) || I18n.locale) do %>
                   <%= render partial: 'campaign', locals: { campaign: campaign } %>
