@@ -246,6 +246,9 @@ a {
   .campaign-tabs {
     background-color: #fff;
     padding: 15px;
+    .nav.nav-tabs {
+      margin-bottom: 20px;
+    }
   }
   .campaign-actions {
     margin: 20px 0;
