@@ -44,7 +44,7 @@ describe 'Site', type: :feature, js: true do
     end
     scenario 'visitor comes to root_path' do
       visit campaign_url
-      expect(evaluate_script('apiUrl')).to eq("http://api.#{ENV['base_url']}:7171")
+      expect(evaluate_script('apiUrl')).to eq("//api.#{ENV['base_url']}:7171")
     end
   end
 end
