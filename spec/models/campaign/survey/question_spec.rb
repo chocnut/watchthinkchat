@@ -8,7 +8,7 @@ RSpec.describe Campaign::Survey::Question, type: :model do
     is_expected.to accept_nested_attributes_for(:options).allow_destroy(true)
   end
   describe '#code' do
-    before { subject.stub(:id) { 123 } }
+    before { allow(subject).to receive_messages(id: 123) }
     it 'returns correct code' do
       expect(subject.code).to eq(Base62.encode(subject.id))
     end

@@ -1,6 +1,6 @@
 class Campaign < ActiveRecord::Base
-  SUBDOMAIN = /\A((?!app)[a-z0-9][a-z0-9\-]*[a-z0-9]|[a-z0-9])\z/
-  CNAME = /\A^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6}(:[0-9]{1,5})?\z/
+  SUBDOMAIN ||= /\A((?!app)[a-z0-9][a-z0-9\-]*[a-z0-9]|[a-z0-9])\z/
+  CNAME ||= /\A^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6}(:[0-9]{1,5})?\z/
   # associations
   has_many :permissions, as: :resource, dependent: :destroy
   has_many :users, through: :permissions

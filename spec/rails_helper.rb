@@ -28,7 +28,7 @@ RSpec.configure do |config|
 end
 
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, js_errors: false, timeout: 200)
+  Capybara::Poltergeist::Driver.new(app, js_errors: true, timeout: 200)
 end
 
 Capybara.configure do |config|

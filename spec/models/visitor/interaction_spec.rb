@@ -24,7 +24,7 @@ RSpec.describe Visitor::Interaction, type: :model do
   end
   it { is_expected.to serialize(:data) }
   context 'if resource not related to campaign' do
-    before { subject.stub(:resource) { build_stubbed(:campaign) } }
+    before { allow(subject).to receive_messages(resource: build_stubbed(:campaign)) }
     it { is_expected.to_not be_valid }
   end
 end
