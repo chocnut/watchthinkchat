@@ -24,6 +24,7 @@ gem 'pusher'
 gem 'rest-client'
 gem 'platform-api'
 gem 'versionist'
+gem 'aws-ses'
 
 # Assets CSS
 gem 'sass-rails'
