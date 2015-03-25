@@ -18,7 +18,7 @@ describe 'User', type: :feature do
           fill_in 'user[password_confirmation]', with:  user[:password]
           click_button 'Sign Up'
         end.to change(User, :count).by(1)
-        expect(current_path).to eq(authenticated_root_path)
+        expect(current_path).to eq(campaigns_path)
       end
       scenario 'facebook' do
         user = attributes_for(:user)
@@ -38,7 +38,7 @@ describe 'User', type: :feature do
           click_link 'Sign Up'
           find("a[href='#{user_omniauth_authorize_path(:facebook)}']").click
         end.to change(User, :count).by(1)
-        expect(current_path).to eq(authenticated_root_path)
+        expect(current_path).to eq(campaigns_path)
       end
     end
   end
@@ -54,7 +54,7 @@ describe 'User', type: :feature do
         fill_in 'user[email]', with:  user_attributes[:email]
         fill_in 'user[password]', with:  user_attributes[:password]
         click_button 'Sign In'
-        expect(current_path).to eq(authenticated_root_path)
+        expect(current_path).to eq(campaigns_path)
       end
     end
     scenario 'show error message on invalid login' do

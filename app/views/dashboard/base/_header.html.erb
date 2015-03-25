@@ -7,11 +7,6 @@
 
   <div class="top-nav clearfix">
     <ul class="nav navbar-nav">
-      <li>
-        <a href="<%= unauthenticated_root_path %>" class="<%= 'active' if current_page?("/#{I18n.locale}") %>">
-          <%=t('routes.dashboard').titleize %>
-        </a>
-      </li>
       <% if current_user.has_role? :manager %>
       <li>
         <a href="<%= campaigns_path %>" class="<%= 'active' if request.path.match(campaigns_path) %>">
