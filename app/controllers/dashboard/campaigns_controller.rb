@@ -7,7 +7,7 @@ module Dashboard
     def new
       build_campaign
       save_campaign
-      redirect_to campaign_build_path(id: :basic, campaign_id: @campaign.id)
+      redirect_to campaign_build_path(id: I18n.t('wicked.basic'), campaign_id: @campaign.id)
     end
 
     def show

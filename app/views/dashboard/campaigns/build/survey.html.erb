@@ -1,10 +1,8 @@
 <% Globalize.with_locale(@campaign.locale.try(:code) || I18n.locale) do %>
-<%= render 'progress' %>
-<div class="col-md-9">
-  <section class="panel">
-    <header class="panel-heading">
-      <%= t 'campaigns.build.title' %>
-    </header>
+  <%= render 'header' %>
+  <% content_for(:title) { t 'campaigns.build.progress.survey.title' } %>
+  <% content_for(:subtitle) { t 'campaigns.build.progress.survey.description' } %>
+  <div class="container-fluid">
     <div ng-app="survey_generator" ng-controller="SurveyController" ng-init="init()" class="survey_generator">
       <ul id="question_list" ui-sortable="questionSortable" ng-model="questions">
         <li ng-repeat="question in questions | orderBy:'question.position'" ng-class="{active: active_question==question}" class="clearfix">
@@ -18,8 +16,7 @@
               <h3>{{question.title}}</h3>
               <h5>{{question.help_text}}</h5>
               <div ng-repeat="option in question.options_attributes" ng-hide="option._destroy == 1">
-                <div class="input-group">
-                  <input type="radio" disabled>
+                <div>
                   <label>{{option.title}}</label>
                 </div>
               </div>
@@ -27,26 +24,23 @@
           </div>
           <form class="form-horizontal" ng-submit="updateQuestion(question)" novalidate>
             <div class="form-group row">
-              <label class="col-md-2 control-label" for="question_title">Question</label>
+              <label class="col-md-2 control-label" for="question_title"><%= t 'activerecord.attributes.survey.question' %></label>
               <div class="col-md-8">
                 <input name="question_title" class="form-control" type="text" ng-model="question.title" required />
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-2 control-label" for="question_help_text">Help Text</label>
+              <label class="col-md-2 control-label" for="question_help_text"><%= t 'activerecord.attributes.survey.help_text' %></label>
               <div class="col-md-8">
                 <input name="question_help_text"class="form-control" type="text" ng-model="question.help_text" />
               </div>
             </div>
             <div class="form-group row options">
-              <label class="col-md-2 control-label" for="options">Options</label>
+              <label class="col-md-2 control-label" for="options"><%= t 'activerecord.attributes.survey.options' %></label>
               <div class="col-md-9">
                 <div class="row" ng-repeat="option in question.options_attributes" ng-hide="option._destroy == 1">
                   <div class="col-sm-5">
-                    <div class="input-group">
-                      <span class="input-group-addon">
-                        <input type="radio" disabled>
-                      </span>
+                    <div>
                       <input name="option_text" class="form-control" type="text" value="{{option.title}}" required ng-model="option.title" />
                     </div>
                   </div>
@@ -61,9 +55,9 @@
                       </div>
                       <div class="col-sm-4">
                         <select class="form-control" ng-model="option.conditional" required>
-                          <option value="next">Continue</option>
-                          <option value="skip">Skip to</option>
-                          <option value="finish">Finish</option>
+                          <option value="next"><%= t 'activerecord.attributes.survey.continue' %></option>
+                          <option value="skip"><%= t 'activerecord.attributes.survey.skip_to' %></option>
+                          <option value="finish"><%= t 'activerecord.attributes.survey.finish' %></option>
                         </select>
                       </div>
                       <div class="row col-sm-4">
@@ -79,18 +73,16 @@
                 </div>
                 <div class="row">
                   <div class="col-sm-5">
-                  <div class="input-group add_option" ng-click="addOptionToQuestion(question)">
-                    <span class="input-group-addon">
-                      <input type="radio" disabled>
-                    </span>
-                    <input name="option_text" class="form-control" type="text" value="Click to add option" disabled />
+                    <div class="add_option" ng-click="addOptionToQuestion(question)">
+                      <input name="option_text" class="form-control" type="text" value="<%= t 'activerecord.attributes.survey.click_to_add_question' %>" disabled />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-10 text-right">
-                <input class="btn btn-primary" name="commit" type="submit" value="Save Question">
+              <div class="row">
+                <div class="col-md-10 text-right">
+                  <input class="btn btn-primary" name="commit" type="submit" value="Save Question">
+                </div>
               </div>
             </div>
           </form>
@@ -98,26 +90,23 @@
       </ul>
       <form id="question_form" name="questionForm" class="form-horizontal"  ng-submit="questionForm.$valid && addQuestion(question_attributes)" novalidate>
         <div class="form-group row">
-          <label class="col-md-2 control-label" for="question_title">Question</label>
+          <label class="col-md-2 control-label" for="question_title"><%= t 'activerecord.attributes.survey.question' %></label>
           <div class="col-md-8">
             <input name="new_question_title" class="form-control" type="text" ng-model="question_attributes.title" required />
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-md-2 control-label" for="question_help_text">Help Text</label>
+          <label class="col-md-2 control-label" for="question_help_text"><%= t 'activerecord.attributes.survey.help_text' %></label>
           <div class="col-md-8">
             <input name="new_question_help_text"class="form-control" type="text" ng-model="question_attributes.help_text" />
           </div>
         </div>
         <div class="form-group row options">
-          <label class="col-md-2 control-label" for="options">Options</label>
+          <label class="col-md-2 control-label" for="options"><%= t 'activerecord.attributes.survey.options' %></label>
           <div class="col-md-9">
             <div class="row" ng-repeat="option in question_attributes.options_attributes">
               <div class="col-sm-5">
-                <div class="input-group">
-                  <span class="input-group-addon">
-                    <input type="radio" disabled>
-                  </span>
+                <div>
                   <input name="new_option_text" class="form-control" type="text" value="{{option.title}}" required ng-model="option.title" />
                 </div>
               </div>
@@ -132,9 +121,9 @@
                   </div>
                   <div class="col-sm-4">
                     <select name ="new_conditional" class="form-control" ng-model="option.conditional" required>
-                      <option value="next">Continue</option>
-                      <option value="skip">Skip to</option>
-                      <option value="finish">Finish</option>
+                      <option value="next"><%= t 'activerecord.attributes.survey.continue' %></option>
+                      <option value="skip"><%= t 'activerecord.attributes.survey.skip_to' %></option>
+                      <option value="finish"><%= t 'activerecord.attributes.survey.finish' %></option>
                     </select>
                   </div>
                   <div class="row col-sm-4">
@@ -150,39 +139,31 @@
             </div>
             <div class="row">
               <div class="col-sm-5">
-              <div class="input-group add_option" ng-click="addOptionToNew()">
-                <span class="input-group-addon">
-                  <input type="radio" disabled>
-                </span>
-                <input name="option_text" class="form-control" type="text" value="Click to add option" disabled />
+                <div class="add_option" ng-click="addOptionToNew()">
+                  <input name="option_text" class="form-control" type="text" value="Click to add option" disabled />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-10 text-right">
-            <input class="btn btn-primary" name="commit" type="submit" value="Add Question">
+          <div class="row">
+            <div class="col-md-10 text-right">
+              <input class="btn btn-primary" name="commit" type="submit" value="Add Question">
+            </div>
           </div>
         </div>
       </form>
     </div>
-    <div class="panel-footer clearfix">
-      <%= semantic_form_for @campaign, url: wizard_path, method: :put, html: {class: 'form-horizontal'} do |f| %>
-        <div class="pull-right">
-          <a href="<%= previous_wizard_path %>" class="btn"><%= t('campaigns.build.previous') %></a>&nbsp;
-          <%= f.submit t('campaigns.build.next'), class: 'btn btn-primary' %>
-        </div>
-      <% end %>
-    </div>
-  </section>
-</div>
-<% content_for :javascript do %>
-  <script type="text/javascript">
-    //<![CDATA[
+  </div>
+  <%= semantic_form_for @campaign, url: wizard_path, method: :put, html: {class: 'form-horizontal'} do |f| %>
+    <%= render partial: 'progress', locals: { f: f } %>
+  <% end %>
+  <% content_for :javascript do %>
+    <script type="text/javascript">
+      //<![CDATA[
       var campaign_id = <%= @campaign.id %>;
       var url = "<%= campaign_api_questions_path %>";
-    //]]>
-  </script>
-  <%= javascript_include_tag 'dashboard/survey/application' %>
-<% end %>
+      //]]>
+    </script>
+    <%= javascript_include_tag 'dashboard/survey/application' %>
+  <% end %>
 <% end %>

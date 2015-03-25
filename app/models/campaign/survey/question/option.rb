@@ -4,17 +4,15 @@ class Campaign
       class Option < ActiveRecord::Base
         # associations
         belongs_to :question
-        belongs_to :route, class: 'Campaign::Growthspace::Route'
-        has_one :conditional_question, class: 'Question'
-
-        # callbacks
-        after_save :generate_code, on: :create
+        belongs_to :route, class_name: 'Campaign::Growthspace::Route'
+        belongs_to :conditional_question,
+                   class_name: 'Campaign::Survey::Question'
 
         # validations
-        validates :conditional, presence: true
         validates :title, presence: true
+        validates :conditional, presence: true
         validates :question, presence: true, on: :update
-        validates :conditional_question_id,
+        validates :conditional_question,
                   presence: true,
                   if: proc { self.skip? }
 
@@ -25,10 +23,8 @@ class Campaign
 
         delegate :campaign, to: :question
 
-        protected
-
-        def generate_code
-          update_column(:code, Base62.encode(id))
+        def code
+          Base62.encode id
         end
       end
     end

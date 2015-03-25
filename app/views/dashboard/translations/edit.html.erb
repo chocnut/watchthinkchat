@@ -1,85 +1,67 @@
-<div class="col-md-12">
-  <section class="panel">
-    <header class="panel-heading">
-      <%= t 'routes.translations' %>
-    </header>
-    <div class="panel-body panel-index-body">
-      <table class="table table-striped index-table">
-        <tbody>
-          <tr>
-            <td style="background-image: url(//img.youtube.com/vi/<%= @translation.campaign.engagement_player.try(:decorate).try(:youtube_video_id) %>/maxresdefault.jpg)">
-              <div class="button-row">
-                <a href="<%= translations_path %>" class="btn btn-default">
-                  <%= fa_icon "chevron-left" %>
-                </a>
-              </div>
-              <div class="pull-left cover">
-                <% Globalize.with_locale(@translation.campaign.locale.code) do %>
-                  <h3><%= @translation.campaign.name %></h3>
-                  <div><span class="label label-primary"><%= @translation.locale.decorate.name %></span></div>
-                <% end %>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <% Globalize.with_locale(@translation.locale.code) do %>
+<% Globalize.with_locale(@translation.locale.code) do %>
+  <% content_for(:title) { @translation.campaign.try(:decorate).name } %>
+  <% content_for(:subtitle) { t('routes.translations').titleize } %>
+  <div class="campaigns">
+    <div class="col-md-4">
+      <%= render partial: 'campaign', locals: { translation: @translation, campaign: @translation.campaign.try(:decorate) } %>
+    </div>
+    <div class="col-md-8">
+      <div class="campaign-tabs">
         <%= semantic_form_for @translation.campaign, url: translation_path(@translation) do |f| %>
-          <div class="panel-content">
-            <ul class="nav nav-tabs" role="tablist">
-              <li class="active">
-                <a href="#<%= t('wicked.basic') %>" role="tab" data-toggle="tab"><%= t('wicked.basic').titleize %></a>
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+              <a href="#<%= t('wicked.basic') %>" role="tab" data-toggle="tab"><%= t('wicked.basic').titleize %></a>
+            </li>
+            <%- unless @translation.campaign.engagement_player.blank? %>
+              <li>
+                <a href="#<%= t('wicked.engagement_player') %>" role="tab" data-toggle="tab"><%= t('wicked.engagement_player').titleize %></a>
               </li>
-              <%- unless @translation.campaign.engagement_player.blank? %>
-                <li>
-                  <a href="#<%= t('wicked.engagement_player') %>" role="tab" data-toggle="tab"><%= t('wicked.engagement_player').titleize %></a>
-                </li>
-              <% end -%>
-              <%- unless @translation.campaign.share.blank? || !@translation.campaign.share.enabled? %>
-                <li>
-                  <a href="#<%= t('wicked.share') %>" role="tab" data-toggle="tab"><%= t('wicked.share').titleize %></a>
-                </li>
-              <% end -%>
-              <%- unless @translation.campaign.community.blank? || !@translation.campaign.community.enabled? %>
-                <li>
-                  <a href="#<%= t('wicked.community') %>" role="tab" data-toggle="tab"><%= t('wicked.community').titleize %></a>
-                </li>
-              <% end -%>
-              <%- unless @translation.campaign.growthspace.blank? || !@translation.campaign.growthspace.enabled? %>
-                <li>
-                  <a href="#<%= t('wicked.growthspace') %>" role="tab" data-toggle="tab"><%= t('wicked.growthspace').titleize %></a>
-                </li>
-              <% end -%>
-              <%- unless @translation.campaign.survey.blank? || !@translation.campaign.survey.enabled? %>
-                <li>
-                  <a href="#<%= t('wicked.survey') %>" role="tab" data-toggle="tab"><%= t('wicked.survey').titleize %></a>
-                </li>
-              <% end -%>
-            </ul>
+            <% end -%>
+            <%- unless @translation.campaign.share.blank? || !@translation.campaign.share.enabled? %>
+              <li>
+                <a href="#<%= t('wicked.share') %>" role="tab" data-toggle="tab"><%= t('wicked.share').titleize %></a>
+              </li>
+            <% end -%>
+            <%- unless @translation.campaign.community.blank? || !@translation.campaign.community.enabled? %>
+              <li>
+                <a href="#<%= t('wicked.community') %>" role="tab" data-toggle="tab"><%= t('wicked.community').titleize %></a>
+              </li>
+            <% end -%>
+            <%- unless @translation.campaign.growthspace.blank? || !@translation.campaign.growthspace.enabled? %>
+              <li>
+                <a href="#<%= t('wicked.growthspace') %>" role="tab" data-toggle="tab"><%= t('wicked.growthspace').titleize %></a>
+              </li>
+            <% end -%>
+            <%- unless @translation.campaign.survey.blank? || !@translation.campaign.survey.enabled? %>
+              <li>
+                <a href="#<%= t('wicked.survey') %>" role="tab" data-toggle="tab"><%= t('wicked.survey').titleize %></a>
+              </li>
+            <% end -%>
+          </ul>
 
-            <div class="tab-content">
-              <%= render partial: 'dashboard/translations/tabs/basic', locals: { f: f } %>
-              <%- unless @translation.campaign.engagement_player.blank? %>
-                <%= render partial: 'dashboard/translations/tabs/engagement_player', locals: { f: f } %>
-              <% end -%>
-              <%- unless @translation.campaign.share.blank? || !@translation.campaign.share.enabled? %>
-                <%= render partial: 'dashboard/translations/tabs/share', locals: { f: f } %>
-              <% end -%>
-              <%- unless @translation.campaign.community.blank? || !@translation.campaign.community.enabled? %>
-                <%= render partial: 'dashboard/translations/tabs/community', locals: { f: f } %>
-              <% end -%>
-              <%- unless @translation.campaign.growthspace.blank? || !@translation.campaign.growthspace.enabled? %>
-                <%= render partial: 'dashboard/translations/tabs/growthspace', locals: { f: f } %>
-              <% end -%>
-              <%- unless @translation.campaign.survey.blank? || !@translation.campaign.survey.enabled? %>
-                <%= render partial: 'dashboard/translations/tabs/survey', locals: { f: f } %>
-              <% end -%>
-            </div>
+          <div class="tab-content">
+            <%= render partial: 'dashboard/translations/tabs/basic', locals: { f: f } %>
+            <%- unless @translation.campaign.engagement_player.blank? %>
+              <%= render partial: 'dashboard/translations/tabs/engagement_player', locals: { f: f } %>
+            <% end -%>
+            <%- unless @translation.campaign.share.blank? || !@translation.campaign.share.enabled? %>
+              <%= render partial: 'dashboard/translations/tabs/share', locals: { f: f } %>
+            <% end -%>
+            <%- unless @translation.campaign.community.blank? || !@translation.campaign.community.enabled? %>
+              <%= render partial: 'dashboard/translations/tabs/community', locals: { f: f } %>
+            <% end -%>
+            <%- unless @translation.campaign.growthspace.blank? || !@translation.campaign.growthspace.enabled? %>
+              <%= render partial: 'dashboard/translations/tabs/growthspace', locals: { f: f } %>
+            <% end -%>
+            <%- unless @translation.campaign.survey.blank? || !@translation.campaign.survey.enabled? %>
+              <%= render partial: 'dashboard/translations/tabs/survey', locals: { f: f } %>
+            <% end -%>
           </div>
-          <div class="panel-footer text-right">
-            <%= f.submit t('translations.edit.save'), class: 'btn btn-primary' %>
-          </div>
-        <% end %>
-      <% end %>
-  </section>
-</div>
+        </div>
+        <div class="campaign-actions">
+          <%= f.submit t('translations.edit.save'), class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

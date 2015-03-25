@@ -1,10 +1,10 @@
 class SiteController < ApplicationController
   before_action :load_campaign
+  before_action :load_translations
   decorates_assigned :campaign
 
   def index
-    load_translations
-    return render 'no_campaign' unless @campaign
+    return render 'no_campaign', layout: 'no_campaign', status: 404 unless @campaign
     return if @campaign.locales.find_by(code: I18n.locale) ||
               @campaign.locale.code.try(:to_sym) == I18n.locale
     redirect_to("/#{@campaign.locale.code}")

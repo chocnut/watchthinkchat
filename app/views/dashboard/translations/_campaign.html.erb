@@ -1,0 +1,39 @@
+<div class="campaign">
+  <div class="campaign-image">
+  <% if campaign.engagement_player.try(:decorate).try(:youtube_video_id) %>
+    <img class="img-responsive" src="//img.youtube.com/vi/<%= campaign.engagement_player.try(:decorate).try(:youtube_video_id) %>/maxresdefault.jpg">
+  <% else %>
+    <div class="empty-space">
+    <%= fa_icon campaign.icon %>
+    </div>
+  <% end %>
+  </div>
+  <div class="campaign-buttons text-right">
+    <% if params[:action] == 'index' %>
+    <a href="<%= edit_translation_path(translation) %>" class="btn btn-primary">
+      <%= fa_icon "pencil" %>
+    </a>
+    <% elsif params[:action] == 'edit' %>
+    <a href="<%= translations_path %>" class="btn btn-default">
+      <%= fa_icon "chevron-left" %>
+    </a>
+    <% end %>
+  </div>
+  <div class="campaign-info">
+    <h3><%= campaign.name %></h3>
+    <p><%= campaign.description %></p>
+    <% if campaign.permalink %>
+      <h5><%= link_to campaign.permalink, campaign.permalink, target: '_blank' %></h5>
+    <% else %>
+      <h5>No URL Configured</h5>
+    <% end %>
+    <small>
+      <%= t 'campaigns.created_on', date: campaign.created_at.strftime("%m/%d/%Y") %>
+      <br>
+      <%= t 'campaigns.updated_on', time: time_ago_in_words(campaign.updated_at) %>
+    </small>
+  </div>
+  <div class="campaign-footer">
+    <span class="label label-primary"><%= translation.locale.decorate.name %></span>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+require 'campaign'
 require 'campaign/survey'
 class Campaign
   class Survey

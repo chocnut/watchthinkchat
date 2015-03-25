@@ -16,7 +16,7 @@ describe Dashboard::Api::QuestionsController do
       it 'is successful' do
         get :index,
             campaign_id: @campaign.id,
-            format: :json
+            locale: :en
         expect(response).to be_success
         expect(json_response)
           .to eq(JSON.parse(@survey
@@ -30,7 +30,7 @@ describe Dashboard::Api::QuestionsController do
         get :show,
             campaign_id: @campaign.id,
             id: @survey.questions.first.id,
-            format: :json
+            locale: :en
         expect(response).to be_success
         expect(json_response)
           .to eq(JSON.parse(@survey
@@ -46,7 +46,7 @@ describe Dashboard::Api::QuestionsController do
         post :create,
              campaign_id: @campaign.id,
              question: @question,
-             format: :json
+             locale: :en
         expect(response).to be_success
         expect(json_response)
           .to eq(JSON.parse(@survey
@@ -64,7 +64,7 @@ describe Dashboard::Api::QuestionsController do
             campaign_id: @campaign.id,
             id: @old_question.id,
             question: @question,
-            format: :json
+            locale: :en
         expect(response).to be_success
         expect(@old_question).to_not be(@survey.questions.first)
       end
@@ -76,7 +76,6 @@ describe Dashboard::Api::QuestionsController do
         delete :destroy,
                campaign_id: @campaign.id,
                id: @old_question.id,
-               format: :json,
                locale: :en
         expect(response).to be_success
         expect(json_response)

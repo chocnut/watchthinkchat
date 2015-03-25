@@ -1,20 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe Campaign::Survey::Question::Option, type: :model do
-  it 'is invalid without a conditional' do
-    expect(build(:option, conditional: nil)).not_to be_valid
+  it { is_expected.to belong_to :question }
+  it { is_expected.to belong_to :route }
+  it { is_expected.to belong_to :conditional_question }
+  it { is_expected.to validate_presence_of :title }
+  it { is_expected.to validate_presence_of :conditional }
+  context 'if conditional is skip' do
+    before { subject.stub(:skip?) { true } }
+    it { is_expected.to validate_presence_of :conditional_question }
   end
-  it 'is invalid without a conditional_question if conditional is skip' do
-    expect(build(:option,
-                 conditional: :skip,
-                 conditional_question: nil)).not_to be_valid
-  end
-  it 'generates a unique code' do
-    @option = create(:option)
-    expect(@option.code).to eq(Base62.encode(@option.id))
-  end
-  it 'creates a translation object when title is set' do
-    @option = create(:option)
-    expect(@option.translations.where title: @option.title).to exist
+  describe '#code' do
+    before { subject.stub(:id) { 123 } }
+    it 'returns correct code' do
+      expect(subject.code).to eq(Base62.encode(subject.id))
+    end
   end
 end

@@ -4,11 +4,11 @@ module Dashboard
       respond_to :json
 
       def index
-        respond_with load_questions, include: :options_attributes
+        render json: load_questions, include: :options_attributes
       end
 
       def show
-        respond_with load_question, include: :options_attributes
+        render json: load_question, include: :options_attributes
       end
 
       def new

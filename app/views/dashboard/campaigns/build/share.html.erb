@@ -1,62 +1,56 @@
 <% Globalize.with_locale(@campaign.locale.try(:code) || I18n.locale) do %>
-<%= render 'progress' %>
-<div class="col-md-9">
-  <section class="panel">
-    <header class="panel-heading">
-      Campaign Wizard
-    </header>
-    <%= semantic_form_for @campaign, url: wizard_path, method: :put, html: {class: 'form-horizontal'} do |f| %>
-      <%= f.semantic_fields_for :share, @campaign.share || @campaign.build_share.decorate do |c| %>
-        <%=  c.hidden_field :id %>
-        <div class="panel-body">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-12">
-                <%= c.input :enabled, as: :radio, collection: [['On', true], ['Off', false]], label: 'Share' %>
-              </div>
-              <div class="enabled_fields">
-                <div class="col-md-12">
-                  <%=  c.input :title, input_html: { value: c.object.decorate.title } %>
+  <%= render 'header' %>
+  <% content_for(:title) { t 'campaigns.build.progress.share.title' } %>
+  <% content_for(:subtitle) { t 'campaigns.build.progress.share.description' } %>
+  <%= semantic_form_for @campaign, url: wizard_path, method: :put, html: {class: 'form-horizontal'} do |f| %>
+    <%= f.semantic_fields_for :share, @campaign.share || @campaign.build_share.decorate do |c| %>
+      <%=  c.hidden_field :id %>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <%= c.input :enabled, as: :radio, collection: [[t('activerecord.attributes.common.open'), true], [t('activerecord.attributes.common.closed'), false]], label: t('activerecord.attributes.common.enabled') %>
+          </div>
+          <div class="enabled_fields">
+            <div class="col-md-12">
+              <%=  c.input :title, input_html: { value: c.object.decorate.title }, label: t('activerecord.attributes.share.title') %>
+            </div>
+            <div class="col-md-12">
+              <%=  c.input :description, input_html: { value: c.object.decorate.description }, label: t('activerecord.attributes.share.description') %>
+            </div>
+            <div class="col-md-12">
+            <h3 class="border-above"><%= t 'campaigns.build.progress.share.share_campaign' %></h3>
+            </div>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-3">
+                  <%=  c.input :facebook, label: false %>
                 </div>
-                <div class="col-md-12">
-                  <%=  c.input :description, input_html: { value: c.object.decorate.description } %>
+                <div class="col-md-3">
+                  <%=  c.input :twitter, label: false %>
                 </div>
-                <p>Allow Visitors to Share Campaign On:</p>
-                <div class="row">
-                  <div class="col-md-3">
-                    <%=  c.input :facebook %>
-                  </div>
-                  <div class="col-md-3">
-                    <%=  c.input :twitter %>
-                  </div>
-                  <div class="col-md-3">
-                    <%=  c.input :link %>
-                  </div>
-                  <div class="col-md-3">
-                    <%=  c.input :email %>
-                  </div>
+                <div class="col-md-3">
+                  <%=  c.input :link, label: false %>
                 </div>
-                <p>Custom Email Invite</p>
-                <div class="col-md-12">
-                  <%=  c.input :subject, input_html: { value: c.object.subject } %>
-                </div>
-                <div class="col-md-12">
-                  <%=  c.input :message, input_html: { value: c.object.message } %>
+                <div class="col-md-3">
+                  <%=  c.input :email, label: false %>
                 </div>
               </div>
             </div>
+            <div class="col-md-12">
+            <h3 class="border-above"><%= t 'campaigns.build.progress.share.custom_email_invite' %></h3>
+            </div>
+            <div class="col-md-12">
+              <%=  c.input :subject, input_html: { value: c.object.subject }, label: t('activerecord.attributes.share.subject') %>
+            </div>
+            <div class="col-md-12">
+              <%=  c.input :message, input_html: { value: c.object.message, rows: 5 }, label: t('activerecord.attributes.share.message') %>
+            </div>
           </div>
-        </div>
-        <% end %>
-      <div class="panel-footer clearfix">
-        <div class="pull-right">
-          <a href="<%= previous_wizard_path %>" class="btn">Previous</a>&nbsp;
-          <%= f.submit "Next", class: 'btn btn-primary' %>
         </div>
       </div>
     <% end %>
-  </section>
-</div>
+    <%= render partial: 'progress', locals: { f: f } %>
+  <% end %>
 <% content_for :javascript do %>
   <script type="text/javascript">
   $('.enabled_fields').hide();

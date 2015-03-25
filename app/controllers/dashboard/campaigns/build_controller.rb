@@ -3,6 +3,8 @@ module Dashboard
     class BuildController < Dashboard::BaseController
       include Wicked::Wizard::Translated
 
+      layout 'dashboard/build'
+
       steps :basic,
             :engagement_player,
             :growthspace,
@@ -15,10 +17,7 @@ module Dashboard
 
       def show
         load_campaign
-        unless @campaign.opened? || @campaign.status == wizard_value(step) ||
-               future_step?(I18n.t("wicked.#{@campaign.status}"))
-          return redirect_to(campaign_build_path(campaign_id: @campaign, id: I18n.t("wicked.#{@campaign.status}")))
-        end
+        return unless possible_step?
         send wizard_value(step) if self.class.method_defined? wizard_value(step).to_sym
         decorate_campaign
         render_wizard
@@ -32,6 +31,16 @@ module Dashboard
       end
 
       protected
+
+      def possible_step?
+        unless @campaign.opened? ||
+               @campaign.status == wizard_value(step) ||
+               future_step?(I18n.t("wicked.#{@campaign.status}"))
+          redirect_to(campaign_build_path(campaign_id: @campaign, id: I18n.t("wicked.#{@campaign.status}")))
+          return false
+        end
+        true
+      end
 
       def survey
         return unless @campaign.growthspace.try(:enabled?)

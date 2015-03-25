@@ -1,22 +1,20 @@
 language: ruby
 cache: bundler
 rvm:
-- 2.1.4
+- 2.1.5
 services:
-    - memcached
+- memcached
 env:
   global:
   - AMAZON_S3_BUCKET=cruglobal_bundle_cache
   - AMAZON_ACCESS_KEY_ID=AKIAJMC5POUXHVSOZ4XA
-  - secure: "B95omo/R1Jddftpp1aFxTjJuFwjJCuZ0qSuKFleRn+GKpNuOk1tze7wPp2cslLhDug7ff+ps1ELh+qjWDqSEbAZKq9mpMWu1tY1HCMEM/1AhUlk+kAXxd/arTt8bO2OjIDaylCItf8ZmhX5K/FOqV0BQMLzDR+Hx/UOyhpeHAJ8="
+  - secure: B95omo/R1Jddftpp1aFxTjJuFwjJCuZ0qSuKFleRn+GKpNuOk1tze7wPp2cslLhDug7ff+ps1ELh+qjWDqSEbAZKq9mpMWu1tY1HCMEM/1AhUlk+kAXxd/arTt8bO2OjIDaylCItf8ZmhX5K/FOqV0BQMLzDR+Hx/UOyhpeHAJ8=
   - base_url=watchthinkchat.com
   - SECRET_KEY_BASE=gopgfkgokghojkghjp345jb6kjb45jkb
   - RAILS_ENV=test
-  - secure: "hTAW1DdfaRLXqXCuMJ7kdjxWqxFL5WAFnrAS5knEmf7QfACJ9OJq97om7IFpmc2ClT1SjgwOCDgJegOvIyWK4mCWzUNgExibv+Pf2Ms9SUK1aS8P4mRKj2Oy/FuvOPBDfQjHL6Dkley6iHRiq2H8b4fonSVSbPjwot56nUpihas="
-  - secure: "R+oytcnLjaVzYA2EYI1NRog9eW0jW5X6DF/M80fRNLZHnFU+y7GFG0VCHoDBPE9OQyWmNCWLm05Wm0IFjG9uWcsCUaSvmbBTsT+iRe4NxtYLfeAS+9+qmv6bHggcmDPDCg8/v7exLSkddENll4FvFDIUhnqwgjVwh+KL1g8qQas="
-before_install:
-- export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
+  - secure: hTAW1DdfaRLXqXCuMJ7kdjxWqxFL5WAFnrAS5knEmf7QfACJ9OJq97om7IFpmc2ClT1SjgwOCDgJegOvIyWK4mCWzUNgExibv+Pf2Ms9SUK1aS8P4mRKj2Oy/FuvOPBDfQjHL6Dkley6iHRiq2H8b4fonSVSbPjwot56nUpihas=
+  - secure: R+oytcnLjaVzYA2EYI1NRog9eW0jW5X6DF/M80fRNLZHnFU+y7GFG0VCHoDBPE9OQyWmNCWLm05Wm0IFjG9uWcsCUaSvmbBTsT+iRe4NxtYLfeAS+9+qmv6bHggcmDPDCg8/v7exLSkddENll4FvFDIUhnqwgjVwh+KL1g8qQas=
+  - secure: aC5Lb5WmQjIVdd/f4xUxdyI+c1mZ9/ZOUA2iN/3Vu8iO3q83GUrddkRizN5qMlqoV1ZfOAShVN9DUAKk8VSzaYbKpxYxgUVWjQW1IOn1l96uQdXnFVIkXX2YnSf64RsJYb0mQJ0p9X5gnSVbGJBi4P01clL4pXSGnVKvd1Zd8oM=
 install:
 - travis_retry script/cached-bundle install --deployment --without development
 before_script:
@@ -24,22 +22,8 @@ before_script:
 - cp config/database.yml.travis config/database.yml
 - bundle exec rake db:migrate RAILS_ENV=test
 script:
-- bundle exec rake
+- bin/rspec
 - bundle exec rubocop -R --fail-level error
-deploy:
-  provider: heroku
-  strategy: git
-  api_key:
-    secure: G/82imsp6l8YiGUp4BCc/C1jVBkBN63sMC63HJpjK3y65DQ1PusLSmCVKW97z4gCFhX1z1IHPX8i8i03IgCT3HdFY7pEQzoCLEVcCrY9lXcF1nVu1bpaBgbLnVIm9QGIYPJjhG+QMdkzHV2jZ937T4DqujVtwWZUs9YOp0GM530=
-  app:
-    develop: watchthinkchat-staging
-    master: watchthinkchat-production
-  run:
-  - rake db:migrate
-  - restart
-  - rake cleanup
-  on:
-    repo: CruGlobal/watchthinkchat
 addons:
   code_climate:
     repo_token:
@@ -47,3 +31,24 @@ addons:
 notifications:
   flowdock:
     secure: RoqS2OnNISeEhi2Hs2adhejdCLOhVy+3siuX9N5GvE3m76IJm5crh/26U1rSzMb8jAbvV22JqXTy4wfoeFEHfpPEZn0XCgvOyTJPvSHPDzi9itJyTQt4trEcuPTgixAvLz7ce+PWoTMJwpg4fNO1mX0+rNfOPW5jxukRfi+rUfM=
+deploy:
+  - provider: opsworks
+    access_key_id: AKIAJJA7ZKF5VD6QZS2A
+    secret_access_key:
+      secure: dwYRBHsDeFOzJQiP3+N6T6cXqhHGrrFP2YKfLb6LYzkQo3tzZhVp9/mcKFCXo3m1gee/XuI0zIPqboKao8vFhPEdO89BtoIzT3VR/bGnq/MPKzprkckyrpJh3FVyzUjVQC4WkmXU9LqlYJZyIfvnNWnpaCXYTZiB45UQZXfvTFE=
+    app-id: aaa46ab3-21b0-44b6-b5a2-094d3138cd74
+    migrate: true
+    wait-until-deployed: true
+    on:
+      repo: CruGlobal/watchthinkchat
+      branch: master
+  - provider: opsworks
+    access_key_id: AKIAJJA7ZKF5VD6QZS2A
+    secret_access_key:
+      secure: dwYRBHsDeFOzJQiP3+N6T6cXqhHGrrFP2YKfLb6LYzkQo3tzZhVp9/mcKFCXo3m1gee/XuI0zIPqboKao8vFhPEdO89BtoIzT3VR/bGnq/MPKzprkckyrpJh3FVyzUjVQC4WkmXU9LqlYJZyIfvnNWnpaCXYTZiB45UQZXfvTFE=
+    app-id: 610c4ce5-8fe8-47ee-8dc6-db873a12ae5f
+    migrate: true
+    wait-until-deployed: true
+    on:
+      repo: CruGlobal/watchthinkchat
+      branch: develop

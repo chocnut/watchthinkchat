@@ -58,7 +58,7 @@ Rails.application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets.
-  config.assets.precompile += ['visitor_chat.css', 'manage_panel.css']
+  # config.assets.precompile += %w(application.css)
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate
@@ -82,25 +82,12 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-
-  # Heroku requires logging to go to stdout
-  # config.logger = Logger.new(STDOUT)
-  # STDOUT.sync
   config.log_level = :info
-  # config.logger.level = Logger::DEBUG
 
-  # smtp
-  config.action_mailer.delivery_method = :smtp
+  # ActionMailer
+  config.action_mailer.delivery_method = :ses
   config.action_mailer.default_url_options =
     { host: "app.#{ENV['base_url']}" }
-
-  ActionMailer::Base.smtp_settings = {
-    address: 'smtp.sendgrid.net',
-    port: '587',
-    authentication: :plain,
-    user_name: ENV['SENDGRID_USERNAME'],
-    password: ENV['SENDGRID_PASSWORD'],
-    domain: 'heroku.com',
-    enable_starttls_auto: true
-  }
+  config.action_controller.asset_host = "//app.#{ENV['base_url']}"
+  config.action_mailer.asset_host = config.action_controller.asset_host
 end

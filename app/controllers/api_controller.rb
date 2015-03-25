@@ -24,21 +24,19 @@ class ApiController < ApplicationController
     @visitor ||= Visitor.create
   end
 
-  def visitor_from_share
-    share = URI(request.referer).path.match(%r{/(?<locale>.*)/s/(?<token>.*)/?})
+  def visitor_from_share(share = parse_request('s'))
     return unless share
     load_campaign
-    inviter = Visitor::Inviter.find_by(share_token: share[:token])
+    inviter = VisitorInvite::Inviter.find_by(share_token: share[:token])
     return unless inviter
     Visitor::Invitation.create(
-      invitee: current_visitor.try(:as, :invitee) || Visitor::Invitee.create,
+      invitee: current_visitor.try(:as, :invitee) || VisitorInvite::Invitee.create,
       inviter: inviter,
       campaign: @campaign
     ).invitee.becomes Visitor
   end
 
-  def visitor_from_invitation
-    invite = URI(request.referer).path.match(%r{/(?<locale>.*)/i/(?<token>.*)/?})
+  def visitor_from_invitation(invite = parse_request('i'))
     return unless invite
     unless visitor_signed_in?
       return Visitor::Invitation.find_by(token: invite[:token]).try(:invitee)
@@ -51,6 +49,10 @@ class ApiController < ApplicationController
   end
 
   protected
+
+  def parse_request(mode)
+    URI(request.referer).path.match(%r{/(?<locale>.*)/#{mode}/(?<token>.*)/?})
+  end
 
   def load_campaign
     return unless request.referer

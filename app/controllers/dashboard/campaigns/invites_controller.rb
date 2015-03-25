@@ -26,6 +26,7 @@ module Dashboard
       def build_invite
         @invite = User::Translator::Invite.new(campaign: @campaign)
         @invite.attributes = invite_params
+        @invite.user = current_manager
         authorize! :read, @campaign
       end
 

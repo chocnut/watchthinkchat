@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Core
-gem 'rails', '4.1.6'
+gem 'rails', '4.1.8'
 gem 'rails-observers'
 
 # Data Storage
@@ -24,9 +24,10 @@ gem 'pusher'
 gem 'rest-client'
 gem 'platform-api'
 gem 'versionist'
+gem 'aws-ses'
 
 # Assets CSS
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails'
 gem 'font-awesome-rails'
 gem 'bootstrap-sass'
 
@@ -79,6 +80,8 @@ group :test do
   gem 'capybara-angular'
   gem 'launchy'
   gem 'vcr'
+  gem 'poltergeist'
+  gem 'formulaic'
 end
 
 group :test, :development do

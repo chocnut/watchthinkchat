@@ -1,6 +1,6 @@
 class Campaign < ActiveRecord::Base
-  SUBDOMAIN = /\A((?!app)[a-z0-9][a-z0-9\-]*[a-z0-9]|[a-z0-9])\z/i
-  CNAME = /\A^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6}(:[0-9]{1,5})?\z/i
+  SUBDOMAIN = /\A((?!app)[a-z0-9][a-z0-9\-]*[a-z0-9]|[a-z0-9])\z/
+  CNAME = /\A^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,6}(:[0-9]{1,5})?\z/
   # associations
   has_many :permissions, as: :resource, dependent: :destroy
   has_many :users, through: :permissions
@@ -37,9 +37,10 @@ class Campaign < ActiveRecord::Base
   accepts_nested_attributes_for :growthspace, update_only: true
 
   # validations
+  validates :url, uniqueness: true, allow_blank: true
   validates :name, presence: true, unless: :basic?
   validates :locale, presence: true, unless: :basic?
-  validates :url, presence: true, uniqueness: true, unless: :basic?
+  validates :url, presence: true, unless: :basic?
   validates :url, length: { maximum: 63 }, if: :subdomain?
   validates :url, length: { maximum: 255 }, unless: :subdomain?
   validates :url,
@@ -53,10 +54,6 @@ class Campaign < ActiveRecord::Base
   # callbacks
   after_create do
     campaign.create_survey
-  end
-
-  before_save do |campaign|
-    campaign.url = campaign.url.try(:downcase)
   end
 
   # definitions

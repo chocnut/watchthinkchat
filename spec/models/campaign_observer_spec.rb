@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe CampaignObserver, type: :observer do
   subject { CampaignObserver.instance }
-
   before do
     ENV['heroku_name'] = 'watchthinkchat-test'
     ENV['heroku_token'] = '1234'

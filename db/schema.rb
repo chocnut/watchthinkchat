@@ -126,12 +126,12 @@ ActiveRecord::Schema.define(version: 20150129203119) do
     t.integer  "campaign_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "subject"
-    t.text     "message"
     t.boolean  "facebook",    default: true
     t.boolean  "twitter",     default: true
     t.boolean  "link",        default: true
     t.boolean  "email",       default: true
+    t.string   "subject"
+    t.text     "message"
   end
 
   create_table "campaign_survey_question_option_translations", force: true do |t|

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe Locale, type: :model do
   # associations
@@ -6,10 +6,6 @@ RSpec.describe Locale, type: :model do
   it { is_expected.to have_many(:locales).through(:alternate_locales) }
 
   # validations
-  it 'is invalid without code' do
-    expect(build(:locale, code: nil)).not_to be_valid
-  end
-  it 'is invalid without name' do
-    expect(build(:locale, name: nil)).not_to be_valid
-  end
+  it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_presence_of(:code) }
 end

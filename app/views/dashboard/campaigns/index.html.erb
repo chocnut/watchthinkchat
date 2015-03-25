@@ -1,3 +1,5 @@
+<% content_for(:title) { t('routes.campaigns').titleize } %>
+<% content_for(:subtitle) { } %>
 <div class="col-md-12">
   <%- if @campaigns.empty? %>
   <div class="row">
@@ -12,63 +14,22 @@
     </div>
   </div>
   <% else %>
-  <section class="panel">
-    <header class="panel-heading">
-      <%= t 'routes.campaigns' %>
-    </header>
-    <div class="panel-body panel-index-body">
-      <table class="campaigns table table-striped index-table">
-        <tbody>
-          <% @campaigns.decorate.each do |campaign| %>
-            <% Globalize.with_locale(campaign.locale.try(:code) || I18n.locale) do %>
-            <tr>
-              <td style="background-image: url(//img.youtube.com/vi/<%= campaign.engagement_player.try(:decorate).try(:youtube_video_id) %>/maxresdefault.jpg)">
-                <div class="button-row">
-                  <a href="<%= campaign_path(campaign) %>" class="btn btn-primary">
-                    <%= fa_icon "search" %>
-                  </a>
-                  <a href="<%= campaign_build_path(id: t('wicked.basic'), campaign_id: campaign.id) %>" class="btn btn-primary">
-                    <%= fa_icon "pencil" %>
-                  </a>
-                  <%= link_to fa_icon("trash-o"), campaign, confirm: 'Are you sure you want to delete this campaign?', method: :delete, class: 'btn btn-danger' %>
-                </div>
-                <div class="pull-left cover">
-                  <h3><%= campaign.name %></h3>
-                  <h5><%= link_to campaign.permalink, campaign.permalink, target: '_blank' %></h5>
-                  <small class="text-muted">
-                    <%= t 'campaigns.created_on', date: campaign.created_at.strftime("%m/%d/%Y") %>
-                    &middot;
-                    <%= t 'campaigns.updated_on', time: time_ago_in_words(campaign.updated_at) %>
-                  </small>
-                  <br />
-                  <%- unless campaign.engagement_player.blank? %>
-                    <span class="label label-primary"><%= t('wicked.engagement_player').humanize %></span>
-                  <% end -%>
-                  <%- unless campaign.share.blank? || !campaign.share.enabled? %>
-                    <span class="label label-primary"><%= t 'wicked.share' %></span>
-                  <% end -%>
-                  <%- unless campaign.community.blank? || !campaign.community.enabled? %>
-                    <span class="label label-primary"><%= t 'wicked.community' %></span>
-                  <% end -%>
-                  <%- unless campaign.alternate_locales.empty? %>
-                    <span class="label label-primary"><%= t 'routes.translations' %></span>
-                  <% end -%>
-                </div>
-              </td>
-            </tr>
+    <div class="campaigns">
+      <%= render 'actions' %>
+      <div class="row">
+        <% @campaigns.decorate.in_groups(3) do |campaign_group| %>
+          <div class="col-md-4">
+            <% campaign_group.each do |campaign| %>
+              <% if campaign %>
+                <% Globalize.with_locale(campaign.locale.try(:code) || I18n.locale) do %>
+                  <%= render partial: 'campaign', locals: { campaign: campaign } %>
+                <% end %>
+              <% end %>
             <% end %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <div class="panel-footer clearfix">
-      <div class="pull-right">
-        <a class="btn btn-default btn-primary" href="<%= new_campaign_path %>">
-          <%= fa_icon "plus-circle" %>
-          <%= t 'campaigns.new' %>
-        </a>
+          </div>
+        <% end %>
       </div>
+      <%= render 'actions' %>
     </div>
-  </section>
   <% end -%>
 </div>

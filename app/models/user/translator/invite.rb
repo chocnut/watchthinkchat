@@ -8,13 +8,16 @@ class User
       attribute :first_name, :string
       attribute :last_name, :string
       attribute :email, :string
+      attribute :user_id, :integer
 
       # associations
       belongs_to :campaign
       belongs_to :locale
+      belongs_to :user
       belongs_to :invited_user, class_name: 'User'
 
       # validations
+      validates :user, presence: true
       validates :campaign, presence: true
       validates :locale, presence: true
       validates :first_name, presence: true
@@ -33,10 +36,11 @@ class User
 
       def find_or_create_invited_user
         self.invited_user = User.find_by(email: email)
-        return if invited_user # send added to email
-        self.invited_user = User.invite! email: email,
-                                         first_name: first_name,
-                                         last_name: last_name
+        return if invited_user # user already exists
+        self.invited_user = User.invite_translator!({ email: email,
+                                                      first_name: first_name,
+                                                      last_name: last_name },
+                                                    user, self)
       end
 
       def add_translator_role_to_invited_user
