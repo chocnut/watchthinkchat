@@ -23,7 +23,7 @@ before_script:
 - bundle exec rake db:migrate RAILS_ENV=test
 script:
 - bin/rspec
-- bundle exec rubocop -R --fail-level error
+- bundle exec rubocop
 addons:
   code_climate:
     repo_token:
