@@ -13,7 +13,6 @@ describe 'Campaign Builder', type: :feature do
     scenario 'no campaign index' do
       visit campaigns_path
       expect(page).to have_content('Start Creating')
-      expect(page).to have_content('Create a New Campaign')
     end
   end
 
