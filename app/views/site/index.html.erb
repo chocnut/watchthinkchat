@@ -36,7 +36,7 @@
   <%= @campaign.name %>
 <% end %>
 <% content_for :javascript do %>
-  <script src="http://api.<%= "#{ENV['base_url']}:#{request.port}" %>/token.js" type="text/javascript"></script>
+  <script src="//api.<%= "#{ENV['base_url']}#{':' + request.port.to_s unless Rails.env.production? }" %>/token.js" type="text/javascript"></script>
   <script type="text/javascript">
     // <![CDATA[
       var campaign = <%= Rabl::Renderer.json(@campaign.decorate, 'site/campaign', view_path: 'app/views').html_safe %>;
