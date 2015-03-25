@@ -4,6 +4,7 @@ describe 'Site', type: :feature, js: true do
   before do
     page.driver.browser.url_blacklist = ['http://fonts.googleapis.com']
   end
+  after { page.driver.reset! }
   feature 'cname' do
     let(:campaign) { create(:campaign) }
     let(:campaign_url) { root_url(subdomain: campaign.url, host: 'lvh.me') }
