@@ -6,6 +6,6 @@ class UserDecorator < Draper::Decorator
   end
 
   def profile_pic
-    object.profile_pic.sub(/^https?\:/, '')
+    object.profile_pic.sub(/^https?\:/, '') if object.profile_pic
   end
 end
