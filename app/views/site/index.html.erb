@@ -7,12 +7,12 @@
           <% unless @campaign.locales.blank? %>
 
             <div class="btn-group pull-right" dropdown>
-              # <a href="" class="language" dropdown-toggle><%#= language(language_code).titleize %></a>
+              <a href="" class="language" dropdown-toggle><%= language(language_code).titleize %></a>
               <ul class="dropdown-menu" role="menu">
-                <!-- <li><a href="/<%= @campaign.locale.try(:code) %>"><%= language(language_code @campaign.locale.try(:code)).titleize %></a></li>
+                <li><a href="/<%= @campaign.locale.try(:code) %>"><%= language(language_code @campaign.locale.try(:code)).titleize %></a></li>
                 <% @campaign.locales.each do |locale| %>
                   <li><a href="/<%= locale.try(:code) %>"><%= language(language_code locale.try(:code)).titleize %></a></li>
-                <% end %> -->
+                <% end %>
               </ul>
             </div>
           <% end %>
