@@ -29,12 +29,6 @@
   <%= yield %>
   </div>
   <%= javascript_include_tag "dashboard/application" %>
-  <script src="//use.typekit.net/dbk1gza.js" type="text/javascript"></script>
-  <script type="text/javascript">
-    try {
-      Typekit.load();
-    } catch (e) {}
-  </script>
   <%= yield :javascript %>
 </body>
 </html>
