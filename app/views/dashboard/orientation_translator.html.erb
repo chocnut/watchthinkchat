@@ -1,0 +1,25 @@
+<div class="overlay">
+  <div class="modal-table">
+    <div class="cell">
+      <div class="overlay-modal">
+        <div class="content">
+        <img src="<%= image_url('matt.jpg') %>" class="avatar">
+          <h2>Hey <%= current_user.first_name %>, </h2>
+
+          <p>Welcome to WatchThinkChat. Thanks for signing up and welcome on board!</p>
+
+          <p>We’re currently in beta and working hard to add new features and fix bugs. I hope you’ll love using WatchThinkChat for translating campaigns for yourself and your friends.</p>
+
+          <p>If you have any problems, feedback or just want to chat, feel free to email me personally at <a href="mailto:matthew.watts@cru.org">matthew.watts@cru.org.</a></p>
+
+          <div class="signature">
+            <span>Matthew</span>
+            Project Manager
+          </div>
+
+          <a href="<%= authenticated_root_path %>" class="btn btn-primary">Let me in!</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150129203119) do
+ActiveRecord::Schema.define(version: 20150325051030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -294,6 +294,7 @@ ActiveRecord::Schema.define(version: 20150129203119) do
     t.string   "invited_by_type"
     t.integer  "invitations_count",      default: 0
     t.string   "locale"
+    t.boolean  "orientated"
   end
 
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
