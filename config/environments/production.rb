@@ -85,10 +85,9 @@ Rails.application.configure do
   config.log_level = :info
 
   # ActionMailer
+  config.action_mailer.delivery_method = :ses
   config.action_mailer.default_url_options =
     { host: "app.#{ENV['base_url']}" }
-  config.action_mailer.delivery_method = :ses
-  config.action_mailer.default_url_options = { host: ENV['base_url'] }
   config.action_controller.asset_host = "//app.#{ENV['base_url']}"
   config.action_mailer.asset_host = config.action_controller.asset_host
 end
