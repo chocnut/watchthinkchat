@@ -27,10 +27,7 @@ script:
 addons:
   code_climate:
     repo_token:
-      secure: bhnsns5MbtkyeFp0L+H4QuwjiED4i65LOFriMqHVV3+ED6OKRuCrFCiGsv0UaWYDBb6ZaWIqaqjDtD3618RrrvHf13/guo9+68Uw6E6TZyL8+dJQ7RWWyzBko1Ep3JeyaeEbyBd6BChQKPRFvCZnUruAXe0yNntvT0O1AltZFEk=
-notifications:
-  flowdock:
-    secure: RoqS2OnNISeEhi2Hs2adhejdCLOhVy+3siuX9N5GvE3m76IJm5crh/26U1rSzMb8jAbvV22JqXTy4wfoeFEHfpPEZn0XCgvOyTJPvSHPDzi9itJyTQt4trEcuPTgixAvLz7ce+PWoTMJwpg4fNO1mX0+rNfOPW5jxukRfi+rUfM=
+      secure: "Rxg/++pSjqfTBvALdk2egfgPPD2GuvbqXaAOashtAEjRroUzV4gPqBtVrZ8Io5h90URwTI8jNKS8mnTaXqFqsI0ndYjGtXrMIiig0ZCz7ggO0J6DyW4ptOIIl2zaJY3cPM3aWkbyMzM7v0S2pG3Cx4xT18SDG8+tZsLjmglW8Cs="
 deploy:
   - provider: opsworks
     access_key_id: AKIAJJA7ZKF5VD6QZS2A
