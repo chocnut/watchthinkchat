@@ -4,4 +4,8 @@ class UserDecorator < Draper::Decorator
   def name
     "#{first_name} #{last_name}".strip
   end
+
+  def profile_pic
+    object.profile_pic.sub(/^https?\:/, '')
+  end
 end
