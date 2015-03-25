@@ -91,6 +91,6 @@ Rails.application.configure do
   config.action_controller.asset_host = "//app.#{ENV['base_url']}"
   config.action_mailer.asset_host = config.action_controller.asset_host
 
-  # OmniaAuth
-  OmniAuth.config.full_host = "http://app.#{ENV['base_url']}"
+  # OmniAuth
+  OmniAuth.config.full_host = "https://app.#{ENV['base_url']}"
 end
