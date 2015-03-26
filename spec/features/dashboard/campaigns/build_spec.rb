@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Campaign Builder', type: :feature do
+describe 'Campaign Builder', type: :feature, speed: 'slow' do
   let(:manager) { create(:manager) }
   let(:base_locale) { create(:locale, name: 'base', code: 'fr') }
   let(:alternate_locale) { create(:locale, name: 'available', code: 'de') }
