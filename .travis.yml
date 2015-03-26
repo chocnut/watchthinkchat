@@ -20,22 +20,15 @@ install:
 before_script:
 - psql -c 'create database watchthinkchat_test;' -U postgres
 - cp config/database.yml.travis config/database.yml
-- bundle exec rake db:migrate RAILS_ENV=test
+- bundle exec rake db:migrate
 script:
-- bin/rspec
-- bundle exec rubocop -R --fail-level error
-addons:
-  code_climate:
-    repo_token:
-      secure: bhnsns5MbtkyeFp0L+H4QuwjiED4i65LOFriMqHVV3+ED6OKRuCrFCiGsv0UaWYDBb6ZaWIqaqjDtD3618RrrvHf13/guo9+68Uw6E6TZyL8+dJQ7RWWyzBko1Ep3JeyaeEbyBd6BChQKPRFvCZnUruAXe0yNntvT0O1AltZFEk=
-notifications:
-  flowdock:
-    secure: RoqS2OnNISeEhi2Hs2adhejdCLOhVy+3siuX9N5GvE3m76IJm5crh/26U1rSzMb8jAbvV22JqXTy4wfoeFEHfpPEZn0XCgvOyTJPvSHPDzi9itJyTQt4trEcuPTgixAvLz7ce+PWoTMJwpg4fNO1mX0+rNfOPW5jxukRfi+rUfM=
+- bin/rspec --tag ~speed:slow
+- bundle exec rubocop
 deploy:
   - provider: opsworks
     access_key_id: AKIAJJA7ZKF5VD6QZS2A
     secret_access_key:
-      secure: dwYRBHsDeFOzJQiP3+N6T6cXqhHGrrFP2YKfLb6LYzkQo3tzZhVp9/mcKFCXo3m1gee/XuI0zIPqboKao8vFhPEdO89BtoIzT3VR/bGnq/MPKzprkckyrpJh3FVyzUjVQC4WkmXU9LqlYJZyIfvnNWnpaCXYTZiB45UQZXfvTFE=
+      secure: F7qCIxf6iueGZR9xJdaAtOb52b5fioZGcgq0rIe0EeBe3TJKsbsddyEBGGa1+GPe0QZrTJ9Noxc+QnP6hMM5MDj/SJ1ucwEizJUf0DBr6BaC/Lg1w9J7DZ4q59TRD2k7PD1WfjrSrRYooVjuKr6aLTH5LX9H6G4ODW7mI/MN51o=
     app-id: aaa46ab3-21b0-44b6-b5a2-094d3138cd74
     migrate: true
     wait-until-deployed: true
@@ -45,7 +38,7 @@ deploy:
   - provider: opsworks
     access_key_id: AKIAJJA7ZKF5VD6QZS2A
     secret_access_key:
-      secure: dwYRBHsDeFOzJQiP3+N6T6cXqhHGrrFP2YKfLb6LYzkQo3tzZhVp9/mcKFCXo3m1gee/XuI0zIPqboKao8vFhPEdO89BtoIzT3VR/bGnq/MPKzprkckyrpJh3FVyzUjVQC4WkmXU9LqlYJZyIfvnNWnpaCXYTZiB45UQZXfvTFE=
+      secure: F7qCIxf6iueGZR9xJdaAtOb52b5fioZGcgq0rIe0EeBe3TJKsbsddyEBGGa1+GPe0QZrTJ9Noxc+QnP6hMM5MDj/SJ1ucwEizJUf0DBr6BaC/Lg1w9J7DZ4q59TRD2k7PD1WfjrSrRYooVjuKr6aLTH5LX9H6G4ODW7mI/MN51o=
     app-id: 610c4ce5-8fe8-47ee-8dc6-db873a12ae5f
     migrate: true
     wait-until-deployed: true

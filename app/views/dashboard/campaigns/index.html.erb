@@ -2,34 +2,40 @@
 <% content_for(:subtitle) { } %>
 <div class="col-md-12">
   <%- if @campaigns.empty? %>
-  <div class="row">
-    <div class="col-md-offset-3 col-md-6 empty-state text-center">
-      <h2><%= t 'campaigns.new_user.title' %></h2>
-      <p><%= t 'campaigns.new_user.description' %></p>
-      <br />
-      <a class="btn btn-default btn-primary btn-lg" href="<%= new_campaign_path %>">
-        <%= fa_icon "plus-circle" %>
-        <%= t 'campaigns.new' %>
-      </a>
+    <div class="campaigns">
+      <div class="row">
+        <div class="col-md-2">
+          <%= render 'actions' %>
+        </div>
+        <div class="col-md-10">
+          <h2><%= t 'campaigns.new_user.title' %></h2>
+          <p><%= t 'campaigns.new_user.description' %></p>
+        </div>
+      </div>
     </div>
   </div>
   <% else %>
     <div class="campaigns">
-      <%= render 'actions' %>
       <div class="row">
-        <% @campaigns.decorate.in_groups(3) do |campaign_group| %>
-          <div class="col-md-4">
-            <% campaign_group.each do |campaign| %>
-              <% if campaign %>
-                <% Globalize.with_locale(campaign.locale.try(:code) || I18n.locale) do %>
-                  <%= render partial: 'campaign', locals: { campaign: campaign } %>
+        <div class="col-md-2">
+          <%= render 'actions' %>
+        </div>
+        <div class="col-md-10">
+          <div class="row">
+            <% @campaigns.decorate.in_groups(3) do |campaign_group| %>
+              <div class="col-md-4">
+                <% campaign_group.each do |campaign| %>
+                  <% if campaign %>
+                    <% Globalize.with_locale(campaign.locale.try(:code) || I18n.locale) do %>
+                      <%= render partial: 'campaign', locals: { campaign: campaign } %>
+                    <% end %>
+                  <% end %>
                 <% end %>
-              <% end %>
+              </div>
             <% end %>
           </div>
-        <% end %>
+        </div>
       </div>
-      <%= render 'actions' %>
     </div>
   <% end -%>
 </div>

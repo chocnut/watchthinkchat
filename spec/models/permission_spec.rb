@@ -11,7 +11,7 @@ RSpec.describe Permission, type: :model do
   it { is_expected.to validate_presence_of(:user) }
   it { is_expected.to validate_presence_of(:state) }
   context 'if state is translator' do
-    before { subject.stub(:translator?) { true } }
+    before { allow(subject).to receive_messages(translator?: true) }
     it { is_expected.to validate_presence_of(:locale) }
   end
 end

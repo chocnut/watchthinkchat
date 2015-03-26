@@ -18,7 +18,8 @@ describe 'User', type: :feature do
           fill_in 'user[password_confirmation]', with:  user[:password]
           click_button 'Sign Up'
         end.to change(User, :count).by(1)
-        expect(current_path).to eq(campaigns_path)
+        expect(current_path).to eq(authenticated_root_path)
+        expect(page).to have_content('Welcome to WatchThinkChat')
       end
       scenario 'facebook' do
         user = attributes_for(:user)
@@ -38,14 +39,15 @@ describe 'User', type: :feature do
           click_link 'Sign Up'
           find("a[href='#{user_omniauth_authorize_path(:facebook)}']").click
         end.to change(User, :count).by(1)
-        expect(current_path).to eq(campaigns_path)
+        expect(current_path).to eq(authenticated_root_path)
+        expect(page).to have_content('Welcome to WatchThinkChat')
       end
     end
   end
   describe 'sign in' do
     feature 'authenticate existing user' do
       scenario 'email and password' do
-        user_attributes = attributes_for(:user)
+        user_attributes = attributes_for(:user, orientated: true)
         user = User.new(user_attributes)
         user.roles << :manager
         user.save
@@ -55,6 +57,7 @@ describe 'User', type: :feature do
         fill_in 'user[password]', with:  user_attributes[:password]
         click_button 'Sign In'
         expect(current_path).to eq(campaigns_path)
+        expect(page).to_not have_content('Welcome to WatchThinkChat')
       end
     end
     scenario 'show error message on invalid login' do

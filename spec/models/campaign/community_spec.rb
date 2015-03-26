@@ -4,9 +4,9 @@ RSpec.describe Campaign::Community, type: :model do
   it { is_expected.to belong_to :campaign }
   it { is_expected.to validate_presence_of :campaign }
   context 'if enabled' do
-    before { subject.stub(:enabled?) { true } }
+    before { allow(subject).to receive_messages(enabled?: true) }
     context 'if other_campaign' do
-      before { subject.stub(:other_campaign?) { true } }
+      before { allow(subject).to receive_messages(other_campaign?: true) }
       it { is_expected.to validate_presence_of :child_campaign }
       it { is_expected.to_not validate_presence_of :url }
       it { is_expected.to_not ensure_length_of(:url).is_at_most(255) }
@@ -14,7 +14,7 @@ RSpec.describe Campaign::Community, type: :model do
       it { is_expected.to_not validate_presence_of :description }
     end
     context 'if external site' do
-      before { subject.stub(:other_campaign?) { false } }
+      before { allow(subject).to receive_messages(other_campaign?: false) }
       it { is_expected.to_not validate_presence_of :child_campaign }
       it { is_expected.to validate_presence_of :url }
       it { is_expected.to ensure_length_of(:url).is_at_most(255) }

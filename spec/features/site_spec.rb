@@ -1,9 +1,10 @@
 require 'rails_helper'
 
-describe 'Site', type: :feature, js: true do
+describe 'Site', type: :feature, js: true, speed: 'slow' do
   before do
     page.driver.browser.url_blacklist = ['http://fonts.googleapis.com']
   end
+  after { page.driver.reset! }
   feature 'cname' do
     let(:campaign) { create(:campaign) }
     let(:campaign_url) { root_url(subdomain: campaign.url, host: 'lvh.me') }
@@ -22,7 +23,7 @@ describe 'Site', type: :feature, js: true do
 
   feature 'subdomain' do
     let(:campaign) { create(:subdomain_campaign) }
-    let(:campaign_url) { root_url(subdomain: "#{campaign.url}", host: "#{ENV['base_url']}.lvh.me") }
+    let(:campaign_url) { root_url(subdomain: campaign.url, host: "#{ENV['base_url']}.lvh.me") }
     before do
       Capybara.app_host = campaign_url
     end

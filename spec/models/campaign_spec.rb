@@ -38,14 +38,14 @@ RSpec.describe Campaign, type: :model do
 
   # validations
   context 'when status is not basic' do
-    before { subject.stub(:basic?) { false } }
+    before { allow(subject).to receive_messages(basic?: false) }
     it { is_expected.to validate_presence_of :name }
     it { is_expected.to validate_presence_of :locale }
     it { is_expected.to validate_presence_of :url }
     it { is_expected.to validate_uniqueness_of :url }
   end
   describe 'when url is a subdomain' do
-    before { subject.stub(:subdomain?) { true } }
+    before { allow(subject).to receive_messages(subdomain?: true) }
     it { is_expected.to ensure_length_of(:url).is_at_most(63) }
     it { is_expected.to_not allow_value('-gwtbesr-', '!@#$%').for(:url) }
     it { is_expected.to_not allow_value('app').for(:url) }
@@ -54,7 +54,7 @@ RSpec.describe Campaign, type: :model do
   end
 
   describe 'when url is a cname' do
-    before { subject.stub(:subdomain?) { false } }
+    before { allow(subject).to receive_messages(subdomain?: false) }
     it { is_expected.to ensure_length_of(:url).is_at_most(255) }
     it do
       is_expected.to_not allow_value('goober',
