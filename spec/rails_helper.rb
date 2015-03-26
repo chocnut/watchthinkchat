@@ -33,6 +33,5 @@ end
 
 Capybara.configure do |config|
   config.always_include_port = true
-  config.javascript_driver = :poltergeist
   config.server_port = 7171
 end
