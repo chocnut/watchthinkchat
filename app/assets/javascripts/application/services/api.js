@@ -1,7 +1,7 @@
-angular.module('chatApp').service('api', function ($http, $cacheFactory) {
-  //var apiCache = $cacheFactory('api');
+angular.module('chatApp').service('api', function ($http, $q) {
 
-  this.interaction = function (data, successFn, errorFn) {
+  this.interaction = function (data) {
+    var deferred = $q.defer();
     $http({
       method: 'post',
       url: apiUrl + '/v1/interactions',
@@ -11,17 +11,13 @@ angular.module('chatApp').service('api', function ($http, $cacheFactory) {
       },
       timeout: 5000
     }).
-        success(function(data, status) {
-          if(_.isFunction(successFn)){
-            successFn(data, status);
-          }
+        success(function(data) {
+          deferred.resolve(data);
         }).
-        error(function(data, status) {
-          console.log('API ERROR: ' + status);
-          if(_.isFunction(errorFn)){
-            errorFn(data, status);
-          }
+        error(function(data) {
+          deferred.resolve(data);
         });
+    return deferred.promise;
   };
 
   this.call = function (method, url, data, successFn, errorFn) {
