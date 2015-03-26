@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Site', type: :feature, js: true do
+describe 'Site', type: :feature, js: true, speed: 'slow' do
   before do
     page.driver.browser.url_blacklist = ['http://fonts.googleapis.com']
   end
