@@ -15,6 +15,8 @@ env:
   - secure: hTAW1DdfaRLXqXCuMJ7kdjxWqxFL5WAFnrAS5knEmf7QfACJ9OJq97om7IFpmc2ClT1SjgwOCDgJegOvIyWK4mCWzUNgExibv+Pf2Ms9SUK1aS8P4mRKj2Oy/FuvOPBDfQjHL6Dkley6iHRiq2H8b4fonSVSbPjwot56nUpihas=
   - secure: R+oytcnLjaVzYA2EYI1NRog9eW0jW5X6DF/M80fRNLZHnFU+y7GFG0VCHoDBPE9OQyWmNCWLm05Wm0IFjG9uWcsCUaSvmbBTsT+iRe4NxtYLfeAS+9+qmv6bHggcmDPDCg8/v7exLSkddENll4FvFDIUhnqwgjVwh+KL1g8qQas=
   - secure: aC5Lb5WmQjIVdd/f4xUxdyI+c1mZ9/ZOUA2iN/3Vu8iO3q83GUrddkRizN5qMlqoV1ZfOAShVN9DUAKk8VSzaYbKpxYxgUVWjQW1IOn1l96uQdXnFVIkXX2YnSf64RsJYb0mQJ0p9X5gnSVbGJBi4P01clL4pXSGnVKvd1Zd8oM=
+  # Codeclimate
+  - secure: "TKmF6y0zkiCm8CP4VLHvXjuwAIVEiNzt4/fiM8ItfySvUWuluO/fNZaH+9rEbwY/NQoJYVVrFOHoDp+4k2GCDzOlwiwtChlmS5+cyZx/EIZ/C+K5yuHVDkqf85fptMVqCAt6w5LTzdbhilRfPgSM7u+nMxq21/Epaxj4AmOb8yk="
 install:
 - travis_retry script/cached-bundle install --deployment --without development
 before_script:
@@ -24,10 +26,6 @@ before_script:
 script:
 - bin/rspec
 - bundle exec rubocop
-addons:
-  code_climate:
-    repo_token:
-      secure: "Rxg/++pSjqfTBvALdk2egfgPPD2GuvbqXaAOashtAEjRroUzV4gPqBtVrZ8Io5h90URwTI8jNKS8mnTaXqFqsI0ndYjGtXrMIiig0ZCz7ggO0J6DyW4ptOIIl2zaJY3cPM3aWkbyMzM7v0S2pG3Cx4xT18SDG8+tZsLjmglW8Cs="
 deploy:
   - provider: opsworks
     access_key_id: AKIAJJA7ZKF5VD6QZS2A
