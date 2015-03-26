@@ -5,7 +5,6 @@ require 'draper/test/rspec_integration'
 require 'capybara/poltergeist'
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
-ActiveRecord::Migration.maintain_test_schema!
 
 module Features
   include Formulaic::Dsl

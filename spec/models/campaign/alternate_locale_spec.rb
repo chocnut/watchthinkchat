@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe AlternateLocale, type: :model do
+RSpec.describe Campaign::AlternateLocale, type: :model do
   # associations
   it { is_expected.to belong_to :campaign }
   it { is_expected.to belong_to :locale }

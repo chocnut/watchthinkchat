@@ -10,5 +10,6 @@ end
 require File.expand_path('../../config/environment', __FILE__)
 require 'shoulda/matchers'
 require 'rspec/rails'
+ActiveRecord::Migration.maintain_test_schema!
 
 Dir['../../spec/factories/*.rb'].each { |file| require_relative file }

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe AlternateLocaleDecorator, type: :decorator do
+describe Campaign::AlternateLocaleDecorator, type: :decorator do
   let(:alternate_locale) { create(:alternate_locale).decorate }
 
   it '#permissions returns array of permissions for this locale' do

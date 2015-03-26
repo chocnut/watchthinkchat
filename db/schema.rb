@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325051030) do
+ActiveRecord::Schema.define(version: 20150326042328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20150325051030) do
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
-  create_table "alternate_locales", force: true do |t|
+  create_table "campaign_alternate_locales", force: true do |t|
     t.integer  "campaign_id"
     t.integer  "locale_id"
     t.datetime "created_at"
