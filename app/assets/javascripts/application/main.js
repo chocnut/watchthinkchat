@@ -55,6 +55,18 @@ angular.module('chatApp', ['ngRoute', 'templates', 'ui.bootstrap', 'youtube-embe
         });
       };
 
+      $rootScope.infoModal = function(){
+        $modal.open({
+          templateUrl: 'modals/infoModal.html',
+          controller: function($scope, $modalInstance){
+            $scope.close = function () {
+              $modalInstance.dismiss();
+            };
+          },
+          size: 'lg'
+        });
+      };
+
       $rootScope.$on('$routeChangeStart', function(event, next, current) {
         var nextController = next.$$route.controller;
         var currentController = '';
