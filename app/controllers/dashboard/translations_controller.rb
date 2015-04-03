@@ -6,6 +6,7 @@ module Dashboard
 
     def edit
       load_translation
+      raise "LOL"
     end
 
     def update

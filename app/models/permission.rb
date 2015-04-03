@@ -22,4 +22,11 @@ class Permission < ActiveRecord::Base
   ]
 
   delegate :campaign, to: :resource
+  delegate :published?, to: :alternate_locale
+
+  protected
+
+  def alternate_locale
+    @alternate_locale ||= campaign.alternate_locales.find_by(locale: locale)
+  end
 end
