@@ -25,8 +25,8 @@ angular.module('chatApp').controller('FinalController', function ($scope, $rootS
     $window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), 'fbShare', 'height=250,width=650');
   };
 
-  $scope.twitterShare = function(url){
-    $window.open('https://twitter.com/share?url=' + encodeURIComponent(url), 'twitterShare', 'height=400,width=650');
+  $scope.twitterShare = function(url, text){
+    $window.open('https://twitter.com/share?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text), 'twitterShare', 'height=400,width=650');
   };
 
   $scope.linkShare = function(url){
