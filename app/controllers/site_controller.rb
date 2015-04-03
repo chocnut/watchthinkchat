@@ -10,6 +10,10 @@ class SiteController < ApplicationController
     redirect_to("/#{@campaign.locale.code}")
   end
 
+  def privacy
+    render 'privacy', layout: 'no_campaign'
+  end
+
   protected
 
   def load_translations
