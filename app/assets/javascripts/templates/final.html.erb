@@ -44,7 +44,7 @@
       <div class="share-icons">
         <a href="" ng-if="campaign.share.email" ng-click="toggleEmailForm()"><img src="<%= image_url("icon_email.png") %>" alt="Email" /></a>
         <a href="" ng-if="campaign.share.facebook" ng-click="facebookShare(visitorInfo.url)"><img src="<%= image_url("icon_facebook.png") %>" alt="Facebook" /></a>
-        <a href="" ng-if="campaign.share.twitter" ng-click="twitterShare(visitorInfo.url)"><img src="<%= image_url("icon_twitter.png") %>" alt="Twitter" /></a>
+        <a href="" ng-if="campaign.share.twitter" ng-click="twitterShare(visitorInfo.url, campaign.share.description)"><img src="<%= image_url("icon_twitter.png") %>" alt="Twitter" /></a>
         <a href="" ng-if="campaign.share.link" ng-click="linkShare(visitorInfo.url)"><img src="<%= image_url("icon_link.png") %>" alt="Link" /></a>
       </div>
       <h2>{{campaign.share.title}}</h2>
