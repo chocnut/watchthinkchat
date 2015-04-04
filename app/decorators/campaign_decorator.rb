@@ -33,11 +33,19 @@ class CampaignDecorator < Draper::Decorator
   end
 
   def signing_up
-    0
+    begin
+      Campaign::Growthspace::Subscriber.access_id = campaign.growthspace.api_key
+      Campaign::Growthspace::Subscriber.access_secret = campaign.growthspace.api_secret
+      Campaign::Growthspace::Subscriber.all.count
+    rescue => e
+      logger.error e.message
+      0
+    end
   end
 
   def signing_up_percentage
     return 0 if unique_visitors == 0
-    ((signing_up.to_d / unique_visitors.to_d) * 100).to_i
+    signing_up = 100 unless signing_up == 0
+    ((unique_visitors.to_d / signing_up.to_d) * 100).to_i
   end
 end
