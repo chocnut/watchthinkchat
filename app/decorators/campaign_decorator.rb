@@ -33,14 +33,12 @@ class CampaignDecorator < Draper::Decorator
   end
 
   def signing_up
-    begin
-      Campaign::Growthspace::Subscriber.access_id = campaign.growthspace.api_key
-      Campaign::Growthspace::Subscriber.access_secret = campaign.growthspace.api_secret
-      Campaign::Growthspace::Subscriber.all.count
-    rescue => e
-      logger.error e.message
-      0
-    end
+    Campaign::Growthspace::Subscriber.access_id = campaign.growthspace.api_key
+    Campaign::Growthspace::Subscriber.access_secret = campaign.growthspace.api_secret
+    Campaign::Growthspace::Subscriber.all.count
+  rescue => e
+    logger.error e.message
+    0
   end
 
   def signing_up_percentage
